@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<main role="main">
+    <h1>Hello, franklin-dashboard</h1>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+{{ super() }}
+<script>
+    console.log('Hello, index');
+</script>
+{% endblock %}
