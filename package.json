@@ -1,27 +1,41 @@
 {
   "name": "franklin-dashboard",
   "version": "0.1.0",
-  "description": "Angular frontend interface into the franklin-api",
+  "description": "fFrontend interface into fFranklin API",
   "scripts": {
-    "start": "./node_modules/gulp/bin/gulp.js build-dev",
-    "build": "./node_modules/gulp/bin/gulp.js build",
+    "start": "gulp build-dev",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ISL",
+  "dependencies": {
+    "angular": "1.4.7",
+    "angular-route": "^1.4.7",
+    "satellizer": "^0.13.0"
+  },
   "devDependencies": {
-    "autoprefixer": "6.0.3",
-    "babelify": "6.3.0",
-    "browserify": "11.2.0",
-    "browser-sync": "2.9.10",
+    "autoprefixer": "6.1.0",
+    "babel-preset-es2015": "6.1.4",
+    "babelify": "7.2.0",
+    "browser-sync": "2.10.0",
+    "browserify": "12.0.1",
+    "del": "2.0.2",
     "gulp": "3.9.0",
     "gulp-concat": "2.6.0",
+    "gulp-htmlmin": "1.2.0",
+    "gulp-if": "2.0.0",
+    "gulp-minify-css": "1.2.1",
     "gulp-nunjucks-render": "1.0.0",
     "gulp-postcss": "6.0.1",
-    "gulp-sass": "2.0.4",
+    "gulp-rev": "6.0.1",
+    "gulp-rev-replace": "0.4.2",
+    "gulp-sass": "2.1.0",
     "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "1.4.2",
     "gulp-util": "3.0.6",
+    "run-sequence": "1.1.4",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.4.0"
+    "watchify": "3.6.0"
   }
 }
