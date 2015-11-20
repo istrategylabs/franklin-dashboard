@@ -3,6 +3,7 @@ require('angular-route');
 require('satellizer');
 //require('ngConstants');
 
+
 /**
 
 */
@@ -10,6 +11,7 @@ require('satellizer');
     'use strict';
 
     var app = angular
+
         .module('franklin-dashboard', [ 'ngRoute'])
         .constant('VERSION', require('../../package.json').version)
 		.config( function( $routeProvider) {

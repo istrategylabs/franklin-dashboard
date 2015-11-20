@@ -128,7 +128,6 @@ gulp.task('clean', function() {
   return del('./public/');
 });
 
-
 gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras'/*, 'config'*/]);
 
 gulp.task('build-dev', function(done) {
