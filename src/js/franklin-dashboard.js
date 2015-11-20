@@ -1,5 +1,7 @@
 var angular = require('angular');
 require('angular-route');
+require('satellizer');
+//require('ngConstants');
 
 /**
 
@@ -8,7 +10,7 @@ require('angular-route');
     'use strict';
 
     var app = angular
-        .module('franklin-dashboard', [ 'ngRoute' ])
+        .module('franklin-dashboard', [ 'ngRoute'])
         .constant('VERSION', require('../../package.json').version)
 		.config( function( $routeProvider) {
 		 $routeProvider.when('/login', {
@@ -18,7 +20,7 @@ require('angular-route');
 		    redirectTo: '/login'
 		  });
 
-		    console.log('Hello, franklin-dashboard');
+		  console.log('Hello, franklin-dashboard');
 		});
 })();
 

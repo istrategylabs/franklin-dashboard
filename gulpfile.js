@@ -20,6 +20,7 @@ var htmlmin        = require('gulp-htmlmin');
 var gulpif         = require('gulp-if');
 var runSequence    = require('run-sequence');
 
+
 function bundle(options) {
   options = options || {};
   var bundler = browserify('./src/js/franklin-dashboard.js', { entry: true, debug: true })
@@ -128,7 +129,7 @@ gulp.task('clean', function() {
 });
 
 
-gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras']);
+gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras'/*, 'config'*/]);
 
 gulp.task('build-dev', function(done) {
   runSequence('clean',
