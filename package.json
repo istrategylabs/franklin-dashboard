@@ -5,13 +5,15 @@
   "scripts": {
     "start": "gulp build-dev",
     "build": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "protractor test/protractor.conf.js",
+    "postinstall" : "./node_modules/protractor/bin/webdriver-manager update"
   },
   "author": "ISL",
   "dependencies": {
     "angular": "1.4.7",
     "angular-route": "^1.4.7",
     "foundation": "^4.2.1",
+    "protractor": "^3.0.0",
     "satellizer": "^0.13.0"
   },
   "devDependencies": {

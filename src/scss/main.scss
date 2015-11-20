@@ -37,6 +37,7 @@ body {
 	border-style: none;
 	color: #5D8F3C;
 	font-size: 20px;
+	border: 2px solid #FFF;
 	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
@@ -44,9 +45,6 @@ body {
 	cursor: pointer;
 	background-color: #5D8F3C;
 	color: #FFF;
-	border-color: #FFF;
-	border-style: solid;
-	border-width: 2px;
 }
 
 .franklin--login--button a:focus{
