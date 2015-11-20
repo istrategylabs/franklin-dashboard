@@ -49,6 +49,14 @@ body {
 	border-width: 2px;
 }
 
+.franklin--login--button a:focus{
+	background-color: #FFF;
+	border-color: #FFF;
+	border-style: none;
+	color: #5D8F3C;
+	font-size: 20px;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+}
 .franklin--login--logo{
 	background-image: url('../img/franklin.png');
 	background-repeat: no-repeat;
