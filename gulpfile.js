@@ -25,8 +25,8 @@ const runSequence    = require('run-sequence');
 
 function bundle(options) {
   options = options || {};
-  const bunderOpts = { entry: true, debug: true };
-  let bundler = browserify('./src/js/franklin-dashboard.js', bunderOpts)
+  const bundlerOpts = { entry: true, debug: true };
+  let bundler = browserify('./src/js/franklin-dashboard.js', bundlerOpts)
     .transform('babelify', { presets: ['es2015'] });
 
   function rebundle() {
