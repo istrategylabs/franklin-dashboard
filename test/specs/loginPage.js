@@ -1,3 +1,5 @@
+'use strict';
+
 describe('franklin login page', function() {
 
   //TODO: check if the user is logged
@@ -12,7 +14,7 @@ describe('franklin login page', function() {
 
     expect(button.getText()).toEqual('Login with GitHub');
 
-  });  
+  });
 
   //TODO: check if the user is logged
   it('should redirect to login page', function() {
@@ -26,5 +28,5 @@ describe('franklin login page', function() {
 
     expect(button.getText()).toEqual('Login with GitHub');
 
-  });  
+  });
 });
