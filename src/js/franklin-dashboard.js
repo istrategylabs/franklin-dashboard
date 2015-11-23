@@ -1,28 +1,30 @@
+'use strict';
+
+
 var angular = require('angular');
 require('angular-route');
 require('satellizer');
-//require('ngConstants');
+require('./config/ngConstants');
 
 
-/**
+var app = angular
+    .module('franklin-dashboard', [ 'ngRoute', 'satellizer', 'franklin-dashboard.config'])
+    .constant('VERSION', require('../../package.json').version)
+	.config( function( $routeProvider, $authProvider, ENV) {
+	 $routeProvider.when('/login', {
+	    templateUrl: 'login/login.html',
+	  })
+	  .otherwise({
+	    redirectTo: '/login'
+	  });
 
-*/
-(function() {
-    'use strict';
+	  $authProvider.github({
+	     clientId: ENV.GITHUB_CLIENT_ID
+	   });
 
-    var app = angular
+	  console.log('Hello, franklin-dashboard');
+	});
 
-        .module('franklin-dashboard', [ 'ngRoute'])
-        .constant('VERSION', require('../../package.json').version)
-		.config( function( $routeProvider) {
-		 $routeProvider.when('/login', {
-		    templateUrl: 'login/login.html',
-		  })
-		  .otherwise({
-		    redirectTo: '/login'
-		  });
+require('./login/login.controller');
 
-		  console.log('Hello, franklin-dashboard');
-		});
-})();
 

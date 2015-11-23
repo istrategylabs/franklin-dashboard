@@ -1,12 +1,12 @@
-<div class="franklin--login">
-
+<div class="franklin--login" ng-controller="LoginComponent">
 	<div class="franklin--login--area">
 		<div class="row franklin--login--title">
 			<span>Franklin Dashboard</span>
 		</div>
 		<div class="row franklin--login--logo"></div>			
 		<div class="row franklin--login--button">
-			<a id="franklin-login-button" href="" class="button round ">Login with GitHub</a>
+			<a id="franklin-login-button" href="" class="button round"
+				ng-click="authenticate('github')">Login with GitHub</a>
 		</div>
 	</div>
 </div>

@@ -19,6 +19,10 @@ var minifyCss      = require('gulp-minify-css');
 var htmlmin        = require('gulp-htmlmin');
 var gulpif         = require('gulp-if');
 var runSequence    = require('run-sequence');
+var ngConstant = require('gulp-ng-constant');
+ 
+process.env.GITHUB_CLIENT_ID = '7047f9d9d20fa9a9ab46';
+process.env.GITHUB_CLIENT_SECRET = '0253c07b5c8149f7c7d02e93a3389842452304c1';
 
 
 function bundle(options) {
@@ -76,6 +80,21 @@ gulp.task('extras', function() {
   .pipe(gulp.dest('./public/'));
 });
 
+gulp.task('config', function () {
+  return ngConstant({
+      name: 'franklin-dashboard.config',
+      constants: { 
+        ENV: {
+          GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+          GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID
+        }
+      },
+      wrap: "commonjs",
+      stream: true
+    })
+    .pipe(gulp.dest('./src/js/config/'));
+});
+
 gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], function() {
   browserSync.init({
     server: 'public',
@@ -128,7 +147,7 @@ gulp.task('clean', function() {
   return del('./public/');
 });
 
-gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras'/*, 'config'*/]);
+gulp.task('default', ['config', 'browserify', 'nunjucks', 'sass', 'extras']);
 
 gulp.task('build-dev', function(done) {
   runSequence('clean',
