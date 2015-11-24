@@ -31,7 +31,7 @@ function bundle(options) {
 
   function rebundle() {
     return bundler.bundle()
-      .on('error', (err) => {
+      .on('error', function(err) {
         gutil.log(gutil.colors.red(err.message));
         this.emit('end');
       })
