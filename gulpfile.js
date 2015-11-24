@@ -25,40 +25,34 @@ const ngConstant = require('gulp-ng-constant');
 const dotENV = require('dotenv').load();
 
 function bundle(options) {
-    options = options || {};
-    const bundlerOpts = {
-        entry: true,
-        debug: true
-    };
-    let bundler = browserify('./src/js/franklin-dashboard.js', bundlerOpts)
-        .transform('babelify', {
-            presets: ['es2015']
-        });
+  options = options || {};
+  const bundlerOpts = { entry: true, debug: true };
+  let bundler = browserify('./src/js/franklin-dashboard.js', bundlerOpts)
+    .transform('babelify', { presets: ['es2015'] });
 
-    function rebundle() {
-        return bundler.bundle()
-            .on('error', (err) => {
-                gutil.log(gutil.colors.red(err.message));
-                this.emit('end');
-            })
-            .pipe(source('bundle.js'))
-            .pipe(buffer())
-            .pipe(sourcemaps.init({
-                loadMaps: true
-            }))
-            .pipe(sourcemaps.write())
-            .pipe(gulp.dest('./public/js/'));
-    }
+  function rebundle() {
+    return bundler.bundle()
+      .on('error', function(err) {
+        gutil.log(gutil.colors.red(err.message));
+        this.emit('end');
+      })
+      .pipe(source('bundle.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('./public/js/'));
+  }
 
-    if (options.watch) {
-        bundler = watchify(bundler);
-        bundler.on('update', () => {
-            gutil.log('-> bundling...');
-            rebundle();
-        });
-    }
+  if (options.watch) {
+    bundler = watchify(bundler);
+    bundler.on('update', () => {
+      gutil.log('-> bundling...');
+      rebundle();
+    });
+  }
 
-    return rebundle();
+  return rebundle();
+
 }
 
 gulp.task('browserify', () => {
