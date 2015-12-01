@@ -1,17 +1,21 @@
 {
   "name": "franklin-dashboard",
   "version": "0.1.0",
-  "description": "fFrontend interface into fFranklin API",
+  "description": "Frontend interface into Franklin API",
   "scripts": {
     "start": "gulp build-dev",
     "build": "gulp build",
     "test": "protractor test/protractor.conf.js",
-    "postinstall" : "./node_modules/protractor/bin/webdriver-manager update"
+    "postinstall": "./node_modules/protractor/bin/webdriver-manager update"
   },
   "author": "ISL",
   "dependencies": {
     "angular": "1.4.7",
+    "angular-animate": "1.4.8",
     "angular-route": "^1.4.7",
+    "angular-toastr": "1.6.0",
+    "angular-ui-router": "0.2.15",
+    "dotenv": "1.2.0",
     "foundation": "^4.2.1",
     "protractor": "^3.0.0",
     "satellizer": "^0.13.0"
@@ -28,18 +32,23 @@
     "gulp-htmlmin": "1.2.0",
     "gulp-if": "2.0.0",
     "gulp-minify-css": "1.2.1",
+    "gulp-ng-constant": "^1.1.0",
     "gulp-nunjucks-render": "1.0.0",
     "gulp-postcss": "6.0.1",
+    "gulp-protractor": "2.0.0",
     "gulp-rev": "6.0.1",
     "gulp-rev-replace": "0.4.2",
     "gulp-sass": "2.1.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-uglify": "1.4.2",
     "gulp-util": "3.0.6",
-    "gulp-ng-constant": "^1.1.0",
     "run-sequence": "1.1.4",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.6.0"
+  },
+  "engines": {
+    "npm": "3.3.3",
+    "node": "4.2.1"
   }
 }

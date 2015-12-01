@@ -1,17 +1,17 @@
-	{% extends '_base.html' %}
+       {% extends '_base.html' %}
 
-	{% block content %}
-	<main role="main">    
-		<div ng-app="franklin-dashboard">
-			<div ng-view></div>
-		</div>
-	</main>
-	{% endblock %}
+        {% block content %}
+        <main role="main">
+                <div class="franklin--dashboard" ng-app="franklin-dashboard">
+                        <div ui-view></div>
+                </div>
+        </main>
+        {% endblock %}
 
 
-	{% block javascripts %}
-	{{ super() }}
-	<script>
-		console.log('Hello, index');
-	</script>
-	{% endblock %}
+        {% block javascripts %}
+        {{ super() }}
+        <script>
+                console.log('Hello, index');
+        </script>
+        {% endblock %}

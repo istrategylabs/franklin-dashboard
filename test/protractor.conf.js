@@ -1,10 +1,11 @@
-// An example configuration file.
+
 exports.config = {
   directConnect: true,
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': { 'args': ['incognito'] }
   },
 
   rootElement: '[ng-app]',
