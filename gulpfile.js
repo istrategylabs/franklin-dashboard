@@ -101,7 +101,8 @@ gulp.task('config', () => {
             name: 'franklin-dashboard.config',
             constants: {
                 ENV: {
-                    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID
+                    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+                    FRANKLIN_API_URL: process.env.FRANKLIN_API_URL
                 }
             },
             wrap: "commonjs",
