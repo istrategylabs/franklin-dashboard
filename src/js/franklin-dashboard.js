@@ -2,21 +2,17 @@
 
 import angular from "angular";
 import packageJson from "../../package.json";
-
-//import angular-route from "angular-route";
-//import satellizer from "satellizer";
-//import ngConstants from "./config/ngConstants";
-
 import {
     LoginComponent
 }
 from "./login/login.controller";
 
+require('angular-ui-router');
 require('angular-animate');
 require('angular-toastr');
 require('satellizer');
 require('./config/ngConstants');
-require('angular-ui-router');
+require('../../node_modules/foundation-apps/js/angular/foundation');
 
 const app = angular
     .module('franklin-dashboard', ['ngAnimate', 'toastr', 'satellizer', 'franklin-dashboard.config', 'ui.router'])
@@ -25,20 +21,20 @@ const app = angular
 
         //angular routing depending on login status
         $stateProvider
-          .state('logged', {
-            url: '/dashboard',
-            templateUrl: 'dashboard/dashboard.html',
-            resolve: {
-              loginRequired: loginRequired
-            }
-          })
-          .state('login', {
-            url: '/login',
-            templateUrl: 'login/login.html',
-            resolve: {
-              skipIfLoggedIn: skipIfLoggedIn
-            }
-          });
+            .state('logged', {
+                url: '/dashboard',
+                templateUrl: 'dashboard/dashboard.html',
+                resolve: {
+                    loginRequired: loginRequired
+                }
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'login/login.html',
+                resolve: {
+                    skipIfLoggedIn: skipIfLoggedIn
+                }
+            });
 
         $urlRouterProvider.otherwise('/dashboard');
 
@@ -46,28 +42,28 @@ const app = angular
         $authProvider.withCredentials = false;
         $authProvider.github({
             clientId: ENV.GITHUB_CLIENT_ID,
-            url: 'http://ab763639.ngrok.io/auth/github/'// franklin-api url
+            url: ENV.FRANKLIN_API_URL + "/auth/github/"
         });
 
         //Auxiliar functions to routing
         function skipIfLoggedIn($q, $auth) {
-          var deferred = $q.defer();
-          if ($auth.isAuthenticated()) {
-            deferred.reject();
-          } else {
-            deferred.resolve();
-          }
-          return deferred.promise;
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.reject();
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise;
         }
 
         function loginRequired($q, $location, $auth) {
-          var deferred = $q.defer();
-          if ($auth.isAuthenticated()) {
-            deferred.resolve();
-          } else {
-            $location.path('/login');
-          }
-          return deferred.promise;
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.resolve();
+            } else {
+                $location.path('/login');
+            }
+            return deferred.promise;
         }
 
         //toastr configuration - error messages
@@ -78,7 +74,7 @@ const app = angular
             extendedTimeOut: 10000,
             tapToDismiss: true,
             timeOut: 10000,
-          });
+        });
 
         console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
     })

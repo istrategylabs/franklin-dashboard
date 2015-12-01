@@ -16,7 +16,7 @@
     "angular-toastr": "1.6.0",
     "angular-ui-router": "0.2.15",
     "dotenv": "1.2.0",
-    "foundation": "^4.2.1",
+    "foundation-apps": "1.1.0",
     "protractor": "^3.0.0",
     "satellizer": "^0.13.0"
   },

@@ -11,16 +11,16 @@ function LoginComponent($scope, $location, $auth, toastr) {
                 $location.path('/');
             })
             .catch(function(error) {
-              if (error.error) {
-                // Popup error - invalid redirect_uri, pressed cancel button, etc.
-                toastr.error(error.error);
-              } else if (error.data) {
-                // HTTP response error from server
-                toastr.error("Try reloading the page", "Github login failed");
-              } else {
-                toastr.error(error);
-              }
-        });
+                if (error.error) {
+                    // Popup error - invalid redirect_uri, pressed cancel button, etc.
+                    toastr.error(error.error);
+                } else if (error.data) {
+                    // HTTP response error from server
+                    toastr.error("Try reloading the page", "Github login failed");
+                } else {
+                    toastr.error(error);
+                }
+            });
     };
 };
 

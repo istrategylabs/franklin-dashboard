@@ -1,17 +1,12 @@
 // Make sure the charset is set appropriately
 @charset "UTF-8";
 
-// This includes all of the foundation global elements that are needed to work with any of the other files.
-@import "../../node_modules/foundation/scss/foundation/variables";
-
 // Foundation Components
 @import
-"../../node_modules/foundation/scss/foundation/components/global",
-"../../node_modules/foundation/scss/foundation/components/grid",
-"../../node_modules/foundation/scss/foundation/components/buttons",
-"../../node_modules/foundation/scss/foundation/components/top-bar";
+"../../node_modules/foundation-apps/scss/foundation";
 
 @import "../../node_modules/angular-toastr/dist/angular-toastr";
+
 
 body {
 	margin: 0;
@@ -41,6 +36,7 @@ body {
 	font-size: 20px;
 	border: 2px solid #FFF;
 	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+	border-radius: 30px;
 }
 
 .franklin--login--button a:hover{

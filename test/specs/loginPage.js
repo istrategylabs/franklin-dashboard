@@ -11,7 +11,7 @@ describe('login implementation and redirection', function() {
 
   it('should be in the login page if not logged in', function() {
 
-    browser.get('http://localhost:3000');
+    browser.get(process.env.BASE_URL);
 
     expect(browser.getTitle()).toEqual('franklin-dashboard');
     expect(element(by.id('franklin-login-button')).isPresent()).toBe(true);
@@ -23,7 +23,7 @@ describe('login implementation and redirection', function() {
 
   it('should redirect to login page if not logged in', function() {
 
-    browser.get('http://localhost:3000/#/otherpage');
+    browser.get(process.env.BASE_URL + '/#/otherpage');
 
     expect(browser.getTitle()).toEqual('franklin-dashboard');
     expect(element(by.id('franklin-login-button')).isPresent()).toBe(true);
@@ -35,7 +35,7 @@ describe('login implementation and redirection', function() {
 
   it('should redirect to dashboard page after logging in', function() {
 
-    browser.get('http://localhost:3000');
+    browser.get(process.env.BASE_URL);
 
     //load app and click on github login button
     browser.findElement(protractor.By.id('franklin-login-button')).click();
@@ -71,7 +71,7 @@ describe('login implementation and redirection', function() {
 
             //check the dashboard page is loaded            
             browser.getCurrentUrl().then(function(actualUrl) {
-              expect(actualUrl).toBe('http://localhost:3000/#/dashboard');
+              expect(actualUrl).toBe(process.env.BASE_URL + '/#/dashboard');
             });            
         });
       });
