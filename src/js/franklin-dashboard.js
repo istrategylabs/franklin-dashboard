@@ -7,8 +7,9 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-toastr';
 import 'satellizer';
-//import 'angular-foundation/mm-foundation.min';
-//import 'angular-foundation/mm-foundation-tpls.min';
+import 'angular-foundation/mm-foundation.min';
+import 'angular-foundation/mm-foundation-tpls.min';
+
 
 /* Franklin Dashboard modules */
 import './config';
@@ -32,8 +33,8 @@ angular
     'satellizer',
     'franklin-dashboard.config',
     'ui.router',
-    'franklin-dashboard.services'//,
-    //'mm.foundation'
+    'franklin-dashboard.services',
+    'mm.foundation'
   ])
   .constant('VERSION', packageJson.version)
   .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig,
@@ -64,7 +65,6 @@ angular
 
     //Github login configuration
     $authProvider.withCredentials = false;
-
 
     $authProvider.github({
       clientId: ENV.GITHUB_CLIENT_ID,
@@ -119,11 +119,21 @@ angular
     '$state',
     LoginComponent
   ])
-  .controller('DashboardComponent', ['franklinAPIService', '$scope',
-    '$location', '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state',
+  .controller('DashboardComponent', [
+    'franklinAPIService',
+    '$scope',
+    '$location',
+    '$auth',
+    'toastr',
+    'ENV',
+    '$httpParamSerializer',
+    '$state',
     '$modal', DashboardComponent
   ])
   .directive('dashboard', DashboardDirective)
-  .controller('DashboardModalComponent', ['$scope', '$modalInstance',
+  .controller('DashboardModalComponent', [
+    '$scope',
+    '$modalInstance',
+    'franklinAPIService',
     DashboardModalComponent
   ]);
