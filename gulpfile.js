@@ -26,9 +26,14 @@ const dotENV = require('dotenv').load();
 
 function bundle(options) {
   options = options || {};
-  const bundlerOpts = { entry: true, debug: true };
+  const bundlerOpts = {
+    entry: true,
+    debug: true
+  };
   let bundler = browserify('./src/js/franklin-dashboard.js', bundlerOpts)
-    .transform('babelify', { presets: ['es2015'] });
+    .transform('babelify', {
+      presets: ['es2015']
+    });
 
   function rebundle() {
     return bundler.bundle()
@@ -38,7 +43,9 @@ function bundle(options) {
       })
       .pipe(source('bundle.js'))
       .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.init({
+        loadMaps: true
+      }))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('./public/js/'));
   }
@@ -56,121 +63,123 @@ function bundle(options) {
 }
 
 gulp.task('browserify', () => {
-    return bundle();
+  return bundle();
 });
 
 gulp.task('watchify', () => {
-    return bundle({
-        watch: true
-    });
+  return bundle({
+    watch: true
+  });
 });
 
 gulp.task('sass', () => {
-    return gulp.src('./src/scss/**/*.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(postcss([autoprefixer]))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public/css/'));
+  return gulp.src('./src/scss/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss([autoprefixer]))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./public/css/'));
 });
 
 gulp.task('nunjucks', () => {
-    nunjucksRender.nunjucks.configure(['./src/templates/'], {
-        watch: false
-    });
-    return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
-        .pipe(nunjucksRender())
-        .pipe(gulp.dest('./public/'));
+  nunjucksRender.nunjucks.configure(['./src/templates/'], {
+    watch: false
+  });
+  return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
+    .pipe(nunjucksRender())
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('extras', () => {
-    return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
-        .pipe(gulp.dest('./public/'));
+  return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('config', () => {
-    //Creates angular module with environment variables
-    //Reads env variables from .env file
-    return ngConstant({
-            name: 'franklin-dashboard.config',
-            constants: {
-                ENV: {
-                    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-                    FRANKLIN_API_URL: process.env.FRANKLIN_API_URL
-                }
-            },
-            wrap: "commonjs",
-            stream: true
-        })
-        .pipe(gulp.dest('./src/js/config/'));
+  //Creates angular module with environment variables
+  //Reads env variables from .env file
+  return ngConstant({
+      name: 'franklin-dashboard.config',
+      constants: {
+        ENV: {
+          GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+          FRANKLIN_API_URL: process.env.FRANKLIN_API_URL,
+          FRANKLIN_CLIENT_SECRET: process.env.FRANKLIN_CLIENT_SECRET,
+          FRANKLIN_CLIENT_ID: process.env.FRANKLIN_CLIENT_ID
+        }
+      },
+      wrap: "commonjs",
+      stream: true
+    })
+    .pipe(gulp.dest('./src/js/config/'));
 });
 
 gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
-    browserSync.init({
-        server: 'public',
-        files: './public/**/*'
-    });
+  browserSync.init({
+    server: 'public',
+    files: './public/**/*'
+  });
 
-    gulp.watch('./src/scss/**/*.scss', ['sass']);
-    gulp.watch('./src/**/*.html', ['nunjucks']);
-    gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
+  gulp.watch('./src/scss/**/*.scss', ['sass']);
+  gulp.watch('./src/**/*.html', ['nunjucks']);
+  gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
 gulp.task('rev', ['default', 'banner'], () => {
-    return gulp.src(['./public/**/*', '!**/*.html'], {
-            base: './public'
-        })
-        .pipe(rev())
-        .pipe(gulp.dest('./public/'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('./public/'));
+  return gulp.src(['./public/**/*', '!**/*.html'], {
+      base: './public'
+    })
+    .pipe(rev())
+    .pipe(gulp.dest('./public/'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('rev:replace', ['rev'], () => {
-    const manifest = gulp.src('./public/rev-manifest.json');
-    return gulp.src('./public/**/*')
-        .pipe(revReplace({
-            manifest: manifest
-        }))
-        .pipe(gulp.dest('./public/'));
+  const manifest = gulp.src('./public/rev-manifest.json');
+  return gulp.src('./public/**/*')
+    .pipe(revReplace({
+      manifest: manifest
+    }))
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('banner', ['browserify'], () => {
-    return gulp.src(['banner.txt', './public/js/bundle.js'])
-        .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('./public/js/'));
+  return gulp.src(['banner.txt', './public/js/bundle.js'])
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest('./public/js/'));
 });
 
 gulp.task('minify', ['rev:replace'], () => {
-    return gulp.src(['./public/**/*'], {
-            base: './public/'
-        })
-        // Only target the versioned files with the hash
-        // Those files have a - and a 10 character string
-        .pipe(gulpif(/-\w{10}\.js$/, uglify()))
-        .pipe(gulpif(/-\w{10}\.css$/, minifyCss()))
-        .pipe(gulpif('*.html', htmlmin({
-            collapseWhitespace: true,
-            removeComments: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
-        })))
-        .pipe(gulp.dest('./public/'));
+  return gulp.src(['./public/**/*'], {
+      base: './public/'
+    })
+    // Only target the versioned files with the hash
+    // Those files have a - and a 10 character string
+    .pipe(gulpif(/-\w{10}\.js$/, uglify()))
+    .pipe(gulpif(/-\w{10}\.css$/, minifyCss()))
+    .pipe(gulpif('*.html', htmlmin({
+      collapseWhitespace: true,
+      removeComments: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true
+    })))
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('clean', () => {
-    return del('./public/');
+  return del('./public/');
 });
 
 gulp.task('default', ['config', 'browserify', 'nunjucks', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
-    const sequence = ['default', 'start'];
-    runSequence('clean', sequence, done);
+  const sequence = ['default', 'start'];
+  runSequence('clean', sequence, done);
 });
 
 gulp.task('build', (done) => {
-    const sequence = ['default', 'banner', 'rev:replace', 'minify'];
-    runSequence('clean', sequence, done);
+  const sequence = ['default', 'banner', 'rev:replace', 'minify'];
+  runSequence('clean', sequence, done);
 });
