@@ -1,6 +1,6 @@
 # Franklin Dashboard
 
-Franklin Dashboard allows you to check and manage your Franklin Projects.
+Franklin Dashboard allows you to check and manage your Franklin Projects. Have you seen inception? If not, watch it.
 
 ## Usage
 
