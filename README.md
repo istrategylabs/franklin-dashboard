@@ -40,3 +40,6 @@ To run e2e tests you should run
 npm test
 ```
 
+## Deployment
+
+Franklin can automatically bootstrap itself. More on this eventually.
