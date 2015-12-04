@@ -127,3 +127,4 @@ angular
   .controller('DashboardModalComponent', ['$scope', '$modalInstance',
     DashboardModalComponent
   ]);
+

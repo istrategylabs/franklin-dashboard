@@ -75,7 +75,6 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       $state.go('logout');
     });
   };
-
 };
 
 export {

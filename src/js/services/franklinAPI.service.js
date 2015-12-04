@@ -1,6 +1,5 @@
 'use strict';
 
-
 export default ['$resource', 'ENV', '$auth',
   function($resource, ENV, $auth) {
 

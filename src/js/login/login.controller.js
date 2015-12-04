@@ -20,7 +20,6 @@ function LoginComponent(franklinAPIService, $scope, $location,
         $auth.logout().then(() => {
           $state.go('logout');
         });
-
         console.log("Login FAILED: " + JSON.stringify(error));
         toastr.error("Try reloading the page", "Github login failed");
       });
