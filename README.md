@@ -42,4 +42,4 @@ npm test
 
 ## Deployment
 
-Franklin can automatically bootstrap itself. More on this eventually.
+Franklin can automatically bootstrap itself. More on this eventually. Subsequent deploys will all work from Master.
