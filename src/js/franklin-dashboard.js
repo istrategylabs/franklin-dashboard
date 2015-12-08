@@ -92,4 +92,5 @@ const app = angular
   })
   .controller('LoginComponent', ['franklinAPIService', '$scope', '$location',
     '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', LoginComponent])
-  .controller('DashboardComponent',  DashboardComponent);
+  .controller('DashboardComponent', ['franklinAPIService', '$scope', '$location',
+    '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', DashboardComponent]);

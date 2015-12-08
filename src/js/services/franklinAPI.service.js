@@ -4,14 +4,31 @@ export default ['$resource', 'ENV', 'localStorageService',
   function($resource, ENV, localStorageService) {
 
     const _self = this;
-    const token_key = "token";
+    const tokenKey = "token";
 
     _self.authFranklinUser = authFranklinUser;
+    _self.userRepos = userRepos;
     _self.isUserLogged = isUserLogged;
     _self.getToken = getToken;
     _self.saveToken = saveToken;
     _self.refreshToken = refreshToken;
     _self.isTokenHealthy = isTokenHealthy;
+
+    //get user deployed repos from franklin and deployables from github 
+    function userRepos() {
+      return $resource(ENV.FRANKLIN_API_URL, {}, {
+        getFranklinRepos: {
+          method: 'GET',
+          url: ENV.FRANKLIN_API_URL + '/user/repos/deployed/',
+          headers: {
+             'Content-Type': 'pplication/json;charset=UTF-8',
+             'Authorization': 'Bearer ' + _self.getToken()
+          },
+          //workaround to satellizer adding auth header to http request          
+          skipAuthorization: true
+        },
+      });
+    };
 
     //sends github access_token to franklin API and retrieves franklin token
     function authFranklinUser() {
@@ -30,19 +47,19 @@ export default ['$resource', 'ENV', 'localStorageService',
     };
 
     function isUserLogged() {
-      return localStorageService.get(token_key) !== null && _self.isTokenHealthy();
+      return localStorageService.get(tokenKey) !== null && _self.isTokenHealthy();
     };
 
     function getToken() {
-      return localStorageService.get(token_key);
+      return localStorageService.get(tokenKey);
     };
 
-    function saveToken(new_token) {
-      return localStorageService.set(token_key, new_token);
+    function saveToken(newToken) {
+      return localStorageService.set(tokenKey, newToken);
     };
 
     function deleteToken() {
-      return localStorageService.remove(token_key);
+      return localStorageService.remove(tokenKey);
     }
 
     //TODO: call franklin API and get new token
