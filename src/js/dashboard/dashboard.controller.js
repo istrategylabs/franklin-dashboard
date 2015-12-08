@@ -15,6 +15,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   dc.listDeployableRepos = listDeployableRepos;
   dc.logout = logout;
 
+
   dc.getFranklinRepos();
 
   function getFranklinRepos() {
