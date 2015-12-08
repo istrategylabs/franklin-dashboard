@@ -27,7 +27,7 @@ const app = angular
     'franklin-dashboard.services'
   ])
   .constant('VERSION', packageJson.version)
-  .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig) => {
+  .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig, $resourceProvider) => {
 
     //angular routing depending on login status
     $stateProvider
@@ -47,6 +47,8 @@ const app = angular
       });
 
     $urlRouterProvider.otherwise('/dashboard');
+
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
     //Github login configuration
     $authProvider.withCredentials = false;
