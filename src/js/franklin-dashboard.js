@@ -105,4 +105,6 @@ angular
       LoginComponent
     ]
   )
-  .controller('DashboardComponent',  DashboardComponent);
+  .controller('DashboardComponent', ['franklinAPIService', '$scope', '$location',
+    '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', DashboardComponent]);
+
