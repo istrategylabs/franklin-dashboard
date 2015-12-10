@@ -129,8 +129,6 @@ gulp.task('config', () => {
         ENV: {
           GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
           FRANKLIN_API_URL: process.env.FRANKLIN_API_URL,
-          FRANKLIN_CLIENT_SECRET: process.env.FRANKLIN_CLIENT_SECRET,
-          FRANKLIN_CLIENT_ID: process.env.FRANKLIN_CLIENT_ID
         }
       },
       wrap: "commonjs",

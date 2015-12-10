@@ -1,0 +1,55 @@
+.bg-applegreen {
+    background-color: #5d8f3c;
+}
+
+.bg-purple {
+    background-color: #8f3c5d;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.padding-ltr {
+    // padding: 0.5em;
+    // padding-bottom: 0;
+}
+
+.no-side-margin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.relative {
+    position: relative;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.cf:before,
+.cf:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.cf {
+    *zoom: 1;
+}

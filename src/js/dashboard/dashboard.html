@@ -1,3 +1,50 @@
-<div class="dashboard" ng-controller="DashboardComponent as dc">
-    <h1>Welcome to Franklin Dashboard!</h1>
+<div class="row dashboard" ng-controller="DashboardComponent as dc">
+    <div class="row cf bg-applegreen dashboard__menu">
+        <div class="large-2 medium-4 small-12 columns bg-purple full-height">
+            <div class="row">
+                <div class="large-6 medium-6 small-5 columns">
+                    <img class="dashboard__logo" src="/img/franklin-logo2.png" alt="logo">
+                </div>
+                <div class="large-6 medium-6 small-6 columns no-padding">
+                    <p class="dashboard__title no-margin ">Franklin
+                        <br>Dashboard</p>
+                </div>
+            </div>
+        </div>
+        <div class="large-10 medium-8 small-12 columns full-height">
+            <p class="dashboard__great">Hi, {[{dc.username}]}</p>
+        </div>
+    </div>
+    <div class="row dashboard__content">
+        <div class="large-2 medium-12 small-12 columns bg-applegreen full-height show-for-large-up">
+            <ul class="side-nav dashboard__sidebar">
+                <li class="active"><a class="dashboard__menuitem">Dashboard</a></li>
+                <li><a class="dashboard__menuitem" href="" ng-click="dc.logout()">Logout</a></li>
+            </ul>
+        </div>
+        <div class="large-10 medium-12 small-12 columns full-height">
+            <div class="dashboard__repolist">
+                <div class="row">
+                    <div class="columns small-10 small-centered">
+                        <table class="dashboard__table">
+                            <thead>
+                                <tr>
+                                    <th >Name</th>
+                                    <th >Environment</th>
+                                    <th >Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="repo in dc.deployedRepos">
+                                    <td >{[{repo.name}]}</td>
+                                    <td >{[{repo.environment}]}</td>
+                                    <td >{[{repo.status}]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
