@@ -1,3 +1,4 @@
+<<<<<<< e7961f11ecd5cc2b43012c52a1934160c7fb741d
 @import "settings";
 .bg-applegreen {
     background-color: $franklin-applegreen;
@@ -15,6 +16,7 @@
     padding: 0;
 }
 
+
 .no-padding-right {
     padding-right: 0;
 }
@@ -24,14 +26,17 @@
     margin-bottom: 0;
 }
 
+
 .no-margin {
     margin: 0;
 }
+
 
 .no-side-margin {
     margin-left: 0;
     margin-right: 0;
 }
+
 
 .center {
     text-align: center;
@@ -70,6 +75,7 @@
     clear: both;
 }
 
+
 /**
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
@@ -77,4 +83,4 @@
 
 .cf {
     *zoom: 1;
-}
+

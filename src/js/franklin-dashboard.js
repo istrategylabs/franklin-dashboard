@@ -19,6 +19,7 @@ import {
   DashboardDirective
 }
 from './dashboard';
+
 import {
   LoginComponent
 }
@@ -60,10 +61,26 @@ angular
 
     $urlRouterProvider.otherwise('/dashboard');
 
-    $resourceProvider.defaults.stripTrailingSlashes = false;
+    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 
-    //Github login configuration
-    $authProvider.withCredentials = false;
+    //angular routing depending on login status
+    $stateProvider
+      .state('logged', {
+        url: '/dashboard',
+        templateUrl: 'dashboard/dashboard.html',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('logout', {
+        url: '/login',
+        templateUrl: 'login/login.html',
+        resolve: {
+          skipIfLoggedIn: skipIfLoggedIn
+        }
+      });
+
+    $urlRouterProvider.otherwise('/dashboard');
 
 
     $authProvider.github({
@@ -127,5 +144,4 @@ angular
   .controller('DashboardModalComponent', ['$scope', '$modalInstance',
     DashboardModalComponent
   ]);
-
 

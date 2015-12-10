@@ -33,5 +33,6 @@ export default ['$resource', 'ENV', '$auth',
         }
       });
     };
+
   }
 ];

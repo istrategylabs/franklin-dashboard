@@ -9,12 +9,12 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   dc.deployedRepos = [];
   $scope.deployableRepos = [];//Scope used because of foundation modal directive
 
+
   dc.getFranklinRepos = getFranklinRepos;
   dc.getDeployableRepos = getDeployableRepos;
   dc.listFranklinRepos = listFranklinRepos;
   dc.listDeployableRepos = listDeployableRepos;
   dc.logout = logout;
-
 
   dc.getFranklinRepos();
 
@@ -76,6 +76,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       $state.go('logout');
     });
   };
+
 };
 
 export {
