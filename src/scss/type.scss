@@ -1,0 +1,118 @@
+
+h1 {
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 800;
+    font-size: 3.541666667em; //85px desk
+    margin-bottom: 0.2em;
+    margin-top: 0;
+    letter-spacing: 5px;
+    line-height: .94;
+    text-transform: uppercase;
+}
+
+.alpha, %alpha {
+    @extend h1;
+}
+.alpha--wide {
+    letter-spacing: 7.5px;
+}
+
+.jumbo, %jumbo {
+    @extend h1;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    color: #5d8f3c;
+    font-size: 7em;
+    line-height: 0.7em;
+}
+
+h2 {
+    // heading of bottom section
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-size: 2em; //48px desk;
+    line-height: 1.4;
+    margin-top: 0;
+}
+
+.beta, %beta  {
+    @extend h2;
+}
+
+h3 {
+    // heading of copy section at top
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-size: 1.5em; //36px desk;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 1em;
+    position: relative;
+    color: #5d8f3c;
+    font-weight: 700;
+    &:after {
+        content: '';
+        display: block;
+        background-color: #5d8f3c;
+        width: 1.8em;
+        height: 4px;
+        margin-top: 0.6em;
+    }
+}
+
+.gamma {
+    @extend h3;
+}
+
+h4 {
+    //milestone #
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 400;
+    font-size: 1em; //24px desk
+    margin-bottom: 1.2em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 0;
+}
+
+.delta {
+    @extend h4;
+}
+
+h5 {
+    //blockquote attribution
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-size: 0.75em; //18px desk;
+    // line-height: 1.2;
+    margin-top: 0;
+}
+
+.epsilon {
+    @extend h5;
+}
+
+h6 {
+    //link in bottom section
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-weight: 400;
+    font-size: 0.75em; //18px desk;
+    margin-bottom: 1.2em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 0;
+}
+
+.zeta {
+    @extend h6;
+}
+
+p {
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serifans;
+    font-weight: 400;
+    font-size: 1em; //24px desk
+    margin-bottom: 1em;
+    color: #FFF;
+    line-height: 1.75em;
+}
+
+.color-white {color: #FFF!important;}
+.color-green{color: #5d8f3c!important;}

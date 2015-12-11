@@ -9,7 +9,6 @@ export default ['$resource', 'ENV', '$auth',
 
     _self.userRepos = userRepos;
 
-
     //get user deployed repos from franklin and deployables from github 
     function userRepos() {
       return $resource(ENV.FRANKLIN_API_URL, {}, {

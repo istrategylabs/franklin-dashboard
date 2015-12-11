@@ -1,64 +1,108 @@
-    .dashboard {
+@import "settings";
+.dashboard {
     width: 100%;
     max-width: 100%;
 }
 
-.dashboard__logo {
-    height: 3em;
+.dashboard__body {
+    height: calc(100vh - 4em);
 }
 
-.dashboard__menu {
+.dashboard__logo {
     height: 3em;
+    position: absolute;
+    left: 1.5em;
+    top: 1em;
+}
+
+.dashboard__header {
+    height: 4em;
+}
+
+.dashboard__greet {
+    color: $white !important;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    float: right;
+    margin: 0;
+    margin-right: 2em;
+    line-height: 4em
 }
 
 .dashboard__title {
-    font-size: 1.1em;
-    line-height: 1.5em;
-    color: #fff;
+    font-size: 1.2em;
+    line-height: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    color: #FFFFFF;
     font-weight: bold;
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-}
-
-.dashboard__menuitem {
-    color: #fff !important;
-    font-size: 1.2em;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    position: absolute;
+    right: 7%;
+    top: 0.5em;
+    
 }
 
 .dashboard__sidebar {
-    text-align: center;
+    padding: 0;
+    li {
+        border-bottom: 1px solid $white;
+        margin: 0;
+        height: 4.5em;
+        line-height: 4.5em;
+    }
+    .dashboard__sidebar__item {
+        padding-left: 1em;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        color: $white !important;
+        font-size: 1.2em;
+        font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+        text-decoration: none;
+        vertical-align: middle;
+    }
 }
 
 .dashboard__content {
-    height: calc(100vh - 3em);
-}
-
-.dashboard__great {
-    color: #fff !important;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    float: right;
-    margin-right: 2em;
-    margin-bottom: 0;
-    line-height: 3em
-}
-
-.dashboard__repolist {
     height: 100%;
     margin-top: 2em;
 }
 
+.dashboard__newrepo {
+    width: 2.5em;
+    transform: translateZ(0);
+    transition: 0.5s;
+    fill: $franklin-purple;
+    float: right;
+}
+
+.dashboard__icon {
+    width: 1.2em;
+    transform: translateZ(0);
+    transition: 0.5s;
+    fill: $white;
+    margin-right: 0.8em;
+}
+
 .dashboard__table {
     border: none;
-    //width: 100%;
-    background-color: #FFF;
+    width: 100%;
+    background-color: $white;
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    thead {
+        border-bottom: 2px solid $franklin-applegreen;
+    }
     th {
-        background-color: #FFF;
-        border-bottom: 2px solid #5d8f3c;
-        color: #5d8f3c;
+        background-color: $white;
+        color: $franklin-applegreen;
         font-weight: bold;
         font-size: 1.2em;
-        td {
-            background-color: #FFF;
-        }
     }
+    td {
+        color: $charcoal;
+        background-color: $white;
+    }
+    a {
+        color: $charcoal;
+        text-decoration: none;
+    }
+}

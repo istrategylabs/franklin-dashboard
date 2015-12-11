@@ -67,6 +67,7 @@ angular
       url: ENV.FRANKLIN_API_URL + '/auth/github/',
       //Ask permission for hooks, deploy keys, private repos
       scope: ['user:email', 'admin:repo_hook', 'repo'],
+      redirectUri: window.location.origin
     });
 
 

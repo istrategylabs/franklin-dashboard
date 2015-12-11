@@ -1,11 +1,17 @@
 // Make sure the charset is set appropriately
 @charset "UTF-8";
 // Foundation Components
-@import "foundation";
+@import "foundation/components/grid";
+@import "foundation/components/tables";
+@import "foundation/components/buttons";
+@import "foundation/components/visibility";
 @import "angular-toastr";
 @import "dashboard";
 @import "utils";
 @import "login";
+@import "type";
+
+
 body {
     margin: 0;
 }

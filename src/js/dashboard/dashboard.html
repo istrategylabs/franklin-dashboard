@@ -1,44 +1,77 @@
 <div class="row dashboard" ng-controller="DashboardComponent as dc">
-    <div class="row cf bg-applegreen dashboard__menu">
-        <div class="large-2 medium-4 small-12 columns bg-purple full-height">
+<div class="columns small-12">
+    <div class="row cf bg-gray dashboard__header">
+        <div class="large-2 medium-4 small-12 columns bg-purple no-padding full-height">
             <div class="row">
-                <div class="large-6 medium-6 small-5 columns">
+                <!-- <div class="large-6 medium-6 small-5 columns center"> -->
                     <img class="dashboard__logo" src="/img/franklin-logo2.png" alt="logo">
-                </div>
-                <div class="large-6 medium-6 small-6 columns no-padding">
-                    <p class="dashboard__title no-margin ">Franklin
-                        <br>Dashboard</p>
-                </div>
+                <!-- </div> -->
+                <!-- <div class="large-6 medium-6 small-6 columns no-padding"> -->
+                    <p class="dashboard__title no-margin ">Franklin<br>Dashboard</p>
+                <!-- </div> -->
             </div>
         </div>
         <div class="large-10 medium-8 small-12 columns full-height">
-            <p class="dashboard__great">Hi, {[{dc.username}]}</p>
+            <p class="dashboard__greet">Hi, {[{dc.username}]}</p>
         </div>
     </div>
-    <div class="row dashboard__content">
-        <div class="large-2 medium-12 small-12 columns bg-applegreen full-height show-for-large-up">
-            <ul class="side-nav dashboard__sidebar">
-                <li class="active"><a class="dashboard__menuitem">Dashboard</a></li>
-                <li><a class="dashboard__menuitem" href="" ng-click="dc.logout()">Logout</a></li>
+    <div class="row dashboard__body">
+        <div class="large-2 medium-12 small-12 columns bg-applegreen full-height no-padding show-for-large-up">
+            <ul class="side-nav dashboard__sidebar no-vertical-margin">
+                <li class="active">
+                    <a class="dashboard__sidebar__item">
+                        <svg class="dashboard__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" viewBox="0 0 100 100" version="1.1" x="0px" y="0px">
+                            <g stroke="none" stroke-width="1" sketch:type="MSPage">
+                                <g sketch:type="MSArtboardGroup">
+                                    <path d="M45.5211765,62.4186765 C41.9917647,62.4186765 38.9864706,65.2951471 38.9864706,68.6939706 L38.9864706,86.4716176 C38.9864706,90.0010294 36.11,92.7451471 32.45,92.7451471 L15.0641176,92.7451471 C11.5347059,92.7451471 8.52941176,89.8704412 8.52941176,86.3410294 L8.52941176,48.3010294 C8.52941176,44.7716176 10.6205882,39.9345588 13.1035294,37.3210294 L44.0847059,6.86220588 C46.5676471,4.37926471 50.75,4.37926471 53.2347059,6.86220588 L84.2141176,37.3210294 C86.6988235,39.8039706 88.79,44.7716176 88.79,48.3010294 L88.79,86.3410294 C88.79,89.8704412 85.9135294,92.7451471 82.2535294,92.7451471 L66.4364706,92.7451471 C62.9070588,92.7451471 60.0323529,89.8704412 60.0323529,86.4716176 L60.0323529,68.6939706 C60.0323529,65.1645588 57.1558824,62.4186765 53.6264706,62.4186765 L45.5211765,62.4186765" sketch:type="MSShapeGroup" />
+                                </g>
+                            </g>
+                        </svg>
+                        Dashboard</a>
+                </li>
+                <li>
+                    <a class="dashboard__sidebar__item" href="" ng-click="dc.logout()">
+                        <svg class="dashboard__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve">
+                            <g>
+                                <path d="M83.7,43c0-0.3-0.1-0.6-0.2-0.9c-0.1-0.1-0.2-0.3-0.3-0.4c-0.1-0.1-0.1-0.2-0.2-0.3c0,0,0,0,0,0L70.3,28.6   c-0.9-0.9-2.3-0.9-3.2,0c-0.9,0.9-0.9,2.6,0,3.5l8.9,9.2H31.7c-1.2,0-2.3,1-2.3,2.3c0,1.2,1,2.3,2.3,2.3H76l-8.9,8.7   c-0.9,0.9-0.9,2.2,0,3.1c0.9,0.9,2.3,0.8,3.2-0.1l12.8-12.8c0,0,0,0,0,0c0.1-0.1,0.2-0.2,0.2-0.4c0.1-0.1,0.2-0.2,0.2-0.4   C83.7,43.6,83.7,43.3,83.7,43L83.7,43L83.7,43z" />
+                                <path d="M53.9,58.8v17.6H13.2V13.1h40.7v16.5h4.5V13.1c0-2.5-1.9-4.5-4.2-4.5H12.9c-2.3,0-4.2,2-4.2,4.5v63.3   c0,2.5,1.9,4.5,4.2,4.5h41.3c2.3,0,4.2-2,4.2-4.5V58.8H53.9z" />
+                            </g>
+                        </svg>
+                        Logout</a>
+                </li>
             </ul>
         </div>
-        <div class="large-10 medium-12 small-12 columns full-height">
-            <div class="dashboard__repolist">
+        <div class="large-10 medium-12 small-12 columns full-height  ">
+            <div class="dashboard__content">
                 <div class="row">
                     <div class="columns small-10 small-centered">
+                        <div class="row">
+                            <div class="columns small-6">
+                                <h3 class="">Franklin Repositories</h3>
+                            </div>
+                            <div class="columns small-6">
+                                <a href="" ng-click="" title="New Repo">
+                                    <svg class="dashboard__newrepo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                                        <path d="M50.433,0.892c-27.119,0-49.102,21.983-49.102,49.102s21.983,49.103,49.102,49.103s49.101-21.984,49.101-49.103  S77.552,0.892,50.433,0.892z M50.433,93.258c-23.895,0-43.264-19.371-43.264-43.265c0-23.894,19.37-43.264,43.264-43.264  c23.894,0,43.263,19.37,43.263,43.264C93.696,73.887,74.327,93.258,50.433,93.258z" />
+                                        <path d="M78,50.964C78,47.118,74.882,44,71.036,44H27.964C24.118,44,21,47.118,21,50.964v0.072C21,54.882,24.118,58,27.964,58  h43.072C74.882,58,78,54.882,78,51.036V50.964z" />
+                                        <path d="M57,28.964C57,25.118,53.882,22,50.036,22h-0.071C46.118,22,43,25.118,43,28.964v43.071C43,75.882,46.118,79,49.964,79  h0.071C53.882,79,57,75.882,57,72.035V28.964z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                         <table class="dashboard__table">
                             <thead>
                                 <tr>
-                                    <th >Name</th>
-                                    <th >Environment</th>
-                                    <th >Status</th>
+                                    <th>Name</th>
+                                    <th>Environment</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="repo in dc.deployedRepos">
-                                    <td >{[{repo.name}]}</td>
-                                    <td >{[{repo.environment}]}</td>
-                                    <td >{[{repo.status}]}</td>
+                                    <td><a href="https://github.com/{[{repo.owner}]}/{[{repo.name}]}/" target="blank">{[{repo.name}]}</a></td>
+                                    <td>{[{repo.environment}]}</td>
+                                    <td>{[{repo.status}]}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -47,4 +80,7 @@
             </div>
         </div>
     </div>
+
+</div>
+    
 </div>
