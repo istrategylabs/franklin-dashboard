@@ -9,6 +9,7 @@ import 'angular-toastr';
 import 'satellizer';
 // require('../../node_modules/foundation-apps/js/angular/foundation');
 
+
 /* Franklin Dashboard modules */
 require('./config/ngConstants');
 import './services';
@@ -116,3 +117,4 @@ angular
   .controller('DashboardComponent', ['franklinAPIService', '$scope', '$location',
     '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', DashboardComponent
   ]);
+

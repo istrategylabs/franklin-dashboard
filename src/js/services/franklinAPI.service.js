@@ -1,5 +1,6 @@
 'use strict';
 
+
 export default ['$resource', 'ENV', '$auth',
   function($resource, ENV, $auth) {
 
@@ -7,6 +8,7 @@ export default ['$resource', 'ENV', '$auth',
     const tokenKey = "token";
 
     _self.userRepos = userRepos;
+
 
     //get user deployed repos from franklin and deployables from github 
     function userRepos() {
@@ -23,6 +25,5 @@ export default ['$resource', 'ENV', '$auth',
         },
       });
     };
-
   }
 ];
