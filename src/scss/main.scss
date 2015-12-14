@@ -1,80 +1,19 @@
 // Make sure the charset is set appropriately
 @charset "UTF-8";
 // Foundation Components
-@import "foundation";
+@import "settings";
+@import "foundation/components/grid";
+@import "foundation/components/tables";
+@import "foundation/components/buttons";
+@import "foundation/components/visibility";
+@import "foundation/components/reveal";
 @import "angular-toastr";
+@import "dashboard";
+@import "utils";
+@import "login";
+@import "type";
+
+
 body {
     margin: 0;
-}
-
-.login {
-    height: 100vh;
-    background: #1e5799;
-    /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* FF3.6-15 */
-    background: -webkit-radial-gradient(center, ellipse cover, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: radial-gradient(ellipse at center, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#5d8f3c', GradientType=1);
-    /* IE6-9 fallback on horizontal gradient */
-    width: 100%;
-    color: #CCC;
-    text-align: center;
-    padding-top: 5%
-}
-
-.login__button {
-    background-color: #FFF;
-    border-color: #FFF;
-    border-style: none;
-    color: #5D8F3C;
-    font-size: 20px;
-    border: 2px solid #FFF;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    border-radius: 30px;
-    @media(max-height: 400px) {
-        font-size: 15px;
-    }
-    @media(min-width: 768px) {
-        font-size: 20px;
-    }
-}
-
-.login__button:hover {
-    cursor: pointer;
-    background-color: #5D8F3C;
-    color: #FFF;
-}
-
-.login__button:focus {
-    background-color: #FFF;
-    border-color: #FFF;
-    border-style: none;
-    color: #5D8F3C;
-    font-size: 20px;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-}
-
-.login__logo {
-    background-image: url('../img/franklin.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50vh;
-    background-size: contain;
-}
-
-.login__title {
-    margin-bottom: 5%;    
-    font-size: 30px;
-    color: #fff;
-    font-weight: bold;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-    @media(max-height: 400px) {
-        margin-bottom: 0%;
-    }
-    @media(min-width: 768px) {
-        font-size: 40px;
-    }
 }

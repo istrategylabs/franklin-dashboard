@@ -8,13 +8,11 @@ Franklin Dashboard allows you to check and manage your Franklin Projects. Have y
 
 
     ```
-    	GITHUB_CLIENT_ID=7047fds785d670dfsd9ab46    - App's Github Client ID
-    	FRANKLIN_API_URL=http://ab763639.ngrok.io   - Franklin API URL
-    	FRANKLIN_CLIENT_ID=ROdDPXSQ9TJJhnwiXi		- Franklin App Client ID
-		FRANKLIN_CLIENT_SECRET=3tQunIqi2g2AZ		- Franklin App Client Secret
-		BASE_URL=http://localhost:3000 				- App url for e2e testing only
-		TEST_USER=example@isl.co 					- Github user for e2e testing only
-		TEST_PASS=1234								- Github password for e2e testing only
+    	GITHUB_CLIENT_ID=<your_github_client_id>    		- App's Github Client ID
+    	FRANKLIN_API_URL=<franklin_api_url>    				- Franklin API URL
+		BASE_URL=http://localhost:3000 						- App url for e2e testing only
+		TEST_USER=example@isl.co 							- Github user for e2e testing only
+		TEST_PASS=1234										- Github password for e2e testing only
 
     ```
 

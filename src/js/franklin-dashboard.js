@@ -7,102 +7,124 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-toastr';
 import 'satellizer';
-// require('../../node_modules/foundation-apps/js/angular/foundation');
+import 'angular-foundation/mm-foundation.min';
+import 'angular-foundation/mm-foundation-tpls.min';
+
 
 /* Franklin Dashboard modules */
-require('./config/ngConstants');
+import './config';
 import './services';
-import { DashboardComponent } from './dashboard/dashboard.controller';
-import { LoginComponent } from './login/login.controller';
+import {
+  DashboardComponent,
+  DashboardModalComponent,
+  DashboardDirective
+}
+from './dashboard';
+import {
+  LoginComponent
+}
+from './login/login.controller';
 
 
 angular
-  .module('franklin-dashboard',
-    [
-      'ngAnimate',
-      'toastr',
-      'satellizer',
-      'franklin-dashboard.config',
-      'ui.router',
-      'franklin-dashboard.services'
-    ]
-  )
+  .module('franklin-dashboard', [
+    'ngAnimate',
+    'toastr',
+    'satellizer',
+    'franklin-dashboard.config',
+    'ui.router',
+    'franklin-dashboard.services',
+    'mm.foundation'
+  ])
   .constant('VERSION', packageJson.version)
-  .config(
-    ($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig) => {
+  .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig,
+    $resourceProvider, $interpolateProvider) => {
 
-      //angular routing depending on login status
-      $stateProvider
-        .state('logged', {
-          url: '/dashboard',
-          templateUrl: 'dashboard/dashboard.html',
-          resolve: {
-            loginRequired: loginRequired
-          }
-        })
-        .state('logout', {
-          url: '/login',
-          templateUrl: 'login/login.html',
-          resolve: {
-            skipIfLoggedIn: skipIfLoggedIn
-          }
-        });
+    $interpolateProvider.startSymbol('[[').endSymbol(']]');
 
-      $urlRouterProvider.otherwise('/dashboard');
-
-      //Github login configuration
-      $authProvider.withCredentials = false;
-
-      $authProvider.github({
-        clientId: ENV.GITHUB_CLIENT_ID,
-        url: ENV.FRANKLIN_API_URL + '/auth/github/'
+    //angular routing depending on login status
+    $stateProvider
+      .state('logged', {
+        url: '/dashboard',
+        templateUrl: 'dashboard/dashboard.html',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('logout', {
+        url: '/login',
+        templateUrl: 'login/login.html',
+        resolve: {
+          skipIfLoggedIn: skipIfLoggedIn
+        }
       });
 
+    $urlRouterProvider.otherwise('/dashboard');
 
-      //toastr configuration - error messages
-      angular.extend(toastrConfig, {
-        positionClass: 'toast-bottom-center',
-        closeButton: false,
-        closeHtml: '<button>&times;</button>',
-        extendedTimeOut: 10000,
-        tapToDismiss: true,
-        timeOut: 10000,
-      });
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
-      //Auxiliar functions for routing
-      function skipIfLoggedIn($q, $auth) {
-        var deferred = $q.defer();
-        if ($auth.isAuthenticated()) {
-          deferred.reject();
-        } else {
-          deferred.resolve();
-        }
-        return deferred.promise;
+    //Github login configuration
+    $authProvider.withCredentials = false;
+
+
+    $authProvider.github({
+      clientId: ENV.GITHUB_CLIENT_ID,
+      url: ENV.FRANKLIN_API_URL + '/auth/github/',
+      //Ask permission for hooks, deploy keys, private repos
+      scope: ['user:email', 'admin:repo_hook', 'repo'],
+      redirectUri: window.location.origin
+    });
+
+
+    //toastr configuration - error messages
+    angular.extend(toastrConfig, {
+      positionClass: 'toast-bottom-center',
+      closeButton: false,
+      closeHtml: '<button>&times;</button>',
+      extendedTimeOut: 10000,
+      tapToDismiss: true,
+      timeOut: 10000,
+    });
+
+    //Auxiliar functions for routing
+    function skipIfLoggedIn($q, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.reject();
+      } else {
+        deferred.resolve();
       }
+      return deferred.promise;
+    }
 
-      function loginRequired($q, $location, $auth) {
-        var deferred = $q.defer();
-        if ($auth.isAuthenticated()) {
-          deferred.resolve();
-        } else {
-          $location.path('/login');
-        }
-        return deferred.promise;
+    function loginRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.resolve();
+      } else {
+        $location.path('/login');
       }
+      return deferred.promise;
+    }
 
-      console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
+    console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
   })
-  .controller('LoginComponent',
-    [
-      'franklinAPIService',
-      '$scope',
-      '$location',
-      '$auth',
-      'toastr',
-      'ENV',
-      '$httpParamSerializer',
-      '$state',
-      LoginComponent
-    ]
-  )
-  .controller('DashboardComponent',  DashboardComponent);
+  .controller('LoginComponent', [
+    'franklinAPIService',
+    '$scope',
+    '$location',
+    '$auth',
+    'toastr',
+    'ENV',
+    '$httpParamSerializer',
+    '$state',
+    LoginComponent
+  ])
+  .controller('DashboardComponent', ['franklinAPIService', '$scope',
+    '$location', '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state',
+    '$modal', DashboardComponent
+  ])
+  .directive('dashboard', DashboardDirective)
+  .controller('DashboardModalComponent', ['$scope', '$modalInstance',
+    DashboardModalComponent
+  ]);

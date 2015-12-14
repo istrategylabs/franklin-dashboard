@@ -11,7 +11,6 @@ const autoprefixer = require('autoprefixer');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
-const nunjucksRender = require('gulp-nunjucks-render');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const browserify = require('browserify');
@@ -106,12 +105,8 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('nunjucks', () => {
-  nunjucksRender.nunjucks.configure(['./src/templates/'], {
-    watch: false
-  });
+gulp.task('html', () => {
   return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
-    .pipe(nunjucksRender())
     .pipe(gulp.dest('./public/'));
 });
 
@@ -129,8 +124,6 @@ gulp.task('config', () => {
         ENV: {
           GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
           FRANKLIN_API_URL: process.env.FRANKLIN_API_URL,
-          FRANKLIN_CLIENT_SECRET: process.env.FRANKLIN_CLIENT_SECRET,
-          FRANKLIN_CLIENT_ID: process.env.FRANKLIN_CLIENT_ID
         }
       },
       wrap: "commonjs",
@@ -139,14 +132,14 @@ gulp.task('config', () => {
     .pipe(gulp.dest('./src/js/config/'));
 });
 
-gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
+gulp.task('start', ['sass', 'extras', 'watchify'], () => {
   browserSync.init({
     server: 'public',
     files: './public/**/*'
   });
 
   gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch('./src/**/*.html', ['nunjucks']);
+  gulp.watch('./src/**/*.html', ['html']);
   gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
@@ -197,14 +190,15 @@ gulp.task('clean', () => {
   return del('./public/');
 });
 
-gulp.task('default', ['config', 'browserify', 'nunjucks', 'sass', 'extras']);
+gulp.task('default', ['config', 'browserify', 'html', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
   const sequence = ['default', 'start'];
   runSequence('clean', sequence, done);
 });
 
+//TODO: uncomment minification
 gulp.task('build', (done) => {
-  const sequence = ['default', 'banner', 'rev:replace', 'minify'];
+  const sequence = ['default', 'banner', 'rev:replace'/*, 'minify'*/];
   runSequence('clean', sequence, done);
 });
