@@ -53,6 +53,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       templateUrl: 'dashboard/modal/listDeployableRepos.html',
       controller: 'DashboardModalComponent',
       scope: $scope,
+
       resolve: {
         deployableRepos: function() {
           if (data.length > 0) {
@@ -70,6 +71,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       }
     });
   };
+
 
   function logout() {
     $auth.logout().then(() => {
