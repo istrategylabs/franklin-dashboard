@@ -136,11 +136,21 @@ angular
     '$state',
     LoginComponent
   ])
-  .controller('DashboardComponent', ['franklinAPIService', '$scope',
-    '$location', '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state',
+  .controller('DashboardComponent', [
+    'franklinAPIService',
+    '$scope',
+    '$location',
+    '$auth',
+    'toastr',
+    'ENV',
+    '$httpParamSerializer',
+    '$state',
     '$modal', DashboardComponent
   ])
   .directive('dashboard', DashboardDirective)
-  .controller('DashboardModalComponent', ['$scope', '$modalInstance',
+  .controller('DashboardModalComponent', [
+    '$scope',
+    '$modalInstance',
+    'franklinAPIService',
     DashboardModalComponent
   ]);

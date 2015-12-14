@@ -1,24 +1,24 @@
-<a href="" class="button__close" ng-click="cancel()">
+<a href="" class="button__close" ng-click="dmc.cancel()">
     <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
         <path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" d="M 49.97281,5 C 25.191755,5 5,25.191756 5,49.97281 5,74.753863 25.191755,95 49.97281,95 74.753863,95 95,74.753863 95,49.97281 95,25.191756 74.753863,5 49.97281,5 z m 0,11.800604 c 18.385899,0 33.172205,14.786306 33.172205,33.172206 0,18.385899 -14.786306,33.172205 -33.172205,33.172205 -18.385899,0 -33.172205,-14.786306 -33.172205,-33.172205 0,-18.3859 14.786306,-33.172206 33.172205,-33.172206 z M 34.583081,30.450151 a 5.4821193,5.4821193 0 0 0 -3.262839,9.407855 L 41.81571,50.353474 31.320242,60.848943 a 5.4987699,5.49877 0 1 0 7.776435,7.776434 L 49.592145,58.129909 60.087613,68.625377 a 5.4821193,5.4821193 0 1 0 7.722055,-7.776434 L 57.3142,50.353474 67.809668,39.858006 a 5.4821193,5.4821193 0 0 0 -3.969788,-9.407855 5.4821193,5.4821193 0 0 0 -3.752267,1.6858 L 49.592145,42.63142 39.096677,32.135951 a 5.4821193,5.4821193 0 0 0 -3.969788,-1.6858 5.4821193,5.4821193 0 0 0 -0.543808,0 z" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible" />
     </svg>
 </a>
-<h3 id="modalTitle">Deploy a repo with Franklin</h3>
+<h3 id="modalTitle">Register a repo in Franklin</h3>
 <div class="dashboard--scrollable">
     <table class="dashboard__table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Owner</th>
-                <th class="center">Deploy</th>
+                <th class="center">Register</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="repo in deployableRepos">
                 <td><a href="[[repo.url]]" target="blank">[[repo.name]]</a></td>
-                <td>[[repo.owner]]</td>
+                <td>[[repo.owner.name]]</td>
                 <td class="center">
-                    <a href="" class="dashboard__deploy__button" title="Deploy">
+                    <a href="" class="button__register" title="Register" ng-click="dmc.registerRepo(repo)">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
                             <g>
                                 <path d="M69.383,64.324c-4.732,0-9,2.004-12.027,5.195L44.512,59.027c1.695-2.602,2.691-5.7,2.691-9.027   c0-3.401-1.029-6.562-2.793-9.197l13.082-10.177c3.014,3.107,7.232,5.05,11.891,5.05c9.15,0,16.59-7.44,16.59-16.588   S78.533,2.5,69.383,2.5c-9.143,0-16.586,7.44-16.586,16.588c0,3.401,1.029,6.562,2.793,9.197L42.508,38.462   c-3.018-3.107-7.232-5.05-11.891-5.05c-9.146,0-16.59,7.44-16.59,16.588s7.443,16.588,16.59,16.588c4.732,0,9-2.004,12.027-5.195   l12.844,10.496c-1.695,2.598-2.691,5.696-2.691,9.023c0,9.147,7.443,16.588,16.586,16.588c9.15,0,16.59-7.44,16.59-16.588   S78.533,64.324,69.383,64.324z" />

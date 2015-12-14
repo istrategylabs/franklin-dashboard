@@ -8,28 +8,38 @@ export default ['$resource', 'ENV', '$auth',
 
     _self.userRepos = userRepos;
 
-    //get user deployed repos from franklin and deployables from github 
     function userRepos() {
       return $resource(ENV.FRANKLIN_API_URL, {}, {
         getFranklinRepos: {
           method: 'GET',
           url: ENV.FRANKLIN_API_URL + '/user/repos/deployed/',
           headers: {
-             'Authorization': 'Bearer ' + $auth.getToken()
+            'Authorization': 'Bearer ' + $auth.getToken()
           },
           //workaround to satellizer adding auth header to http request          
           skipAuthorization: true,
-          isArray : true
+          isArray: true
         },
         getDeployableRepos: {
           method: 'GET',
           url: ENV.FRANKLIN_API_URL + '/user/repos/deployable/',
           headers: {
-             'Authorization': 'Bearer ' + $auth.getToken()
+            'Authorization': 'Bearer ' + $auth.getToken()
           },
           //workaround to satellizer adding auth header to http request          
           skipAuthorization: true,
-          isArray : true
+          isArray: true
+        },
+        registerRepo: {
+          method: 'POST',
+          url: ENV.FRANKLIN_API_URL + '/register/',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + $auth.getToken()
+          },
+          //workaround to satellizer adding auth header to http request          
+          skipAuthorization: true,
+          isArray: true
         }
       });
     };
