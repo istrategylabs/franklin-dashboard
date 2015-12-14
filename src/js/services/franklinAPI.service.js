@@ -5,7 +5,7 @@ export default ['$resource', 'ENV', '$auth',
   function($resource, ENV, $auth) {
 
     const _self = this;
-    const tokenKey = "token";
+    const tokenKey = 'token';
 
     _self.userRepos = userRepos;
 

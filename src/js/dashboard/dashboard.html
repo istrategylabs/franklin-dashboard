@@ -1,4 +1,4 @@
-<div class="row dashboard" ng-controller="DashboardComponent as dc">
+<dashboard id="dashboard" class="row dashboard" ng-controller="DashboardComponent as dc">
     <div class="columns small-12">
         <div class="row cf bg-gray dashboard__header">
             <div class="large-2 medium-4 small-12 columns bg-purple no-padding full-height">
@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="large-10 medium-8 small-12 columns full-height">
-                <p class="dashboard__greet">Hi, {[{dc.username}]}</p>
+                <p class="dashboard__greet">Hi, [[dc.username]]</p>
             </div>
         </div>
         <div class="row dashboard__body">
@@ -44,11 +44,10 @@
                         <div class="columns small-10 small-centered">
                             <div class="row">
                                 <div class="columns small-6">
-                                    <h3 class="">Franklin Repositories</h3>
+                                    <h3 class="">Franklin Repos</h3>
                                 </div>
                                 <div class="columns small-6">
-                                    <a href="" title="New Repo">
-                                        <!-- ng-click="dc.getFranklinRepos()" -->
+                                    <a href="" title="New Repo" ng-click="dc.getDeployableRepos()">
                                         <svg class="dashboard__newrepo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
                                             <path d="M50.433,0.892c-27.119,0-49.102,21.983-49.102,49.102s21.983,49.103,49.102,49.103s49.101-21.984,49.101-49.103  S77.552,0.892,50.433,0.892z M50.433,93.258c-23.895,0-43.264-19.371-43.264-43.265c0-23.894,19.37-43.264,43.264-43.264  c23.894,0,43.263,19.37,43.263,43.264C93.696,73.887,74.327,93.258,50.433,93.258z" />
                                             <path d="M78,50.964C78,47.118,74.882,44,71.036,44H27.964C24.118,44,21,47.118,21,50.964v0.072C21,54.882,24.118,58,27.964,58  h43.072C74.882,58,78,54.882,78,51.036V50.964z" />
@@ -62,14 +61,14 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Environment</th>
-                                        <th>Status</th>
+                                        <th class="center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="repo in dc.deployedRepos">
-                                        <td><a href="https://github.com/{[{repo.owner}]}/{[{repo.name}]}/" target="blank">{[{repo.name}]}</a></td>
-                                        <td>{[{repo.environment}]}</td>
-                                        <td>{[{repo.status}]}</td>
+                                        <td><a href="https://github.com/{[{repo.owner}]}/{[{repo.name}]}/" target="blank">[[repo.name]]</a></td>
+                                        <td>[[repo.environment]]</td>
+                                        <td class="center">[[repo.status]]</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -79,4 +78,4 @@
             </div>
         </div>
     </div>
-</div>
+</dashboard>

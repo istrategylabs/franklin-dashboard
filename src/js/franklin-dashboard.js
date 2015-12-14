@@ -7,17 +7,19 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-toastr';
 import 'satellizer';
-//import 'angular-foundation';
-//import 'angular-foundation/mm-foundation';
+import 'angular-foundation/mm-foundation.min';
+import 'angular-foundation/mm-foundation-tpls.min';
 
 
 /* Franklin Dashboard modules */
 import './config';
 import './services';
 import {
-  DashboardComponent
+  DashboardComponent,
+  DashboardModalComponent,
+  DashboardDirective
 }
-from './dashboard/dashboard.controller';
+from './dashboard';
 import {
   LoginComponent
 }
@@ -31,13 +33,14 @@ angular
     'satellizer',
     'franklin-dashboard.config',
     'ui.router',
-    'franklin-dashboard.services'//,
-    //'mm.foundation'
+    'franklin-dashboard.services',
+    'mm.foundation'
   ])
   .constant('VERSION', packageJson.version)
-  .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig, $resourceProvider, $interpolateProvider) => {
+  .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig,
+    $resourceProvider, $interpolateProvider) => {
 
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    $interpolateProvider.startSymbol('[[').endSymbol(']]');
 
     //angular routing depending on login status
     $stateProvider
@@ -117,7 +120,11 @@ angular
     '$state',
     LoginComponent
   ])
-  .controller('DashboardComponent', ['franklinAPIService', '$scope', '$location',
-    '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', /*'$modal',*/ DashboardComponent
+  .controller('DashboardComponent', ['franklinAPIService', '$scope',
+    '$location', '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state',
+    '$modal', DashboardComponent
+  ])
+  .directive('dashboard', DashboardDirective)
+  .controller('DashboardModalComponent', ['$scope', '$modalInstance',
+    DashboardModalComponent
   ]);
-
