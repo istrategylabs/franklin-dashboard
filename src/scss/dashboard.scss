@@ -21,7 +21,7 @@
 
 .dashboard__greet {
     color: $white !important;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
     float: right;
     margin: 0;
     margin-right: 2em;
@@ -35,7 +35,7 @@
     padding-top: 0.5em;
     color: #FFFFFF;
     font-weight: bold;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
     position: absolute;
     right: 7%;
     top: 0.5em;
@@ -56,7 +56,7 @@
         padding-bottom: 0 !important;
         color: $white !important;
         font-size: 1.2em;
-        font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
         text-decoration: none;
         vertical-align: middle;
     }
@@ -87,7 +87,7 @@
     border: none;
     width: 100%;
     background-color: $white;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
     thead {
         border-bottom: 2px solid $franklin-applegreen;
     }

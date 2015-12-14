@@ -1,9 +1,8 @@
 'use strict';
 
 import angular from 'angular';
-require('../../../node_modules/angular-resource');
-require('../config/ngConstants');
-
+import 'angular-resource';
+import '../config';
 import FranklinAPIService from './franklinAPI.service';
 
 angular.module('franklin-dashboard.services', ['ngResource', 'franklin-dashboard.config',

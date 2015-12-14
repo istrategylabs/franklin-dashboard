@@ -22,6 +22,16 @@ export default ['$resource', 'ENV', '$auth',
           skipAuthorization: true,
           isArray : true
         },
+        getDeployableRepos: {
+          method: 'GET',
+          url: ENV.FRANKLIN_API_URL + '/user/repos/deployable/',
+          headers: {
+             'Authorization': 'Bearer ' + $auth.getToken()
+          },
+          //workaround to satellizer adding auth header to http request          
+          skipAuthorization: true,
+          isArray : true
+        }
       });
     };
   }

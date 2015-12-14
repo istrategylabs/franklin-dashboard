@@ -7,11 +7,12 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-toastr';
 import 'satellizer';
-// require('../../node_modules/foundation-apps/js/angular/foundation');
+//import 'angular-foundation';
+//import 'angular-foundation/mm-foundation';
 
 
 /* Franklin Dashboard modules */
-require('./config/ngConstants');
+import './config';
 import './services';
 import {
   DashboardComponent
@@ -30,7 +31,8 @@ angular
     'satellizer',
     'franklin-dashboard.config',
     'ui.router',
-    'franklin-dashboard.services'
+    'franklin-dashboard.services'//,
+    //'mm.foundation'
   ])
   .constant('VERSION', packageJson.version)
   .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig, $resourceProvider, $interpolateProvider) => {
@@ -116,6 +118,6 @@ angular
     LoginComponent
   ])
   .controller('DashboardComponent', ['franklinAPIService', '$scope', '$location',
-    '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', DashboardComponent
+    '$auth', 'toastr', 'ENV', '$httpParamSerializer', '$state', /*'$modal',*/ DashboardComponent
   ]);
 
