@@ -9,7 +9,6 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   dc.deployedRepos = [];
   $scope.deployableRepos = [];//Scope used because of foundation modal directive
 
-
   dc.getFranklinRepos = getFranklinRepos;
   dc.getDeployableRepos = getDeployableRepos;
   dc.listFranklinRepos = listFranklinRepos;
@@ -53,7 +52,6 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       templateUrl: 'dashboard/modal/listDeployableRepos.html',
       controller: 'DashboardModalComponent',
       scope: $scope,
-
       resolve: {
         deployableRepos: function() {
           if (data.length > 0) {
@@ -71,7 +69,6 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       }
     });
   };
-
 
   function logout() {
     $auth.logout().then(() => {
