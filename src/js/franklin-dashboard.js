@@ -7,9 +7,8 @@ import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-toastr';
 import 'satellizer';
-import 'angular-foundation/mm-foundation.min';
-import 'angular-foundation/mm-foundation-tpls.min';
-
+//import 'angular-foundation/mm-foundation.min';
+//import 'angular-foundation/mm-foundation-tpls.min';
 
 /* Franklin Dashboard modules */
 import './config';
@@ -33,8 +32,8 @@ angular
     'satellizer',
     'franklin-dashboard.config',
     'ui.router',
-    'franklin-dashboard.services',
-    'mm.foundation'
+    'franklin-dashboard.services'//,
+    //'mm.foundation'
   ])
   .constant('VERSION', packageJson.version)
   .config(($authProvider, ENV, $stateProvider, $urlRouterProvider, toastrConfig,
