@@ -61,27 +61,10 @@ angular
 
     $urlRouterProvider.otherwise('/dashboard');
 
-    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
-    //angular routing depending on login status
-    $stateProvider
-      .state('logged', {
-        url: '/dashboard',
-        templateUrl: 'dashboard/dashboard.html',
-        resolve: {
-          loginRequired: loginRequired
-        }
-      })
-      .state('logout', {
-        url: '/login',
-        templateUrl: 'login/login.html',
-        resolve: {
-          skipIfLoggedIn: skipIfLoggedIn
-        }
-      });
-
-    $urlRouterProvider.otherwise('/dashboard');
-
+    //Github login configuration
+    $authProvider.withCredentials = false;
 
     $authProvider.github({
       clientId: ENV.GITHUB_CLIENT_ID,
