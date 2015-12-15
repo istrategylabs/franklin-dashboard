@@ -1,16 +1,18 @@
 'use strict';
 
 import angular from 'angular';
-require('angular-local-storage');
-require('../../../node_modules/angular-resource');
-require('../config/ngConstants');
+import 'angular-resource';
+import '../config';
 import FranklinAPIService from './franklinAPI.service';
 
 angular.module('franklin-dashboard.services', ['ngResource', 'franklin-dashboard.config',
-    'LocalStorageModule'
+    'satellizer'
   ])
-.config(function (localStorageServiceProvider) {
-  localStorageServiceProvider
-    .setPrefix('franklin-dashboard');
+.config(($authProvider, ENV) => {
+
+    $authProvider.github({
+        clientId: ENV.GITHUB_CLIENT_ID,
+        url: ENV.FRANKLIN_API_URL + '/auth/github/'
+      });
 })
   .service('franklinAPIService', FranklinAPIService);

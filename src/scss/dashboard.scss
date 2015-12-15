@@ -1,0 +1,108 @@
+@import "settings";
+.dashboard {
+    width: 100%;
+    max-width: 100%;
+}
+
+.dashboard__body {
+    height: calc(100vh - 4em);
+}
+
+.dashboard__logo {
+    height: 3em;
+    position: absolute;
+    left: 1.5em;
+    top: 1em;
+}
+
+.dashboard__header {
+    height: 4em;
+}
+
+.dashboard__greet {
+    color: $white !important;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    float: right;
+    margin: 0;
+    margin-right: 2em;
+    line-height: 4em
+}
+
+.dashboard__title {
+    font-size: 1.2em;
+    line-height: 1em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    position: absolute;
+    right: 7%;
+    top: 0.5em;
+    
+}
+
+.dashboard__sidebar {
+    padding: 0;
+    li {
+        border-bottom: 1px solid $white;
+        margin: 0;
+        height: 4.5em;
+        line-height: 4.5em;
+    }
+    .dashboard__sidebar__item {
+        padding-left: 1em;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        color: $white !important;
+        font-size: 1.2em;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+        text-decoration: none;
+        vertical-align: middle;
+    }
+}
+
+.dashboard__content {
+    height: 100%;
+    margin-top: 2em;
+}
+
+.dashboard__newrepo {
+    width: 2.5em;
+    transform: translateZ(0);
+    transition: 0.5s;
+    fill: $franklin-purple;
+    float: right;
+}
+
+.dashboard__icon {
+    width: 1.2em;
+    transform: translateZ(0);
+    transition: 0.5s;
+    fill: $white;
+    margin-right: 0.8em;
+}
+
+.dashboard__table {
+    border: none;
+    width: 100%;
+    background-color: $white;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    thead {
+        border-bottom: 2px solid $franklin-applegreen;
+    }
+    th {
+        background-color: $white;
+        color: $franklin-applegreen;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    td {
+        color: $charcoal;
+        background-color: $white;
+    }
+    a {
+        color: $charcoal;
+        text-decoration: none;
+    }
+}
