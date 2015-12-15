@@ -45,6 +45,17 @@
     height: 100%;
 }
 
+.button__close {
+    position: absolute;
+    right: 2em;
+    z-index: 100;
+    svg {
+        width: 2em;
+        fill: $franklin-purple;
+    }
+}
+
+
 /* Clearfix */
 
 .cf:before,

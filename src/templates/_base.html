@@ -11,12 +11,13 @@
 </head>
 
 <body>
-    {% block content %} 
-    {% endblock %} 
-    
-    {% block javascripts %}
+    <main role="main">
+        <div class="franklin--dashboard" ng-app="franklin-dashboard">
+            <div ui-view></div>
+        </div>
+    </main>
+
     <script src="/js/bundle.js"></script>
-    {% endblock %}
 </body>
 
 </html>

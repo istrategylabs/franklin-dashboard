@@ -4,6 +4,11 @@
     max-width: 100%;
 }
 
+.dashboard--scrollable {
+    height: 70vh;
+    overflow: scroll;
+}
+
 .dashboard__body {
     height: calc(100vh - 4em);
 }
@@ -21,7 +26,7 @@
 
 .dashboard__greet {
     color: $white !important;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     float: right;
     margin: 0;
     margin-right: 2em;
@@ -35,11 +40,10 @@
     padding-top: 0.5em;
     color: #FFFFFF;
     font-weight: bold;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     position: absolute;
     right: 7%;
     top: 0.5em;
-    
 }
 
 .dashboard__sidebar {
@@ -56,7 +60,7 @@
         padding-bottom: 0 !important;
         color: $white !important;
         font-size: 1.2em;
-        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
         text-decoration: none;
         vertical-align: middle;
     }
@@ -83,11 +87,21 @@
     margin-right: 0.8em;
 }
 
+.dashboard__deploy__button {
+    svg {
+        width: 1.8em;
+        transform: translateZ(0);
+        transition: 0.5s;
+        fill: $franklin-purple;
+    }
+}
+
 .dashboard__table {
     border: none;
+    margin-bottom: 0px;
     width: 100%;
     background-color: $white;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     thead {
         border-bottom: 2px solid $franklin-applegreen;
     }
