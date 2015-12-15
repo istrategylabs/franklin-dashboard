@@ -25,7 +25,7 @@
 }
 
 .dashboard__greet {
-    color: $white !important;
+    color: $white;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     float: right;
     margin: 0;
@@ -58,9 +58,9 @@
 
 .dashboard__item {
     padding-left: 1em;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    color: $white !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: $white;
     font-size: 1.2em;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     text-decoration: none;
