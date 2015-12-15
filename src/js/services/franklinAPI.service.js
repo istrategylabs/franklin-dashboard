@@ -8,8 +8,10 @@ export default ['$resource', 'ENV', '$auth',
 
     _self.userRepos = userRepos;
 
+    //manage user repos within Franklin 
     function userRepos() {
       return $resource(ENV.FRANKLIN_API_URL, {}, {
+        //call API to get franklin registered repos
         getFranklinRepos: {
           method: 'GET',
           url: ENV.FRANKLIN_API_URL + '/user/repos/deployed/',
@@ -20,6 +22,7 @@ export default ['$resource', 'ENV', '$auth',
           skipAuthorization: true,
           isArray: true
         },
+        //call API to get franklin deployable repos
         getDeployableRepos: {
           method: 'GET',
           url: ENV.FRANKLIN_API_URL + '/user/repos/deployable/',
@@ -30,6 +33,7 @@ export default ['$resource', 'ENV', '$auth',
           skipAuthorization: true,
           isArray: true
         },
+        //call API to register a franklin repo
         registerRepo: {
           method: 'POST',
           url: ENV.FRANKLIN_API_URL + '/register/',

@@ -2,10 +2,13 @@
 
 function LoginComponent(franklinAPIService, $scope, $location,
   $auth, toastr, ENV, $httpParamSerializer, $state) {
+  
   /* jshint validthis: true */
   let lc = this;
 
   lc.authenticate = authenticate;
+
+  /**************************************************************************/
 
   function authenticate(provider) {
 

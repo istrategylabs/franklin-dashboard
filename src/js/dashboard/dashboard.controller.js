@@ -2,13 +2,18 @@
 
 function DashboardComponent(franklinAPIService, $scope, $location,
   $auth, toastr, ENV, $httpParamSerializer, $state, $modal) {
+
   /* jshint validthis: true */
   const dc = this;
+
+  //variables
   dc.username = '';
   dc.showLoader = false;
   dc.deployedRepos = [];
-  $scope.deployableRepos = []; //Scope used because of foundation modal directive
+  //Scope used because of foundation modal directive
+  $scope.deployableRepos = []; 
 
+  //Functions
   dc.getFranklinRepos = getFranklinRepos;
   dc.getDeployableRepos = getDeployableRepos;
   dc.listFranklinRepos = listFranklinRepos;
@@ -16,6 +21,8 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   dc.logout = logout;
 
   dc.getFranklinRepos();
+
+  /**************************************************************************/
 
   function getFranklinRepos() {
     let repos = franklinAPIService.userRepos().getFranklinRepos();
@@ -32,15 +39,16 @@ function DashboardComponent(franklinAPIService, $scope, $location,
     //TODO: push if it doesn't exits
     dc.deployedRepos = [];
 
-    if (data.length > 0) {
+    if (data.length) {
       dc.username = data[0].owner.name;
       for (let repo of data) {
+
         const numEnv = repo.environments.length;
         const firstEnv = repo.environments[0];
 
         dc.deployedRepos.push({
           name: repo.name,
-          environment:  numEnv > 0 ? firstEnv.name : '',
+          environment: numEnv > 0 ? firstEnv.name : '',
           status: numEnv > 0 ? firstEnv.status : '',
           owner: repo.owner.name
         });
@@ -58,7 +66,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       scope: $scope,
       resolve: {
         deployableRepos: function() {
-          if (data.length > 0) {
+          if (data.length) {
             dc.username = data[0].owner.name;
             for (let repo of data) {
               $scope.deployableRepos.push({
@@ -77,19 +85,17 @@ function DashboardComponent(franklinAPIService, $scope, $location,
       }
     });
 
+    //hide loader
     dc.showLoader = false;
 
+    //when the modal is closed, update franklin repos list
     modalInstance.result.then(function(repo) {
+      //TODO: add only new repo - get info from API?
       dc.getFranklinRepos()
-      // dc.deployedRepos.push({
-      //   name: repo.name,
-      //   environment: '',
-      //   status: '',
-      //   owner: repo.owner.name
-      // });
-
     }, function(data) {
-      toastr.error(data.statusText, "Repo regristation failed");
+      if (data.statusText) {
+        toastr.error(data.statusText, "Repo regristation failed");
+      }
       console.log("Modal was closed");
     });
   };
