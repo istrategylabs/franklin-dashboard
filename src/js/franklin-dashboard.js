@@ -45,6 +45,7 @@ angular
     //angular routing depending on login status
     $stateProvider
       .state('logged', {
+
         url: '/dashboard',
         templateUrl: 'dashboard/dashboard.html',
         resolve: {
@@ -102,34 +103,28 @@ angular
         deferred.resolve();
       } else {
         $location.path('/login');
+        //deferred.reject();
       }
       return deferred.promise;
     }
 
     console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
   })
-  .controller('LoginComponent', [
-    'franklinAPIService',
-    '$scope',
-    '$location',
-    '$auth',
-    'toastr',
-    'ENV',
-    '$httpParamSerializer',
-    '$state',
-    LoginComponent
-  ])
-  .controller('DashboardComponent', [
-    'franklinAPIService',
-    '$scope',
-    '$location',
-    '$auth',
-    'toastr',
-    'ENV',
-    '$httpParamSerializer',
-    '$state',
-    '$modal', DashboardComponent
-  ])
+.controller('LoginComponent', [
+     '$scope',
+     '$auth',
+     'toastr',
+     '$state',
+     LoginComponent
+   ])
+   .controller('DashboardComponent', [
+     'franklinAPIService',
+     '$scope',
+     '$auth',
+     'toastr',
+     '$state',
+     '$modal', DashboardComponent
+   ])
   .directive('dashboard', DashboardDirective)
   .controller('DashboardModalComponent', [
     '$scope',

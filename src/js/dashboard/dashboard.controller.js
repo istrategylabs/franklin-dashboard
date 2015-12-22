@@ -1,7 +1,8 @@
 'use strict';
 
-function DashboardComponent(franklinAPIService, $scope, $location,
-  $auth, toastr, ENV, $httpParamSerializer, $state, $modal) {
+function DashboardComponent(franklinAPIService, $scope,
+  $auth, toastr, $state, $modal) {
+
 
   /* jshint validthis: true */
   const dc = this;
@@ -11,7 +12,7 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   dc.showLoader = false;
   dc.deployedRepos = [];
   //Scope used because of foundation modal directive
-  $scope.deployableRepos = []; 
+  $scope.deployableRepos = [];
 
   //Functions
   dc.getFranklinRepos = getFranklinRepos;
@@ -25,17 +26,23 @@ function DashboardComponent(franklinAPIService, $scope, $location,
   /**************************************************************************/
 
   function getFranklinRepos() {
-    let repos = franklinAPIService.userRepos().getFranklinRepos();
+    let repos = franklinAPIService.userRepos.getFranklinRepos();
     repos.$promise.then(dc.listFranklinRepos);
   };
 
   function getDeployableRepos() {
     dc.showLoader = true;
-    let repos = franklinAPIService.userRepos().getDeployableRepos();
-    repos.$promise.then(dc.listDeployableRepos);
+    let repos = franklinAPIService.userRepos.getDeployableRepos();
+    repos.$promise.then(dc.listDeployableRepos,
+      function(error) {
+        //hide loader
+        dc.showLoader = false;
+        toastr.error(error, "Get deployable repos failed");
+      });
   };
 
   function listFranklinRepos(data) {
+
     //TODO: push if it doesn't exits
     dc.deployedRepos = [];
 

@@ -24,20 +24,21 @@ const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
 const ngConstant = require('gulp-ng-constant');
 const dotENV = require('dotenv').load();
+const protractor = require("gulp-protractor").protractor;
 
 const nodeModules = (() => {
   let base = 'node_modules';
   let modulesPath;
-  while( true ) {
+  while (true) {
     let stats;
-    const upOne = path.resolve( base );
+    const upOne = path.resolve(base);
     try {
-      stats = fs.statSync( upOne );
-      if ( stats.isDirectory() ) {
+      stats = fs.statSync(upOne);
+      if (stats.isDirectory()) {
         modulesPath = upOne;
         break;
       }
-    } catch( e ) { /* The node_modules folder wasn't found here */ }
+    } catch (e) { /* The node_modules folder wasn't found here */ }
     base = '../' + base;
   }
   return modulesPath;
@@ -193,12 +194,23 @@ gulp.task('clean', () => {
 gulp.task('default', ['config', 'browserify', 'html', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
-  const sequence = ['default', 'start'];
+  const sequence = ['default', 'start'/*, 'e2e'*/];
   runSequence('clean', sequence, done);
 });
 
 //TODO: uncomment minification
 gulp.task('build', (done) => {
-  const sequence = ['default', 'banner', 'rev:replace'/*, 'minify'*/];
+  const sequence = ['default', 'banner', 'rev:replace' /*, 'minify'*/ ];
   runSequence('clean', sequence, done);
+});
+
+gulp.task('e2e', () => {
+  gulp.src(["./test/e2e/specs/*.js"])
+    .pipe(protractor({
+      configFile: "test/e2e/protractor.conf.js",
+      args: ['--baseUrl', process.env.BASE_URL]
+    }))
+    .on('error', (e) => {
+      console.error(e);
+    })
 });

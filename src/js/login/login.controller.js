@@ -1,7 +1,6 @@
 'use strict';
 
-function LoginComponent(franklinAPIService, $scope, $location,
-  $auth, toastr, ENV, $httpParamSerializer, $state) {
+function LoginComponent($scope, $auth, toastr, $state) {
 
   /* jshint validthis: true */
   let lc = this;

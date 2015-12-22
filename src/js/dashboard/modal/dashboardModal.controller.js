@@ -35,8 +35,8 @@ function DashboardModalComponent($scope, $modalInstance, franklinAPIService) {
       }
     };
     //register repo in Franklin API
-    let response = franklinAPIService.userRepos()
-      .registerRepo(dmc.registeredRepo);
+    let response =
+      franklinAPIService.userRepos.registerRepo(dmc.registeredRepo);
     response.$promise.then(dmc.solve, dmc.error);
   }
 }
