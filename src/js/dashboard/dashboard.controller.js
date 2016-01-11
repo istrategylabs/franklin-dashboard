@@ -1,8 +1,7 @@
 'use strict';
 
 function DashboardComponent(franklinAPIService, $scope,
-  $auth, toastr, $state, $modal) {
-
+  $auth, toastr, $state, $modal, detailRepoService) {
 
   /* jshint validthis: true */
   const dc = this;
@@ -20,6 +19,7 @@ function DashboardComponent(franklinAPIService, $scope,
   dc.listFranklinRepos = listFranklinRepos;
   dc.listDeployableRepos = listDeployableRepos;
   dc.logout = logout;
+  dc.showRepoDetail = showRepoDetail;
 
   dc.getFranklinRepos();
 
@@ -43,20 +43,17 @@ function DashboardComponent(franklinAPIService, $scope,
 
   function listFranklinRepos(data) {
 
+    $state.go("logged.franklinRepos");
+
     //TODO: push if it doesn't exits
     dc.deployedRepos = [];
 
     if (data.length) {
       dc.username = data[0].owner.name;
       for (let repo of data) {
-
-        const numEnv = repo.environments.length;
-        const firstEnv = repo.environments[0];
-
         dc.deployedRepos.push({
           name: repo.name,
-          environment: numEnv > 0 ? firstEnv.name : '',
-          status: numEnv > 0 ? firstEnv.status : '',
+          environments: repo.environments, 
           owner: repo.owner.name
         });
       };
@@ -105,6 +102,11 @@ function DashboardComponent(franklinAPIService, $scope,
       }
       console.log("Modal was closed");
     });
+  };
+
+  function showRepoDetail(repo) {
+    detailRepoService.setSelectedRepo(repo);
+    $state.go('logged.detailInfo');
   };
 
   function logout() {

@@ -60,18 +60,27 @@ describe('DashboardComponent', function() {
     }],
     savedFranklinRepos = [{
       "name": "proj1",
-      "environment": "Production",
-      "status": "REG",
+      "environments": [{
+        "name": "Production",
+        "url": "",
+        "status": "REG"
+      }],
       "owner": "isl"
     }, {
       "name": "proj2",
-      "environment": "Production",
-      "status": "REG",
+      "environments": [{
+        "name": "Production",
+        "url": "",
+        "status": "REG"
+      }],
       "owner": "isl"
     }, {
       "name": "proj3",
-      "environment": "Production",
-      "status": "REG",
+      "environments": [{
+        "name": "Production",
+        "url": "",
+        "status": "REG"
+      }],
       "owner": "isl"
     }],
     deployedReposResolve = [{

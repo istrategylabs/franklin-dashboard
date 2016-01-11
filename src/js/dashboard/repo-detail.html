@@ -1,0 +1,18 @@
+<div ng-controller="DetailComponent as dec" class="row" ng-init="init('dec.repo', dc.selectedRepo)">
+    <div class="columns small-12">
+        <h3 class="">[[dec.repo.name]]</h3>
+    </div>
+    <div class="row">
+        <div ng-repeat="environment in dec.repo.environments">
+            <div class="columns small-12 medium-4 large-3">
+                <div class="environment">
+                    <h4 class="environment__title">[[environment.name]]</h4>
+                    <p class="environment__status">[[environment.status]]</p>
+                    <div class="centered">
+                        <a class="environment__url" href="http://[[environment.url]]" target="_blank">[[environment.url]]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

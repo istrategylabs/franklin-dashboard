@@ -24,11 +24,15 @@
     margin-bottom: 0;
 }
 
-
 .no-margin {
     margin: 0;
 }
 
+.centered {
+    position: absolute;
+    bottom: 1em;
+    width: 90%;
+}
 
 .no-side-margin {
     margin-left: 0;
@@ -81,4 +85,3 @@
 .cf {
     *zoom: 1;
 }
-

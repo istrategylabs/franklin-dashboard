@@ -17,6 +17,7 @@ import './services';
 import {
   DashboardComponent,
   DashboardModalComponent,
+  DetailComponent,
   DashboardDirective
 }
 from './dashboard';
@@ -51,6 +52,14 @@ angular
         resolve: {
           loginRequired: loginRequired
         }
+      })
+      .state('logged.franklinRepos', {
+        url: '/',
+        templateUrl: 'dashboard/franklin-repos.html'
+      })
+      .state('logged.detailInfo', {
+        url: '/detail',
+        templateUrl: 'dashboard/repo-detail.html'
       })
       .state('logout', {
         url: '/login',
@@ -110,25 +119,29 @@ angular
 
     console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
   })
-.controller('LoginComponent', [
-     '$scope',
-     '$auth',
-     'toastr',
-     '$state',
-     LoginComponent
-   ])
-   .controller('DashboardComponent', [
-     'franklinAPIService',
-     '$scope',
-     '$auth',
-     'toastr',
-     '$state',
-     '$modal', DashboardComponent
-   ])
+  .controller('LoginComponent', [
+    '$scope',
+    '$auth',
+    'toastr',
+    '$state',
+    LoginComponent
+  ])
+  .controller('DashboardComponent', [
+    'franklinAPIService',
+    '$scope',
+    '$auth',
+    'toastr',
+    '$state',
+    '$modal',
+    'detailRepoService', DashboardComponent
+  ])
   .directive('dashboard', DashboardDirective)
   .controller('DashboardModalComponent', [
     '$scope',
     '$modalInstance',
     'franklinAPIService',
     DashboardModalComponent
+  ]).controller('DetailComponent', [
+    '$scope',
+    'detailRepoService', DetailComponent
   ]);

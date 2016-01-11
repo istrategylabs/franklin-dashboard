@@ -5,15 +5,18 @@ import 'angular-resource';
 import '../config';
 
 import FranklinAPIService from './franklinAPI.service';
+import DetailRepoService from './detail-repo.service';
 
 angular.module('franklin-dashboard.services', ['ngResource', 'franklin-dashboard.config',
     'satellizer'
   ])
-.config(($authProvider, ENV) => {
+  .config(($authProvider, ENV) => {
 
+  	//satellizer configuration
     $authProvider.github({
-        clientId: ENV.GITHUB_CLIENT_ID,
-        url: ENV.FRANKLIN_API_URL + '/auth/github/'
-      });
-})
-  .service('franklinAPIService', FranklinAPIService);
+      clientId: ENV.GITHUB_CLIENT_ID,
+      url: ENV.FRANKLIN_API_URL + '/auth/github/'
+    });
+  })
+  .service('franklinAPIService', FranklinAPIService)
+  .factory('detailRepoService', DetailRepoService);
