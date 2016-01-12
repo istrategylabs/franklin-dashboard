@@ -1,21 +1,22 @@
 'use strict';
 
 describe('DashboardComponent', function() {
-  var $authMock,
-    toastrMock,
-    $stateMock,
-    $modalMock,
-    franklinAPIServiceMock,
-    $scope,
-    $q,
-    $rootScope;
+  var $authMock;
+  var toastrMock;
+  var $stateMock;
+  var $modalMock;
+  var franklinAPIServiceMock;
+  var $scope;
+  var $q;
+  var $rootScope;
+  //var mockPromises;
 
   //Promises
-  var passLogoutPromise,
-    franklinReposDeferred,
-    deployableReposDeferred,
-    registerRepoDeferred,
-    selectedRepoDeferred;
+  var passLogoutPromise;
+  var franklinReposDeferred;
+  var deployableReposDeferred;
+  var registerRepoDeferred;
+  var selectedRepoDeferred;
 
   //Controller  
   var createController;
@@ -58,31 +59,6 @@ describe('DashboardComponent', function() {
         "status": "REG"
       }]
     }],
-    savedFranklinRepos = [{
-      "name": "proj1",
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }],
-      "owner": "isl"
-    }, {
-      "name": "proj2",
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }],
-      "owner": "isl"
-    }, {
-      "name": "proj3",
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }],
-      "owner": "isl"
-    }],
     deployedReposResolve = [{
       "name": "proj1",
       "url": "https://github.com/isl/proj1",
@@ -110,6 +86,8 @@ describe('DashboardComponent', function() {
   // DEFINE MOCK SERVICES
   beforeEach(function() {
     module('franklin-dashboard');
+
+    //module('mockPromises');
 
     module('franklinAPIServiceMock');
 
@@ -148,11 +126,12 @@ describe('DashboardComponent', function() {
       });
 
     });
+
   });
 
   //INJECT MOCK SERVICES
   beforeEach(inject(function(_$q_, $auth, toastr, $state,
-    $modal, franklinAPIService) {
+    $modal, franklinAPIService /*, mockPromises*/ ) {
 
     $q = _$q_;
 
@@ -161,6 +140,7 @@ describe('DashboardComponent', function() {
 
     toastrMock = toastr;
     $modalMock = $modal;
+    //mockPromises = mockPromises;
     $stateMock = $state;
 
     //Mock franklinAPI service, spy on functions
@@ -232,7 +212,7 @@ describe('DashboardComponent', function() {
       function() {
         $rootScope.$apply();
         expect(JSON.stringify(DashboardComponent.deployedRepos))
-          .toEqual(JSON.stringify(savedFranklinRepos));
+          .toEqual(JSON.stringify(mockFranklinResponse));
       });
   });
 

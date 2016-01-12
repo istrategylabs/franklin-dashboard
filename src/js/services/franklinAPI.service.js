@@ -11,7 +11,7 @@ export default ['$resource', 'ENV', '$auth',
       //call API to get franklin registered repos
       getFranklinRepos: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/user/repos/deployed/',
+        url: ENV.FRANKLIN_API_URL + '/repos/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
@@ -29,12 +29,22 @@ export default ['$resource', 'ENV', '$auth',
       //call API to register a franklin repo
       registerRepo: {
         method: 'POST',
-        url: ENV.FRANKLIN_API_URL + '/register/',
+        url: ENV.FRANKLIN_API_URL + '/repos/',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + $auth.getToken()
         },
         isArray: true
+      },
+      deleteRepo: {
+        method: 'DELETE',
+        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id`,
+        params: {
+          github_id: "@github_id"
+        },
+        headers: {
+          'Authorization': 'Bearer ' + $auth.getToken()
+        }
       }
     });
 

@@ -61,6 +61,25 @@
     }
 }
 
+.button--ok {
+    background-color: $franklin-applegreen;
+    border-radius: 2em;
+    font-size: 1em;
+    &:hover {
+        background-color: $franklin-applegreen;
+        opacity: 0.9;
+    }
+}
+
+.button--cancel {
+    background-color: $franklin-gray;
+    border-radius: 2em;
+    font-size: 1em;
+    &:hover {
+        background-color: $franklin-gray;
+        opacity: 0.9;
+    }
+}
 
 /* Clearfix */
 

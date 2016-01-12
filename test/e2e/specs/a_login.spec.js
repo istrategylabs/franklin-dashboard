@@ -11,7 +11,7 @@ describe('login implementation and redirection', function() {
   it('should be in the login page if not logged in', function() {
 
     browser.get('/');
-    
+
     expect(browser.getTitle()).toEqual('franklin-dashboard');
     expect(element(by.id('login-button')).isPresent()).toBe(true);
 
@@ -49,8 +49,10 @@ describe('login implementation and redirection', function() {
       browser.driver.executeScript('window.focus();');
 
       //login to github on pop up window
-      browser.driver.findElement(by.id('login_field')).sendKeys(process.env.TEST_USER);
-      browser.driver.findElement(by.id('password')).sendKeys(process.env.TEST_PASS);
+      browser.driver.findElement(by.id('login_field'))
+        .sendKeys(process.env.TEST_USER);
+      browser.driver.findElement(by.id('password'))
+        .sendKeys(process.env.TEST_PASS);
       browser.driver.findElement(by.css('input[type=submit]')).click();
 
       //wait login to be performed

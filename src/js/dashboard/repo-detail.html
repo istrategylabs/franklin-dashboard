@@ -1,6 +1,17 @@
 <div ng-controller="DetailComponent as dec" class="row" ng-init="init('dec.repo', dc.selectedRepo)">
-    <div class="columns small-12">
-        <h3 class="">[[dec.repo.name]]</h3>
+    <div class="row">
+        <div class="columns small-6">
+            <h3 class="">[[dec.repo.name]]</h3>
+        </div>
+        <div class="columns small-6">
+            <a id="dashboard-deleteRepo" href="" title="Delete Repo" ng-click="dec.deleteRepo()">
+                <svg class="delete-repo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                    <path d="M12,26.6v64.5c0,2.2,1.8,3.9,3.9,3.9h67.8c2.3,0,4.2-1.9,4.2-4.2V26.6c0-0.9-0.7-1.6-1.6-1.6H13.6C12.7,25,12,25.7,12,26.6z   M32.4,80h-1.9c-0.9,0-1.6-0.7-1.6-1.6V47.6c0-0.9,0.7-1.6,1.6-1.6h1.9c0.9,0,1.6,0.7,1.6,1.6v30.9C34,79.3,33.3,80,32.4,80z   M51.4,80h-1.9c-0.9,0-1.6-0.7-1.6-1.6V38.6c0-0.9,0.7-1.6,1.6-1.6h1.9c0.9,0,1.6,0.7,1.6,1.6v39.9C53,79.3,52.3,80,51.4,80z   M69.4,80h-1.9c-0.9,0-1.6-0.7-1.6-1.6V47.6c0-0.9,0.7-1.6,1.6-1.6h1.9c0.9,0,1.6,0.7,1.6,1.6v30.9C71,79.3,70.3,80,69.4,80z" />
+                    <path d="M91.1,23.1H9.2c-1.4,0-2.5-1.1-2.5-2.5v-5c0-1.4,1.1-2.5,2.5-2.5h81.8c1.4,0,2.5,1.1,2.5,2.5v5C93.6,22,92.4,23.1,91.1,23.1  z" />
+                    <path d="M60.9,12H39.1c-1.4,0-2.5-1.1-2.5-2.5v-2c0-1.4,1.1-2.5,2.5-2.5h21.8c1.4,0,2.5,1.1,2.5,2.5v2C63.4,10.8,62.3,12,60.9,12z" />
+                </svg>
+            </a>
+        </div>
     </div>
     <div class="row">
         <div ng-repeat="environment in dec.repo.environments">

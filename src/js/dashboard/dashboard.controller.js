@@ -1,7 +1,7 @@
 'use strict';
 
 function DashboardComponent(franklinAPIService, $scope,
-  $auth, toastr, $state, $modal, detailRepoService) {
+  $auth, toastr, $state, $modal, detailRepoService, franklinReposModel) {
 
   /* jshint validthis: true */
   const dc = this;
@@ -22,6 +22,11 @@ function DashboardComponent(franklinAPIService, $scope,
   dc.showRepoDetail = showRepoDetail;
 
   dc.getFranklinRepos();
+
+  //watch changes in franklin repos model
+  $scope.$watch(franklinReposModel.getFranklinRepos,
+    (newValue, oldValue) => dc.deployedRepos = newValue
+  );
 
   /**************************************************************************/
 
@@ -46,17 +51,11 @@ function DashboardComponent(franklinAPIService, $scope,
     $state.go("logged.franklinRepos");
 
     //TODO: push if it doesn't exits
-    dc.deployedRepos = [];
+    dc.deployedRepos = franklinReposModel.getFranklinRepos();
 
     if (data.length) {
       dc.username = data[0].owner.name;
-      for (let repo of data) {
-        dc.deployedRepos.push({
-          name: repo.name,
-          environments: repo.environments, 
-          owner: repo.owner.name
-        });
-      };
+      franklinReposModel.setFranklinRepos(data);
     }
   };
 
@@ -95,7 +94,7 @@ function DashboardComponent(franklinAPIService, $scope,
     //when the modal is closed, update franklin repos list
     modalInstance.result.then(function(repo) {
       //TODO: add only new repo - get info from API?
-      dc.getFranklinRepos()
+      dc.getFranklinRepos();
     }, function(data) {
       if (data.statusText) {
         toastr.error(data.statusText, "Repo regristation failed");

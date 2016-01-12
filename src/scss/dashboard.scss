@@ -162,3 +162,15 @@
     font-weight: bold;
     margin: 0;
 }
+
+.delete-repo {
+    width: 2em;
+    transform: translateZ(0);
+    transition: 0.5s;
+    fill: $franklin-purple;
+    float: right;
+}
+
+.confirmation__message {
+    color: $franklin-gray;
+}

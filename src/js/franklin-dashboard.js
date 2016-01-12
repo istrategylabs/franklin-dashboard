@@ -17,14 +17,17 @@ import './services';
 import {
   DashboardComponent,
   DashboardModalComponent,
-  DetailComponent,
-  DashboardDirective
+  DetailComponent
 }
 from './dashboard';
 import {
   LoginComponent
 }
 from './login/login.controller';
+import {
+  ConfirmModalComponent
+}
+from './common'
 
 
 angular
@@ -46,7 +49,6 @@ angular
     //angular routing depending on login status
     $stateProvider
       .state('logged', {
-
         url: '/dashboard',
         templateUrl: 'dashboard/dashboard.html',
         resolve: {
@@ -133,9 +135,9 @@ angular
     'toastr',
     '$state',
     '$modal',
-    'detailRepoService', DashboardComponent
+    'detailRepoService',
+    'franklinReposModel', DashboardComponent
   ])
-  .directive('dashboard', DashboardDirective)
   .controller('DashboardModalComponent', [
     '$scope',
     '$modalInstance',
@@ -143,5 +145,13 @@ angular
     DashboardModalComponent
   ]).controller('DetailComponent', [
     '$scope',
-    'detailRepoService', DetailComponent
+    'detailRepoService',
+    'franklinAPIService',
+    '$modal',
+    '$state',
+    'toastr',
+    'franklinReposModel',  DetailComponent
+  ]).controller('ConfirmModalComponent', [
+    '$scope',
+    '$modal', ConfirmModalComponent
   ]);
