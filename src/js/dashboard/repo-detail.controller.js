@@ -5,9 +5,16 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
   /* jshint validthis: true */
   const dec = this;
+
+  var functions = {
+    error: error,
+    deleteRepo: deleteRepo,
+    deployRepo: deployRepo
+  }
+  Object.assign(dec, functions);
+
   dec.repo = detailRepoService.getSelectedRepo();
-  dec.error = error;
-  dec.deleteRepo = deleteRepo;
+
   //TODO: find a way to send texts that is not scope related
   $scope.modalTitle = 'Delete Repo';
   $scope.modalMessage = 'Are you sure you want to delete this repository?';
@@ -39,6 +46,10 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
     }, dec.error);
   };
+
+  function deployRepo(){
+    toastr.info("Not implemented yet", ":(");
+  }
 
   function error(error) {
     if (error && error != 'backdrop click') {

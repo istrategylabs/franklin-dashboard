@@ -13,7 +13,6 @@ angular.module('franklin-dashboard.services', ['ngResource',
     'satellizer'
   ])
   .config(($authProvider, ENV) => {
-
     //satellizer configuration
     $authProvider.github({
       clientId: ENV.GITHUB_CLIENT_ID,

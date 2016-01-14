@@ -61,7 +61,7 @@
     }
 }
 
-.button--ok {
+.button--green {
     background-color: $franklin-applegreen;
     border-radius: 2em;
     font-size: 1em;
@@ -69,9 +69,12 @@
         background-color: $franklin-applegreen;
         opacity: 0.9;
     }
+    &:focus {
+        background-color: $franklin-applegreen;
+    }
 }
 
-.button--cancel {
+.button--gray {
     background-color: $franklin-gray;
     border-radius: 2em;
     font-size: 1em;
@@ -79,7 +82,24 @@
         background-color: $franklin-gray;
         opacity: 0.9;
     }
+    &:focus {
+        background-color: $franklin-gray;
+    }
 }
+
+.button--purple {
+    background-color: $franklin-purple;
+    border-radius: 2em;
+    font-size: 1em;
+    &:hover {
+        background-color: $franklin-purple;
+        opacity: 0.9;
+    }
+    &:focus {
+        background-color: $franklin-purple;
+    }
+}
+
 
 /* Clearfix */
 
