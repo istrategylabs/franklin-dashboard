@@ -12,7 +12,7 @@ export default function() {
     removeFranklinRepo: removeFranklinRepo
   }
 
-  Object.assign(_self, attributes);
+  Object.assign(_self, attributes);  
 
   return _self;
 

@@ -12,13 +12,8 @@ angular.module('franklin-dashboard.services', ['ngResource',
     'franklin-dashboard.config',
     'satellizer'
   ])
-  .config(($authProvider, ENV) => {
-    //satellizer configuration
-    $authProvider.github({
-      clientId: ENV.GITHUB_CLIENT_ID,
-      url: ENV.FRANKLIN_API_URL + '/auth/github/'
-    });
-  })
+  //If used independently should init satellizer $authProvider
+
   .service('franklinAPIService', FranklinAPIService)
   .factory('detailRepoService', DetailRepoService)
   .factory('franklinReposModel', FranklinReposModel);

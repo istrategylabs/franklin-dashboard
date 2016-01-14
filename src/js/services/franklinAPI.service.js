@@ -7,7 +7,7 @@ export default ['$resource', 'ENV', '$auth',
     const tokenKey = 'token';
 
     //manage user repos within Franklin 
-    _self.userRepos = $resource(ENV.FRANKLIN_API_URL, {}, {
+    let userRepos = $resource(ENV.FRANKLIN_API_URL, {}, {
       //call API to get franklin registered repos
       getFranklinRepos: {
         method: 'GET',
@@ -47,6 +47,12 @@ export default ['$resource', 'ENV', '$auth',
         }
       }
     });
+
+    let resources = {
+      userRepos: userRepos
+    }
+
+    Object.assign(_self, resources);
 
   }
 ];

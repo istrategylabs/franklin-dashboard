@@ -8,7 +8,6 @@ Franklin Dashboard allows you to check and manage your Franklin Projects. Have y
 
 
     ```
-    	GITHUB_CLIENT_ID=<your_github_client_id>    		- App's Github Client ID
     	FRANKLIN_API_URL=<franklin_api_url>    				- Franklin API URL
 		BASE_URL=http://localhost:3000 						- App url for e2e testing only
 		TEST_USER=example@isl.co 							- Github user for e2e testing only
