@@ -9,6 +9,7 @@ describe('DashboardComponent', function() {
   var $scope;
   var $q;
   var $rootScope;
+  var franReposModel;
   //var mockPromises;
 
   //Promises
@@ -23,65 +24,69 @@ describe('DashboardComponent', function() {
 
   //Mock data
   var mockFranklinResponse = [{
-      "name": "proj1",
-      "github_id": 54435345,
-      "owner": {
-        "name": "isl",
-        "github_id": 45435345
-      },
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }]
-    }, {
-      "name": "proj2",
-      "github_id": 3543543,
-      "owner": {
-        "name": "isl",
-        "github_id": 345435
-      },
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }]
-    }, {
-      "name": "proj3",
-      "github_id": 45445435,
-      "owner": {
-        "name": "isl",
-        "github_id": 45345
-      },
-      "environments": [{
-        "name": "Production",
-        "url": "",
-        "status": "REG"
-      }]
-    }],
-    deployedReposResolve = [{
-      "name": "proj1",
-      "url": "https://github.com/isl/proj1",
-      "id": 54543,
-      "owner": {
-        "name": "isl",
-        "id": 3454543
-      },
-      "permissions": {
-        "admin": true
-      }
-    }, {
-      "name": "proj2",
-      "url": "https://github.com/isl/proj2",
-      "id": 543534534,
-      "owner": {
-        "name": "isl",
-        "id": 45435435
-      },
-      "permissions": {
-        "admin": true
-      }
-    }];
+    "name": "proj",
+    "github_id": 54435345,
+    "owner": {
+      "name": "isl",
+      "github_id": 45435345
+    },
+    "environments": [{
+      "name": "Production",
+      "url": "",
+      "status": "REG"
+    }]
+  }];
+  var deployableReposResolve = [{
+    "name": "proj1",
+    "url": "https://github.com/isl/proj1",
+    "id": 54543,
+    "owner": {
+      "name": "isl",
+      "id": 3454543
+    },
+    "permissions": {
+      "admin": true
+    }
+  }, {
+    "name": "proj2",
+    "url": "https://github.com/isl/proj2",
+    "id": 543534534,
+    "owner": {
+      "name": "isl",
+      "id": 45435435
+    },
+    "permissions": {
+      "admin": true
+    }
+  }];
+  var newRepoMock = {
+    "name": "proj1",
+    "github_id": 54543,
+    "owner": {
+      "name": "isl",
+      "id": 3454543
+    }
+  };
+  var updatedFranklinReposMock = [{
+    "name": "proj",
+    "github_id": 54435345,
+    "owner": {
+      "name": "isl",
+      "github_id": 45435345
+    },
+    "environments": [{
+      "name": "Production",
+      "url": "",
+      "status": "REG"
+    }]
+  }, {
+    "name": "proj1",
+    "github_id": 54543,
+    "owner": {
+      "name": "isl",
+      "id": 3454543
+    }
+  }];
 
   // DEFINE MOCK SERVICES
   beforeEach(function() {
@@ -131,9 +136,12 @@ describe('DashboardComponent', function() {
 
   //INJECT MOCK SERVICES
   beforeEach(inject(function(_$q_, $auth, toastr, $state,
-    $modal, franklinAPIService /*, mockPromises*/ ) {
+    $modal, franklinAPIService, franklinReposModel) {
 
     $q = _$q_;
+    franReposModel = franklinReposModel;
+    spyOn(franReposModel, 'addFranklinRepo').and.callThrough();
+    spyOn(franReposModel, 'getFranklinRepos').and.callThrough();
 
     $authMock = $auth;
     spyOn($auth, 'logout').and.callThrough();
@@ -203,7 +211,7 @@ describe('DashboardComponent', function() {
       franklinReposDeferred.resolve(mockFranklinResponse);
     });
 
-    it('should get Franklin Repos', function() {
+    it('Should get Franklin Repos', function() {
       expect(franklinAPIServiceMock.userRepos.getFranklinRepos)
         .toHaveBeenCalled();
     });
@@ -229,11 +237,48 @@ describe('DashboardComponent', function() {
       expect(DashboardComponent.showLoader).toBe(true);
     });
 
-    it('should open modal with deployable repos and update list after selection',
+    it('Should show error message after failing getting the deployable repos',
       function() {
         DashboardComponent.getDeployableRepos();
 
-        deployableReposDeferred.resolve(deployedReposResolve);
+        deployableReposDeferred.reject("error");
+        $rootScope.$apply();
+
+        //Loader Should be hidden
+        expect(DashboardComponent.showLoader).toBe(false);
+
+        //After getting deployable repos modal Should open
+        expect(toastrMock.error).toHaveBeenCalled();
+      });
+
+    it('Should logout', function() {
+      passLogoutPromise = true;
+
+      DashboardComponent.logout();
+      $rootScope.$apply();
+
+      //After auth logout it Should change state
+      expect($stateMock.go).toHaveBeenCalledWith('logout');
+    });
+  });
+
+  describe('DashboardComponent: register repo', function() {
+
+    beforeEach(function() {
+      DashboardComponent = createController();
+      franklinReposDeferred.resolve(mockFranklinResponse);
+    });
+
+    it('Should not get the entire franklin repo list again after registering',
+      function() {
+
+        //it should call get Franklin Repos to update list
+        expect(franklinAPIServiceMock.userRepos.getFranklinRepos)
+          .toHaveBeenCalled();
+
+        DashboardComponent.getDeployableRepos();
+
+        deployableReposDeferred.resolve(deployableReposResolve);
         $rootScope.$apply();
 
         //Loader should be hidden
@@ -243,36 +288,22 @@ describe('DashboardComponent', function() {
         expect($modalMock.open).toHaveBeenCalled();
 
         //we select one repo from modal
-        selectedRepoDeferred.resolve({});
-
-        //it should call get Franklin Repos to update list
-        expect(franklinAPIServiceMock.userRepos.getFranklinRepos)
-          .toHaveBeenCalled();
-      });
-
-    it('should show error message after failing getting the deployable repos',
-      function() {
-        DashboardComponent.getDeployableRepos();
-
-        deployableReposDeferred.reject("error");
+        selectedRepoDeferred.resolve(newRepoMock);
         $rootScope.$apply();
 
-        //Loader should be hidden
-        expect(DashboardComponent.showLoader).toBe(false);
+        //we assumed here that modal calls register repo from franklin api
+        //and it succeded 
 
-        //After getting deployable repos modal should open
-        expect(toastrMock.error).toHaveBeenCalled();
+        //should add new repo to existing deployable repos list
+        expect(franReposModel.addFranklinRepo).toHaveBeenCalledWith(newRepoMock);
+
+        //franklin repo list should be updated
+        expect(JSON.stringify(DashboardComponent.deployedRepos))
+          .toEqual(JSON.stringify(updatedFranklinReposMock));
+
+        //shouldnt get all repos again
+        expect(franklinAPIServiceMock.userRepos.getFranklinRepos.calls.count())
+          .toEqual(1);
       });
-
-    it('should logout', function() {
-      passLogoutPromise = true;
-
-      DashboardComponent.logout();
-      $rootScope.$apply();
-
-      //After auth logout it should change state
-      expect($stateMock.go).toHaveBeenCalledWith('logout');
-    });
   });
-
 });

@@ -15,9 +15,7 @@ import 'angular-foundation/mm-foundation-tpls.min';
 import './config';
 import './services';
 import {
-  DashboardComponent,
-  DashboardModalComponent,
-  DetailComponent
+  DashboardComponent, DashboardModalComponent, DetailComponent
 }
 from './dashboard';
 import {
@@ -27,7 +25,7 @@ from './login/login.controller';
 import {
   ConfirmModalComponent
 }
-from './common'
+from './common';
 
 const franklinApp = angular
   .module('franklin-dashboard', [
@@ -38,6 +36,41 @@ const franklinApp = angular
     'ui.router',
     'franklin-dashboard.services',
     'mm.foundation'
+  ])
+  .controller('LoginComponent', [
+    '$scope',
+    '$auth',
+    'toastr',
+    '$state',
+    'franklinAPIService',
+    LoginComponent
+  ])
+  .controller('DashboardComponent', [
+    'franklinAPIService',
+    '$scope',
+    '$auth',
+    'toastr',
+    '$state',
+    '$modal',
+    'detailRepoService',
+    'franklinReposModel', DashboardComponent
+  ])
+  .controller('DashboardModalComponent', [
+    '$scope',
+    '$modalInstance',
+    'franklinAPIService',
+    DashboardModalComponent
+  ]).controller('DetailComponent', [
+    '$scope',
+    'detailRepoService',
+    'franklinAPIService',
+    '$modal',
+    '$state',
+    'toastr',
+    'franklinReposModel', DetailComponent
+  ]).controller('ConfirmModalComponent', [
+    '$scope',
+    '$modal', ConfirmModalComponent
   ]);
 
 //get github client id from franklin-api
@@ -117,70 +150,34 @@ function bootstrapApplication(response) {
         });
 
         //Auxiliar functions for routing
-        function skipIfLoggedIn($q, $auth) {
+        function skipIfLoggedIn($q, $auth, $location) {
+          if (!$auth.isAuthenticated()) {
+            return true;
+          } else {
+            //is logged in, redirect to dashboard
+            $location.path('/dashboard');
+            return;
+          }
+        }
+
+        function loginRequired($q, $auth) {
           let deferred = $q.defer();
           if ($auth.isAuthenticated()) {
-            deferred.reject();
-          } else {
             deferred.resolve();
+          } else {
+            deferred.reject();
           }
           return deferred.promise;
         }
-
-        function loginRequired($q, $location, $auth) {
-          let deferred = $q.defer();
-          if ($auth.isAuthenticated()) {
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
-          return deferred.promise;
-        }
-
         console.log(`Hello, franklin-dashboard version ${packageJson.version}`);
-      })
-      .controller('LoginComponent', [
-        '$scope',
-        '$auth',
-        'toastr',
-        '$state',
-        'franklinAPIService',
-        LoginComponent
-      ])
-      .controller('DashboardComponent', [
-        'franklinAPIService',
-        '$scope',
-        '$auth',
-        'toastr',
-        '$state',
-        '$modal',
-        'detailRepoService',
-        'franklinReposModel', DashboardComponent
-      ])
-      .controller('DashboardModalComponent', [
-        '$scope',
-        '$modalInstance',
-        'franklinAPIService',
-        DashboardModalComponent
-      ]).controller('DetailComponent', [
-        '$scope',
-        'detailRepoService',
-        'franklinAPIService',
-        '$modal',
-        '$state',
-        'toastr',
-        'franklinReposModel', DetailComponent
-      ]).controller('ConfirmModalComponent', [
-        '$scope',
-        '$modal', ConfirmModalComponent
-      ]);
+      });
 
     //finally bootstrap angular app
     angular.bootstrap(document, ["franklin-dashboard"]);
   });
 }
 
-function error(errorData){
+function error(errorData) {
   //TODO: redirect to 404?
   console.error(errorData);
 }

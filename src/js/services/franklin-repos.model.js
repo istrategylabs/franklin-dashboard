@@ -27,8 +27,8 @@ export default function() {
   }
 
   function addFranklinRepo(repo) {
-    if (!_self.franklinRepos
-      .findIndex((r) => r.github_id === repo.github_id)) {
+    if (_self.franklinRepos
+      .findIndex((r) => r.github_id === repo.github_id) === -1) {
       _self.franklinRepos.push(repo);
     }
   }

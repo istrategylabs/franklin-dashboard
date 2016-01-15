@@ -3,12 +3,16 @@
 function DashboardModalComponent($scope, $modalInstance, franklinAPIService) {
 
   const dmc = this;
-
-  dmc.registerRepo = registerRepo;
-  dmc.cancel = cancel;
-  dmc.solve = solve;
-  dmc.error = error;
   dmc.registeredRepo = {};
+
+  const functions = {
+    registerRepo,
+    cancel,
+    solve,
+    error
+  };
+  
+  Object.assign(dmc, functions);
 
   /**************************************************************************/
 

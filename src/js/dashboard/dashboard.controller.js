@@ -6,27 +6,32 @@ function DashboardComponent(franklinAPIService, $scope,
   /* jshint validthis: true */
   const dc = this;
 
-  //variables
-  dc.username = '';
-  dc.showLoader = false;
-  dc.deployedRepos = [];
+  const variables = {
+    username: '',
+    showLoader: false,
+    deployedRepos: [],
+  }
+
+  const functions = {
+    getFranklinRepos,
+    getDeployableRepos,
+    listFranklinRepos,
+    listDeployableRepos,
+    logout,
+    showRepoDetail,
+    error
+  };
+
+  Object.assign(dc, variables, functions);
+
   //Scope used because of foundation modal directive
   $scope.deployableRepos = [];
-
-  //Functions
-  dc.getFranklinRepos = getFranklinRepos;
-  dc.getDeployableRepos = getDeployableRepos;
-  dc.listFranklinRepos = listFranklinRepos;
-  dc.listDeployableRepos = listDeployableRepos;
-  dc.logout = logout;
-  dc.showRepoDetail = showRepoDetail;
 
   dc.getFranklinRepos();
 
   //watch changes in franklin repos model
-  $scope.$watch(franklinReposModel.getFranklinRepos,
-    (newValue, oldValue) => dc.deployedRepos = newValue
-  );
+  $scope.$watch(franklinReposModel.getFranklinRepos, 
+    (newValue, oldValue) => dc.deployedRepos = newValue);
 
   /**************************************************************************/
 
@@ -93,8 +98,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
     //when the modal is closed, update franklin repos list
     modalInstance.result.then(function(repo) {
-      //TODO: add only new repo - get info from API?
-      dc.getFranklinRepos();
+      franklinReposModel.addFranklinRepo(repo);
     }, function(data) {
       if (data.statusText) {
         toastr.error(data.statusText, "Repo regristation failed");
@@ -104,14 +108,27 @@ function DashboardComponent(franklinAPIService, $scope,
   };
 
   function showRepoDetail(repo) {
-    detailRepoService.setSelectedRepo(repo);
-    $state.go('logged.detailInfo');
+
+    let payload = {
+      github_id: repo.github_id
+    };
+    //get detail info repo from franklin 
+    let response = franklinAPIService.userRepos.getRepo(payload);
+    response.$promise.then((data) => {
+      Object.assign(repo, data);
+      detailRepoService.setSelectedRepo(repo);
+      $state.go('logged.detailInfo');
+    }, dc.error);
   };
 
   function logout() {
     $auth.logout().then(() => {
       $state.go('logout');
     });
+  };
+
+  function error(error, message) {
+    toastr.error(error, message);
   };
 
 };

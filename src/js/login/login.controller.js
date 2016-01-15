@@ -4,7 +4,6 @@ function LoginComponent($scope, $auth, toastr, $state) {
 
   /* jshint validthis: true */
   let lc = this;
-
   lc.authenticate = authenticate;
 
   /**************************************************************************/

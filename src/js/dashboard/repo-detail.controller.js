@@ -6,11 +6,12 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
   /* jshint validthis: true */
   const dec = this;
 
-  var functions = {
-    error: error,
-    deleteRepo: deleteRepo,
-    deployRepo: deployRepo
-  }
+  const functions = {
+    error,
+    deleteRepo,
+    deployRepo
+  };
+
   Object.assign(dec, functions);
 
   dec.repo = detailRepoService.getSelectedRepo();
