@@ -4,6 +4,7 @@ function DashboardModalComponent($scope, $modalInstance, franklinAPIService) {
 
   const dmc = this;
   dmc.registeredRepo = {};
+  dmc.showLoader = false;
 
   const functions = {
     registerRepo,
@@ -18,17 +19,21 @@ function DashboardModalComponent($scope, $modalInstance, franklinAPIService) {
 
   function cancel() {
     $modalInstance.dismiss('cancel');
+    dmc.showLoader = false;
   };
 
   function error(data) {
     $modalInstance.dismiss(data);
+    dmc.showLoader = false;
   }
 
   function solve(data) {
     $modalInstance.close(dmc.registeredRepo);
+    dmc.showLoader = false;
   }
 
   function registerRepo(repo) {
+    dmc.showLoader = true;
     //create POST payload
     dmc.registeredRepo = {
       name: repo.name,
