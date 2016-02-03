@@ -1,27 +1,68 @@
 <div class="row">
     <div class="columns small-6">
-        <h1 class="">Franklin Repos</h1>
+        <h1 class="">Dashboard</h1>
     </div>
     <div class="columns small-6">
         <a id="dashboard-newrepo" ng-show="!dc.showLoader" href="" title="New Repo" ng-click="dc.getDeployableRepos()">
-            <svg class="dashboard__newrepo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-                <path d="M50.433,0.892c-27.119,0-49.102,21.983-49.102,49.102s21.983,49.103,49.102,49.103s49.101-21.984,49.101-49.103  S77.552,0.892,50.433,0.892z M50.433,93.258c-23.895,0-43.264-19.371-43.264-43.265c0-23.894,19.37-43.264,43.264-43.264  c23.894,0,43.263,19.37,43.263,43.264C93.696,73.887,74.327,93.258,50.433,93.258z" />
-                <path d="M78,50.964C78,47.118,74.882,44,71.036,44H27.964C24.118,44,21,47.118,21,50.964v0.072C21,54.882,24.118,58,27.964,58  h43.072C74.882,58,78,54.882,78,51.036V50.964z" />
-                <path d="M57,28.964C57,25.118,53.882,22,50.036,22h-0.071C46.118,22,43,25.118,43,28.964v43.071C43,75.882,46.118,79,49.964,79  h0.071C53.882,79,57,75.882,57,72.035V28.964z" />
-            </svg>
+            <div class="newrepo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                    <path d="M4 8 L8 4 L16 12 L24 4 L28 8 L20 16 L28 24 L24 28 L16 20 L8 28 L4 24 L12 16 z"></path>
+                </svg>
+            </div>
         </a>
-        <img id="dashboard-loader" src="/img/ajax-loader.gif" alt="" class="dashboard__loader" ng-show="dc.showLoader">
+        <img id="dashboard-loader" src="/img/ajax-loader.gif" alt="" class="loader" ng-show="dc.showLoader">
     </div>
 </div>
-<table class="dashboard__table">
-    <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="repo in dc.deployedRepos" >
-            <td ng-click="dc.showRepoDetail(repo)"><a href="" target="blank">[[repo.name]]</a></td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="repos__title">
+        <div class="columns small-6">
+            <span class="gamma">Your Repos</span>
+        </div>
+    </div>
+    <div class="repos__list">
+        <div class="columns small-12">
+            <table class="dashboard__table" ng-show="dc.deployedRepos.length > 0">
+                <thead>
+                    <tr>
+                        <th class="dashboard__table--large">Repo Name</th>
+                        <th class="dashboard__table--medium">Owner</th>
+                        <th class="dashboard__table--small">Status of default environment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="repo in dc.deployedRepos">
+                        <td class="dashboard__table--large" ng-click="dc.showRepoDetail(repo)"><a href="" target="blank">[[repo.name]]</a></td>
+                        <td class="dashboard__table--medium">[[repo.owner.name]]</td>
+                        <td class="dashboard__table--small">
+                            <div ng-show="repo.environments.length && repo.environments[0].status === 'SUC'" class="circle-icon circle-icon--green">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                                    <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
+                                </svg>
+                            </div>
+                            <div ng-show="repo.environments.length && repo.environments[0].status === 'REG'" class="circle-icon circle-icon--blue">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                                    <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
+                                </svg>
+                            </div>
+                            <div ng-show="repo.environments.length && repo.environments[0].status === 'FAL'" class="circle-icon circle-icon--orange">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                                    <rect x="43.379" y="81.822" width="13.179" height="13.178" />
+                                    <polygon points="39.736,5 43.405,74.035 56.596,74.035 60.264,5 " />
+                                </svg>
+                            </div>
+                            <div ng-show="repo.environments.length && repo.environments[0].status === 'BLD'" class="circle-icon circle-icon--yellow">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+                                    <g>
+                                        <path d="M21.72,21.697c-1.786,1.786-4.164,2.77-6.697,2.77s-4.912-0.984-6.698-2.77c-3.694-3.693-3.694-9.703,0-13.396   c1.786-1.786,4.165-2.77,6.698-2.77c2.394,0,4.65,0.878,6.397,2.483l-3.018,3.02l11.575,1.721L28.256,1.18l-2.919,2.919   C22.543,1.452,18.896,0,15.023,0C11.01,0,7.241,1.559,4.411,4.389c-5.851,5.851-5.851,15.37,0,21.223   C7.241,28.44,11.01,30,15.023,30s7.781-1.56,10.611-4.389l0.293-0.294l-3.914-3.914L21.72,21.697z" />
+                                        <circle cx="14.875" cy="15.146" r="3.248" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span ng-show="dc.deployedRepos.lenght == 0" class="copy-large">Deploy your first repo with Franklin, you're only one click away!</span>
+        </div>
+    </div>
+</div>

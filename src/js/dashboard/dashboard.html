@@ -1,15 +1,15 @@
 <div class="dashboard" ng-controller="DashboardComponent as dc">
-    <div class="dashboard__nav">
+    <div class="nav">
         <div class="row">
-            <div class="columns small-9 dashboard__nav--right-shadow">
-                <div class="dashboard__header">
-                    <div class="dashboard__title">
+            <div class="columns small-9 nav--right-shadow">
+                <div class="header">
+                    <div class="title">
                         <h1 class="alpha">FRANKLIN</h1>
                     </div>
-                    <div class="dashboard__menu">
+                    <div class="menu">
                         <ul>
                             <li>
-                                <a ui-sref="logged.franklinRepos" class="copy-large dashboard__menu-item dashboard__menu-item--active beta">
+                                <a ui-sref="logged.franklinRepos" class="copy menu-item menu-item--active beta">
                                 Dashboard
                             </a>
                             </li>
@@ -17,20 +17,20 @@
                     </div>
                 </div>
             </div>
-            <div class="columns small-3 dashboard__nav--left-shadow">
-                <div class="dashboard__user-info">
-                    <div class="dashboard__user-image" style="background: url(https://avatars2.githubusercontent.com/u/8729714?v=3&s=460) no-repeat; background-size: contain;">
+            <div class="columns small-3 nav--left-shadow">
+                <div class="user-info">
+                    <div class="user-image" style="background: url(https://avatars2.githubusercontent.com/u/8729714?v=3&s=460) no-repeat; background-size: contain;">
                     </div>
                     <div>
-                        <a dropdown-toggle="#dropdown-user-menu" class="dashboard__user-menu">
-                            <span class="beta dashboard__greet">Hello [[ dc.username ]]</span>
-                            <svg id="chevronDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                        <a dropdown-toggle="#dropdown-user-menu" class="user-menu">
+                            <span class="beta greet">Hello [[ dc.username ]]</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
                                 <path d="M1 12 L16 26 L31 12 L27 8 L16 18 L5 8 z"></path>
                             </svg>
                         </a>
-                        <ul id="dropdown-user-menu" class="dashboard__user-menu tiny f-dropdown">
+                        <ul id="dropdown-user-menu" class="user-menu tiny f-dropdown">
                             <li>
-                                <a class="dashboard__user-menu-item" href="" ng-click="dc.logout()">Log out</a>
+                                <a class="user-menu-item" href="" ng-click="dc.logout()">Log out</a>
                             </li>
                         </ul>
                     </div>
@@ -38,9 +38,9 @@
             </div>
         </div>
     </div>
-    <div class="dashboard__content">
+    <div class="content">
         <div class="row">
-            <div class="columns small-10 small-centered">
+            <div class="columns small-12 small-centered">
                 <div ui-view></div>
             </div>
         </div>
