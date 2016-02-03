@@ -8,12 +8,11 @@
 @import "foundation/components/visibility";
 @import "foundation/components/reveal";
 @import "angular-toastr";
-@import "dashboard";
+@import "base";
+@import "type";
+@import "buttons";
 @import "utils";
+@import "dashboard";
 @import "login";
 
-@import "type";
 
-body {
-    margin: 0;
-}

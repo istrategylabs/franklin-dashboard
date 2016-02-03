@@ -1,7 +1,7 @@
 <div ng-controller="DetailComponent as dec" class="row" ng-init="init('dec.repo', dc.selectedRepo)">
     <div class="row">
         <div class="columns small-6">
-            <h3 class="">[[dec.repo.name]]</h3>
+            <h1 class="">[[dec.repo.name]]</h1>
         </div>
         <div class="columns small-6">
             <a id="dashboard-deleteRepo" href="" title="Delete Repo" ng-click="dec.deleteRepo()">
@@ -21,7 +21,7 @@
                     <p class="environment__status">[[environment.status]]</p>
                     <div class="centered">
                         <button ng-click="dec.deployRepo()" class="button button--green">Deploy</button>
-                        <a class="environment__url" href="http://[[environment.url]]" target="_blank">[[environment.url]]</a>
+                        <a class="environment__url" href="http://[[environment.url]]" target="_blank">View site</a>
                     </div>
                 </div>
             </div>

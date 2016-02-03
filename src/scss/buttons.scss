@@ -1,0 +1,40 @@
+@import "settings";
+.button {
+    font-family: 'Lato', sans-serif;
+    border-radius: 0.5em;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.primary-button {}
+
+.secondary-button {
+    background-color: $color-white;
+    border: 1px solid #dedddd;
+    color: $franklin-gray;
+    text-transform: uppercase;
+    &:hover {
+        box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
+        background-color: $color-white;
+        border: 1px solid #dedddd;
+        color: $franklin-gray;
+    }
+    &:focus {
+        background-color: $color-white;
+        border: 1px solid #dedddd;
+        color: $franklin-gray;
+    }
+}
+
+.secondary-button-small {
+    font-size: 0.416667em;
+    letter-spacing: 0.5rem;
+    padding: 0.58333rem 0.95833rem; //14px 23px desk
+}
+
+.secondary-button-large {
+    font-size: 0.5em;
+    letter-spacing: 0.175rem;
+    padding: 0.625rem 1.125rem; //15px 27px desk
+}

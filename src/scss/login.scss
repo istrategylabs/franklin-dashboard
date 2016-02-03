@@ -1,69 +1,30 @@
+@import "settings";
+
 .login {
     height: 100vh;
-    background: #1e5799;
-    /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* FF3.6-15 */
-    background: -webkit-radial-gradient(center, ellipse cover, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: radial-gradient(ellipse at center, #1e5799 0%, #89b56a 0%, #6fb240 40%, #5d8f3c 100%);
-    /* IE6-9 fallback on horizontal gradient */
     width: 100%;
     color: #CCC;
     text-align: center;
-    padding-top: 5%
 }
 
-.login__button {
+.login__button-area {
+    height: 45vh;
     background-color: #FFF;
-    border-color: #FFF;
-    border-style: none;
-    color: #5D8F3C;
-    font-size: 20px;
-    border: 2px solid #FFF;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
-    border-radius: 30px;
-    &:hover {
-        cursor: pointer;
-        background-color: #5D8F3C;
-        color: #FFF;
-    }
-    &:focus {
-        background-color: #FFF;
-        border-color: #FFF;
-        border-style: none;
-        color: #5D8F3C;
-        font-size: 20px;
-        font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
-    }
-
-    @media(max-height: 400px) {
-        font-size: 15px;
-    }
-    @media(min-width: 768px) {
-        font-size: 20px;
-    }
+    padding-top: 5vh;
 }
 
-.login__logo {
-    background-image: url('../img/franklin.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50vh;
-    background-size: contain;
-}
-
-.login__title {
-    margin-bottom: 5%;
-    font-size: 30px;
-    color: #fff;
-    font-weight: bold;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
-    @media(max-height: 400px) {
+.login__title-area {
+    background-color: $franklin-turquoise;
+    height: 55vh;
+    min-height: 12em;
+    padding-top: 25vh;
+    @media(min-width: $small-breakpoint) {
         margin-bottom: 0%;
-    }
-    @media(min-width: 768px) {
-        font-size: 40px;
+        padding-top: 30vh;
     }
 }
 
+.login__icon{
+    height: 1.75em;
+    width: 1.75em;
+}

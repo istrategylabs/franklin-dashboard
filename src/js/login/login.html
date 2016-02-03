@@ -1,9 +1,17 @@
 <div class="login" ng-controller="LoginComponent as lc">
-    <div class="row login__title">
-        Franklin Dashboard
+    <div class="login__title-area">
+        <div class="row">
+            <div class="columns small-12 medium-7 large-7 small-centered">
+                <p class="jumbo">Franklin</p>
+                <p class="copy-jumbo">"One click" static site deploys? You betcha!</p>
+            </div>
+        </div>
     </div>
-    <div class="row login__logo"></div>
-    <div class="row">
-        <a id="login-button" href="" class="button login__button" ng-click="lc.authenticate('github')">Login with GitHub</a>
+    <div class="login__button-area">
+        <div class="row">
+            <a id="login-button" href="" class="button secondary-button secondary-button-large" ng-click="lc.authenticate('github')">
+            <img id="github-icon" src="/img/github.png" alt="" class="login__icon">
+            Log in with GitHub</a>
+        </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
 .dashboard {
     width: 100%;
     max-width: 100%;
+    font-size: 15px;
 }
 
 .dashboard--scrollable {
@@ -30,7 +31,8 @@
     float: right;
     margin: 0;
     margin-right: 2em;
-    line-height: 4em
+    line-height: 4em;
+    font-size: 1em;
 }
 
 .dashboard__title {
@@ -117,7 +119,7 @@
         background-color: $white;
         color: $franklin-applegreen;
         font-weight: bold;
-        font-size: 1.2em;
+        font-size: 1em;
     }
     td {
         color: $charcoal;

@@ -16,7 +16,9 @@ describe('login implementation and redirection', function() {
     expect(element(by.id('login-button')).isPresent()).toBe(true);
 
     var button = element(by.id('login-button'));
-    expect(button.getText()).toEqual('Login with GitHub');
+    expect(button.getText()).toEqual('LOG IN WITH GITHUB');
+
+    console.log("Termino");
 
   });
 
@@ -28,7 +30,7 @@ describe('login implementation and redirection', function() {
     expect(element(by.id('login-button')).isPresent()).toBe(true);
 
     var button = element(by.id('login-button'));
-    expect(button.getText()).toEqual('Login with GitHub');
+    expect(button.getText()).toEqual('LOG IN WITH GITHUB');
 
   });
 
@@ -72,7 +74,7 @@ describe('login implementation and redirection', function() {
 
         //check the dashboard page is loaded            
         browser.getCurrentUrl().then(function(actualUrl) {
-          expect(actualUrl).toBe(process.env.BASE_URL + '/#/dashboard');
+          expect(actualUrl).toBe(process.env.BASE_URL + '/#/dashboard/');
         });
       });
     });

@@ -8,7 +8,7 @@ exports.config = {
     'chromeOptions': { 'args': ['incognito'] }
   },
 
-  rootElement: '[ng-app]',
+  rootElement: 'html',
 
   // Framework to use. Jasmine is recommended.
   framework: 'jasmine',
