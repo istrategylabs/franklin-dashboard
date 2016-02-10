@@ -2,76 +2,107 @@
 .dashboard {
     width: 100%;
     max-width: 100%;
-    font-size: 15px;
 }
 
-.dashboard--scrollable {
-    height: 70vh;
-    overflow: scroll;
-}
-
-.dashboard__body {
-    height: calc(100vh - 4em);
-}
-
-.dashboard__logo {
-    height: 3em;
-    position: absolute;
-    left: 1.5em;
-    top: 1em;
-}
-
-.dashboard__header {
+.dashboard__nav {
+    box-sizing: border-box;
     height: 4em;
-}
-
-.dashboard__greet {
+    background-color: $franklin-turquoise;
     color: $white;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    float: right;
-    margin: 0;
-    margin-right: 2em;
-    line-height: 4em;
-    font-size: 1em;
-}
-
-.dashboard__title {
-    font-size: 1.2em;
-    line-height: 1em;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    color: #FFFFFF;
-    font-weight: bold;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    position: absolute;
-    right: 7%;
-    top: 0.5em;
-}
-
-.dashboard__sidebar {
-    padding: 0;
-    li {
-        border-bottom: 1px solid $white;
-        margin: 0;
-        height: 4.5em;
-        line-height: 4.5em;
+    border-bottom: 5px solid $franklin-petroleum;
+    .dashboard__nav--right-shadow{
+        border-right: 1px solid #13a4ad;
+    }
+    .dashboard__nav--left-shadow{
+        border-left: 1px solid #3bd5df;
     }
 }
 
-.dashboard__item {
-    padding-left: 1em;
-    padding-top: 0;
-    padding-bottom: 0;
-    color: $white;
-    font-size: 1.2em;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    text-decoration: none;
-    vertical-align: middle;
+.dashboard__header {
+    display: inline-flex;
+}
+
+.dashboard__title {
+    .alpha {
+        line-height: 5rem;
+        color: $white;
+    }
+}
+
+.dashboard__menu {
+    ul {
+        list-style-type: none;
+    }
+    .dashboard__menu-item {
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+    }
+    .dashboard__menu-item--active {
+        &:after {
+            content: '';
+            display: block;
+            background-color: $color-white;
+            width: 100%;
+            height: 2px;
+            margin-top: 0.2em;
+        }
+    }
+}
+
+.dashboard__user-info {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dashboard__greet {
+    color: white;
+    line-height: 6em;
+    font-size: 0.6em;
+}
+
+.dashboard__user-image {
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    border: 2px solid #3bd5df;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
 }
 
 .dashboard__content {
-    height: 100%;
-    margin-top: 2em;
+    background-color: $franklin-snow;
+    height: calc(100vh - 4em);
+    padding-top: 2em;
+}
+
+.dashboard__user-menu {
+    width: auto;
+    padding-right: rem-calc(40);
+    font-family: 'Lato', sans-serif;
+    li:hover{
+        background-color: $color-white;
+    }
+    svg {
+        width: 0.5em;
+        height: 0.5em;
+    }
+    .dashboard__user-menu-item {
+        width: 6em;
+        text-decoration: none;
+    }
+    .dashboard__user-menu-item--disabled {
+        color: $franklin-softgray;
+    }
+    &::after{
+        left: 116px;
+    }
+    &::before{
+        left: 117px;
+    }
 }
 
 .dashboard__newrepo {
@@ -87,23 +118,6 @@
     transform: translateZ(0);
     transition: 0.5s;
     float: right;
-}
-
-.dashboard__icon {
-    width: 1.2em;
-    transform: translateZ(0);
-    transition: 0.5s;
-    fill: $white;
-    margin-right: 0.8em;
-}
-
-.button__register {
-    svg {
-        width: 1.8em;
-        transform: translateZ(0);
-        transition: 0.5s;
-        fill: $franklin-purple;
-    }
 }
 
 .dashboard__table {

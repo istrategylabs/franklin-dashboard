@@ -9,7 +9,7 @@ function DashboardComponent(franklinAPIService, $scope,
   const variables = {
     username: '',
     showLoader: false,
-    deployedRepos: [],
+    deployedRepos: []
   }
 
   const functions = {
@@ -30,8 +30,7 @@ function DashboardComponent(franklinAPIService, $scope,
   dc.getFranklinRepos();
 
   //watch changes in franklin repos model
-  $scope.$watch(franklinReposModel.getFranklinRepos, 
-    (newValue, oldValue) => dc.deployedRepos = newValue);
+  $scope.$watch(franklinReposModel.getFranklinRepos, (newValue, oldValue) => dc.deployedRepos = newValue);
 
   /**************************************************************************/
 
