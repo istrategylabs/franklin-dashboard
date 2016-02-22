@@ -57,9 +57,9 @@ function DashboardComponent(franklinAPIService, $scope,
     //TODO: push if it doesn't exits
     dc.deployedRepos = franklinReposModel.getFranklinRepos();
 
-    if (data.length) {
-      dc.username = data[0].owner.name;
-      franklinReposModel.setFranklinRepos(data);
+    if (data.repos.length) {
+      dc.username = data.user.username;
+      franklinReposModel.setFranklinRepos(data.repos);
     }
   };
 
@@ -73,9 +73,9 @@ function DashboardComponent(franklinAPIService, $scope,
       scope: $scope,
       resolve: {
         deployableRepos: function() {
-          if (data.length) {
-            dc.username = data[0].owner.name;
-            for (let repo of data) {
+          if (data.repos.length) {
+            let repos = data.repos;
+            for (let repo of repos) {
               $scope.deployableRepos.push({
                 name: repo.name,
                 url: repo.url,
@@ -114,7 +114,7 @@ function DashboardComponent(franklinAPIService, $scope,
     //get detail info repo from franklin 
     let response = franklinAPIService.userRepos.getRepo(payload);
     response.$promise.then((data) => {
-      Object.assign(repo, data);
+      Object.assign(repo, data.repo);
       detailRepoService.setSelectedRepo(repo);
       $state.go('logged.detailInfo');
     }, dc.error);

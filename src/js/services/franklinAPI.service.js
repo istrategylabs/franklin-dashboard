@@ -15,16 +15,14 @@ export default ['$resource', 'ENV', '$auth',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
-        isArray: true
       },
       //call API to get franklin deployable repos
       getDeployableRepos: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/user/repos/deployable/',
+        url: ENV.FRANKLIN_API_URL + '/repos/all/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
-        isArray: true
       },
       //call API to register a franklin repo
       registerRepo: {
