@@ -59,6 +59,7 @@ const franklinApp = angular
     '$scope',
     '$modalInstance',
     'franklinAPIService',
+    'franklinReposModel',
     DashboardModalComponent
   ]).controller('DetailComponent', [
     '$scope',

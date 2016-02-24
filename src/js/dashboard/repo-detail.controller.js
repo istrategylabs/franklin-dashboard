@@ -1,64 +1,86 @@
 'use strict';
 
 function DetailComponent($scope, detailRepoService, franklinAPIService,
-  $modal, $state, toastr, franklinReposModel) {
+    $modal, $state, toastr, franklinReposModel) {
 
-  /* jshint validthis: true */
-  const dec = this;
+    /* jshint validthis: true */
+    const dec = this;
 
-  const functions = {
-    error,
-    deleteRepo,
-    deployRepo
-  };
+    const functions = {
+        error,
+        deleteRepo,
+        deployRepo
+    };
 
-  Object.assign(dec, functions);
+    Object.assign(dec, functions);
 
-  dec.repo = detailRepoService.getSelectedRepo();
+    dec.repo = detailRepoService.getSelectedRepo();
 
-  //TODO: find a way to send texts that is not scope related
-  $scope.modalTitle = 'Delete Repo';
-  $scope.modalMessage = 'Are you sure you want to delete this repository?';
+    //TODO: find a way to send texts that is not scope related
+    $scope.modalTitle = 'Delete Repo';
+    $scope.modalMessage = 'Are you sure you want to delete this repository?';
 
-  /**************************************************************************/
+    /**************************************************************************/
 
-  function deleteRepo() {
+    function deleteRepo() {
 
-    let modalInstance = $modal.open({
-      templateUrl: 'common/confirmationModal.html',
-      controller: 'ConfirmModalComponent',
-      controllerAs: 'cmc',
-      scope: $scope
-    });
+        let modalInstance = $modal.open({
+            templateUrl: 'common/confirmationModal.html',
+            controller: 'ConfirmModalComponent',
+            controllerAs: 'cmc',
+            scope: $scope
+        });
 
-    modalInstance.result.then(function(answer) {
-      if (answer === 'ok') {
-        let payload = {
-          github_id: dec.repo.github_id
-        };
-        //delete repo in franklin 
-        let response =
-          franklinAPIService.userRepos.deleteRepo(payload);
-        response.$promise.then(() => {
-          franklinReposModel.removeFranklinRepo(dec.repo);
-          $state.go("logged.franklinRepos");
+        modalInstance.result.then(function(answer) {
+            if (answer === 'ok') {
+                let payload = {
+                    github_id: dec.repo.github_id
+                };
+                //delete repo in franklin 
+                let response =
+                    franklinAPIService.userRepos.deleteRepo(payload);
+                response.$promise.then(() => {
+                    franklinReposModel.removeFranklinRepo(dec.repo);
+                    $state.go("logged.franklinRepos");
+                }, dec.error);
+            }
+
         }, dec.error);
-      }
+    };
 
-    }, dec.error);
-  };
+    function deployRepo(index) {
 
-  function deployRepo(){
-    toastr.info("Not implemented yet", ":(");
-  }
+        let payload = {
+            github_id: dec.repo.github_id,
+            branch: dec.repo.environments[index].current_deploy.default_branch,
+            git_hash: dec.repo.environments[index].current_deploy.git_hash
+        };
 
-  function error(error) {
-    if (error && error != 'backdrop click') {
-      toastr.error(error, "Failed to delete repository");
+        //deploy repo in franklin 
+        let response =
+            franklinAPIService.userRepos.deployRepo(payload);
+        response.$promise.then((data) => {
+            //TODO: remove this once we get info from deploy itself
+            let payloadRepo = {
+                github_id: dec.repo.github_id
+            };
+            //get detail info repo from franklin 
+            let responseRepo = franklinAPIService.userRepos.getRepo(payloadRepo);
+            responseRepo.$promise.then((data) => {
+                Object.assign(dec.repo, data.repo);
+                franklinReposModel.updateFranklinRepo(dec.repo);
+            }, dec.error);
+        }, dec.error);
+
     }
-  }
+
+    function error(error) {
+        if (error && error != 'backdrop click') {
+            toastr.error(error, "Failed to process repository");
+        }
+    }
 };
 
 export {
-  DetailComponent
+    DetailComponent
 }

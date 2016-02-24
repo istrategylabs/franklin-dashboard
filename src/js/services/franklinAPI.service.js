@@ -53,6 +53,16 @@ export default ['$resource', 'ENV', '$auth',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         }
+      },
+      deployRepo: {
+        method: 'POST',
+        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/deploy`,
+        params: {
+          github_id: "@github_id"
+        },
+        headers: {
+          'Authorization': 'Bearer ' + $auth.getToken()
+        }
       }
     });
 

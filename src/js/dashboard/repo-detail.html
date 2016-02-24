@@ -20,7 +20,7 @@
                     <h4 class="environment__title">[[environment.name]]</h4>
                     <p class="environment__status">[[environment.status]]</p>
                     <div class="centered">
-                        <button ng-click="dec.deployRepo()" class="button button--green">Deploy</button>
+                        <button ng-show="environment.status == 'REG'" ng-click="dec.deployRepo($index)" class="button button--green">Deploy</button>
                         <a class="environment__url" href="http://[[environment.url]]" target="_blank">View site</a>
                     </div>
                 </div>
