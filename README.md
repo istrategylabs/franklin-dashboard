@@ -1,6 +1,6 @@
 # Franklin Dashboard
 
-Franklin Dashboard allows you to check and manage your Franklin Projects. Have you seen inception? If not, watch it.
+Franklin Dashboard allows you to check and manage your Franklin Projects. 
 
 ## Installation
 
@@ -35,16 +35,19 @@ Franklin Dashboard allows you to check and manage your Franklin Projects. Have y
 
 ## Without Docker
 
-- To run Franklin Dashboard with Browser Sync server you need to run:
+- To run Franklin Dashboard with Express you need to run the following commands:
 - `npm install`
-- `npm run start`
-- or to build, cachebust, and minify all assets use:
+- to build, cachebust, and minify all assets use:
 - `npm run build`
+- and finally to run the app use:
+- `npm run start`
+
 
 ## Test
 
-To run e2e tests you should run `npm test`
+- To run unit tests you should run `npm test`
+- To run e2e tests you should run `gulp e2e`
 
 ## Deployment
 
-Franklin can automatically bootstrap itself. More on this eventually. Subsequent deploys will all work from Master.
+Subsequent deploys will all work from Master.
