@@ -1,7 +1,9 @@
 'use strict';
 
 function DashboardComponent(franklinAPIService, $scope,
-    $auth, toastr, $state, $modal, detailRepoService, franklinReposModel) {
+    $auth, toastr, $state, $modal, detailRepoService, franklinReposModel,
+    $document) {
+
 
     /* jshint validthis: true */
     const dc = this;
@@ -59,7 +61,7 @@ function DashboardComponent(franklinAPIService, $scope,
         //TODO: push if it doesn't exits
         dc.deployedRepos = franklinReposModel.getFranklinRepos();
         dc.username = data.user.username;
-        if (data.repos.length) {            
+        if (data.repos.length) {
             franklinReposModel.setFranklinRepos(data.repos);
         }
     };
@@ -107,7 +109,7 @@ function DashboardComponent(franklinAPIService, $scope,
             responseRepo.$promise.then((res) => {
                 franklinReposModel.addFranklinRepo(res.repo);
             }, dc.error);
-            
+
         }, function(data) {
             if (data.statusText) {
                 toastr.error(data.statusText, "Repo regristation failed");

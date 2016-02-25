@@ -22,6 +22,10 @@
     width: 85%;
 }
 
+.float-left{
+    float: left !important;
+}
+
 .no-side-margin {
     margin-left: 0;
     margin-right: 0;
@@ -39,13 +43,25 @@
     height: 100%;
 }
 
-.button__close {
-    position: absolute;
-    right: 2em;
-    z-index: 100;
-    svg {
+.loader {
+    float: right;
+    animation: spin 2s linear infinite;
+    width: 1.5em;
+    height: 1.5em;
+    fill: $franklin-yellow;
+    &.loader--big {
         width: 2em;
-        fill: $franklin-purple;
+        height: 2em;
+    }
+    &.ng-hide {
+        animation: spin 0s linear infinite;
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
@@ -100,6 +116,18 @@
         top: 50%;
         left: 50%;
         transform: translateX(-50%)translateY(-50%);
+    }
+    &.circle-icon--big {
+        width: 1.5em;
+        height: 1.5em;
+        svg {
+            width: 0.8em;
+        }
+    }
+    &.circle-icon--rotate {
+        svg {
+            transform: translateX(-50%)translateY(-50%)rotate(45deg);
+        }
     }
 }
 

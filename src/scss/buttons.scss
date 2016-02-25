@@ -38,3 +38,17 @@
     letter-spacing: 0.175rem;
     padding: 0.625rem 1.125rem; //15px 27px desk
 }
+
+.button__close {    
+    svg {
+        width: 1em;
+        fill: $franklin-gray;
+    }
+}
+
+.button--fixed-corner{
+    position: absolute;
+    right: 0em;
+    top: -0.5em;
+    z-index: 100;
+}

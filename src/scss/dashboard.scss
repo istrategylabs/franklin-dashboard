@@ -132,11 +132,12 @@
     }
 }
 
-.loader {
-    width: 2em;
-    transform: translateZ(0);
-    transition: 0.5s;
-    float: right;
+
+.dashboard--scrollable {
+    display: block;
+    max-height: 70vh;
+    overflow-y: scroll;
+    margin-top: 1em;
 }
 
 .dashboard__table {
@@ -147,6 +148,11 @@
     background-color: $white;
     border-collapse: collapse;
     font-family: 'Lato', sans-serif;
+    &.expanded {
+        th {
+            line-height: 3.4em;
+        }
+    }
     thead > tr {
         border: 1px solid rgb(224, 224, 224);
         padding: 1em;
@@ -160,6 +166,7 @@
     th {
         font-size: 1rem;
         background-color: $white;
+        text-align: left;
         text-transform: uppercase;
         font-weight: normal;
         line-height: 1.4em;
@@ -184,14 +191,6 @@
     }
     .dashboard__table--small {
         width: 25%;
-    }
-}
-
-.button__register {
-    svg {
-        width: 1.8em;
-        transform: translateZ(0);
-        fill: $franklin-gray;
     }
 }
 
