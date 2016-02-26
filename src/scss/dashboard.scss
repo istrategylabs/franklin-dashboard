@@ -1,8 +1,5 @@
 @import "settings";
-// .dashboard {
-//     width: 100%;
-//     max-width: 100%;
-// }
+
 .nav {
     box-sizing: border-box;
     height: 4em;
@@ -83,6 +80,27 @@
     padding-top: 2em;
 }
 
+.dropdown-menu {
+    width: auto;
+    padding-right: rem-calc(40);
+    font-family: 'Lato', sans-serif;
+    margin-top: 1em;
+    li:hover {
+        background-color: $color-white;
+    }
+    svg {
+        width: 0.5em;
+        height: 0.5em;
+    }
+    .dropdown-menu-item {
+        width: 6em;
+        text-decoration: none;
+    }
+    .dropdown-menu-item--disabled {
+        color: $franklin-softgray;
+    }
+}
+
 .user-menu {
     width: auto;
     padding-right: rem-calc(40);
@@ -131,7 +149,6 @@
         fill: $color-white;
     }
 }
-
 
 .dashboard--scrollable {
     display: block;
@@ -195,14 +212,26 @@
 }
 
 .environment {
-    border: 2px solid $franklin-applegreen;
-    padding: 10px;
-    text-align: center;
-    border-radius: 0.5em;
-    min-height: 15em;
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
     width: 100%;
     margin-top: 1em;
+}
+
+.environment-card {
+    border: 1px solid $franklin-lightgray;
+    border-radius: 0.2em;
+    background-color: $color-white;
+    padding: 10px;
+    text-align: center;
+}
+
+.environment-card__menu{
+    height: 1em;
+}
+
+.environment-card__action {
+    margin-top: 1em;
+    padding-top: 0.4em;
+    border-top: 1px solid $franklin-lightgray;
 }
 
 .environment__url {
@@ -227,16 +256,4 @@
     color: $franklin-applegreen;
     font-weight: bold;
     margin: 0;
-}
-
-.delete-repo {
-    width: 2em;
-    transform: translateZ(0);
-    transition: 0.5s;
-    fill: $franklin-purple;
-    float: right;
-}
-
-.confirmation__message {
-    color: $franklin-gray;
 }

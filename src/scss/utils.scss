@@ -17,13 +17,20 @@
 }
 
 .centered {
-    position: absolute;
-    bottom: 1em;
-    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.float-left{
+.float-left {
     float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .no-side-margin {
@@ -37,6 +44,14 @@
 
 .relative {
     position: relative;
+}
+
+.inline{
+    display: inline-block;
+}
+
+.margin-left{
+    margin-left: 1em;
 }
 
 .full-height {
@@ -65,42 +80,12 @@
     }
 }
 
-.button--green {
-    background-color: $franklin-applegreen;
-    border-radius: 2em;
-    font-size: 1em;
-    &:hover {
-        background-color: $franklin-applegreen;
-        opacity: 0.9;
-    }
-    &:focus {
-        background-color: $franklin-applegreen;
-    }
-}
-
-.button--gray {
-    background-color: $franklin-gray;
-    border-radius: 2em;
-    font-size: 1em;
-    &:hover {
-        background-color: $franklin-gray;
-        opacity: 0.9;
-    }
-    &:focus {
-        background-color: $franklin-gray;
-    }
-}
-
-.button--purple {
-    background-color: $franklin-purple;
-    border-radius: 2em;
-    font-size: 1em;
-    &:hover {
-        background-color: $franklin-purple;
-        opacity: 0.9;
-    }
-    &:focus {
-        background-color: $franklin-purple;
+.icon {
+    svg {
+        width: 1em;
+        height: 1em;
+        display: block;
+        margin: auto;
     }
 }
 
@@ -116,6 +101,13 @@
         top: 50%;
         left: 50%;
         transform: translateX(-50%)translateY(-50%);
+    }
+     &.circle-icon--small {
+        width: 0.7em;
+        height: 0.7em;
+        svg {
+            width: 0.4em;
+        }
     }
     &.circle-icon--big {
         width: 1.5em;

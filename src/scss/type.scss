@@ -39,8 +39,9 @@ h2 {
     font-family: 'Lato', sans-serif;
     font-size: 0.75em; //18px desk;
     line-height: 1.4;
-    margin-top: 0;
+    margin-top: 0.5em;
     color: $franklin-gray;
+    text-decoration: none;
 }
 
 .beta,
@@ -70,6 +71,7 @@ h4 {
     line-height: .75;
     margin-top: 0;
     color: $franklin-softgray;
+    text-transform: uppercase;
 }
 
 .delta {
@@ -127,6 +129,12 @@ p {
     @extend p;
     font-size: 0.65em; //24px desk
     color: $franklin-gray;
+}
+
+.link{
+     @extend .copy;
+     color: $franklin-turquoise;
+     text-decoration: none;
 }
 
 .description-copy {
