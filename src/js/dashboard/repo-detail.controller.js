@@ -1,7 +1,7 @@
 'use strict';
 
 function DetailComponent($scope, detailRepoService, franklinAPIService,
-    $modal, $state, toastr, franklinReposModel) {
+    $modal, $state, toastr, franklinReposModel, $window) {
 
     /* jshint validthis: true */
     const dec = this;
@@ -9,7 +9,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
     const functions = {
         error,
         deleteRepo,
-        deployRepo
+        deployRepo,
+        viewSite
     };
 
     Object.assign(dec, functions);
@@ -72,6 +73,10 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             }, dec.error);
         }, dec.error);
 
+    }
+
+    function viewSite(){
+      $window.open('http://' + dec.repo.environments[0].url, '_blank');
     }
 
     function error(error) {

@@ -46,12 +46,16 @@
     position: relative;
 }
 
-.inline{
+.inline {
     display: inline-block;
 }
 
-.margin-left{
+.margin-left {
     margin-left: 1em;
+}
+
+.margin-right {
+    margin-right: 1em;
 }
 
 .full-height {
@@ -60,7 +64,6 @@
 
 .loader {
     float: right;
-    animation: spin 2s linear infinite;
     width: 1.5em;
     height: 1.5em;
     fill: $franklin-yellow;
@@ -68,6 +71,10 @@
         width: 2em;
         height: 2em;
     }
+}
+
+.spin {
+    animation: spin 2s linear infinite;
     &.ng-hide {
         animation: spin 0s linear infinite;
     }
@@ -102,7 +109,7 @@
         left: 50%;
         transform: translateX(-50%)translateY(-50%);
     }
-     &.circle-icon--small {
+    &.circle-icon--small {
         width: 0.7em;
         height: 0.7em;
         svg {
@@ -137,6 +144,9 @@
 
 .circle-icon--yellow {
     background-color: $franklin-yellow;
+    &:hover {
+        background-color: $franklin-corn;
+    }
 }
 
 

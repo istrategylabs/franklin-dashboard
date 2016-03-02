@@ -1,5 +1,4 @@
 @import "settings";
-
 .nav {
     box-sizing: border-box;
     height: 4em;
@@ -148,6 +147,9 @@
         transform: rotate(45deg);
         fill: $color-white;
     }
+    &:hover{
+        background-color: $franklin-corn;
+    }
 }
 
 .dashboard--scrollable {
@@ -155,6 +157,18 @@
     max-height: 70vh;
     overflow-y: scroll;
     margin-top: 1em;
+}
+
+.REPO_NAME {
+    font-size: 12px;
+    font-family: "Lato";
+    color: rgb(44, 44, 44);
+    line-height: 1.2;
+    text-align: left;
+    position: absolute;
+    left: 155.906px;
+    top: 283.8px;
+    z-index: 83;
 }
 
 .dashboard__table {
@@ -176,6 +190,11 @@
     }
     tbody > tr {
         border-bottom: 1px solid rgb(242, 242, 242);
+        &:hover td, &:hover td a{
+            color: $franklin-gray;
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
     tbody > tr:last-child {
         border-bottom: none;
@@ -224,7 +243,7 @@
     text-align: center;
 }
 
-.environment-card__menu{
+.environment-card__menu {
     height: 1em;
 }
 

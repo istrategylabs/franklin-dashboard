@@ -135,11 +135,17 @@ p {
      @extend .copy;
      color: $franklin-turquoise;
      text-decoration: none;
+     cursor: pointer;
 }
 
 .description-copy {
     @extend p;
     font-style: italic;
+}
+
+.description-copy--inactive {
+    @extend .description-copy;
+    color: $franklin-softgray;
 }
 
 .color-white {

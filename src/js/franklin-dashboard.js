@@ -70,7 +70,8 @@ const franklinApp = angular
     '$modal',
     '$state',
     'toastr',
-    'franklinReposModel', DetailComponent
+    'franklinReposModel',
+    '$window', DetailComponent
   ]).controller('ConfirmModalComponent', [
     '$scope',
     '$modal', ConfirmModalComponent

@@ -10,10 +10,9 @@
                 </svg>
             </div>
         </a>
-        <svg ng-show="dc.showLoader" class="loader loader--big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="" height="" fill="currentcolor">
+        <svg ng-show="dc.showLoader" class="loader spin loader--big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="" height="" fill="currentcolor">
             <path d="M16 2 A14 14 0 0 0 2 16 A14 14 0 0 0 16 30 A14 14 0 0 0 26 26 L 23.25 23 A10 10 0 0 1 16 26 A10 10 0 0 1 6 16 A10 10 0 0 1 16 6 A10 10 0 0 1 23.25 9 L19 13 L30 13 L30 2 L26 6 A14 14 0 0 0 16 2"></path>
         </svg>
-        <!-- <img id="dashboard-loader" src="/img/ajax-loader.gif" alt="" class="loader" ng-show="dc.showLoader"> -->
     </div>
 </div>
 <div class="row">
@@ -29,37 +28,53 @@
                     <tr>
                         <th class="dashboard__table--large">Repo Name</th>
                         <th class="dashboard__table--medium">Owner</th>
-                        <th class="dashboard__table--small">Status of default environment</th>
+                        <th class="dashboard__table--small">Status of production environment</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="repo in dc.deployedRepos">
-                        <td class="dashboard__table--large" ng-click="dc.showRepoDetail(repo)"><a href="" target="blank">[[repo.name]]</a></td>
+                    <tr ng-repeat="repo in dc.deployedRepos" ng-click="dc.showRepoDetail(repo)">
+                        <td class="dashboard__table--large" title="Repo details" >[[repo.name]]</td>
                         <td class="dashboard__table--medium">[[repo.owner.name]]</td>
-                        <td class="dashboard__table--small">
-                            <div ng-show="repo.default_environment.status === 'SUC'" class="circle-icon circle-icon--green">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
-                                    <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
-                                </svg>
+                        <td class="dashboard__table--small description-copy">
+                            <div ng-show="repo.default_environment.status === 'SUC'">
+                                <div class="circle-icon circle-icon--green inline margin-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                                        <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
+                                    </svg>
+                                </div>
+                                <!-- <p class="inline copy description-copy description-copy--inactive copy-jumbo margin-left">Deployed</p> -->
+                                Deployed
                             </div>
-                            <div ng-show="repo.default_environment.status === 'REG'" class="circle-icon circle-icon--blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
-                                    <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
-                                </svg>
+                            <div ng-show="repo.default_environment.status === 'REG'">
+                                <div class="circle-icon circle-icon--blue inline margin-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                                        <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
+                                    </svg>
+                                </div>
+                                <!-- <p class="inline copy description-copy description-copy--inactive copy-jumbo margin-left">Ready</p> -->
+                                Ready
                             </div>
-                            <div ng-show="repo.default_environment.status === 'FAL'" class="circle-icon circle-icon--orange">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-                                    <rect x="43.379" y="81.822" width="13.179" height="13.178" />
-                                    <polygon points="39.736,5 43.405,74.035 56.596,74.035 60.264,5 " />
-                                </svg>
+                            <div ng-show="repo.default_environment.status === 'FAL'">
+                                <div class="circle-icon circle-icon--orange inline margin-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                                        <rect x="43.379" y="81.822" width="13.179" height="13.178" />
+                                        <polygon points="39.736,5 43.405,74.035 56.596,74.035 60.264,5 " />
+                                    </svg>
+                                </div>
+                                <!-- <p class="inline copy description-copy description-copy--inactive copy-jumbo margin-left">Error</p> -->
+                                Error
                             </div>
-                            <div ng-show="repo.default_environment.status === 'BLD'" class="circle-icon circle-icon--yellow">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
-                                    <g>
-                                        <path d="M21.72,21.697c-1.786,1.786-4.164,2.77-6.697,2.77s-4.912-0.984-6.698-2.77c-3.694-3.693-3.694-9.703,0-13.396   c1.786-1.786,4.165-2.77,6.698-2.77c2.394,0,4.65,0.878,6.397,2.483l-3.018,3.02l11.575,1.721L28.256,1.18l-2.919,2.919   C22.543,1.452,18.896,0,15.023,0C11.01,0,7.241,1.559,4.411,4.389c-5.851,5.851-5.851,15.37,0,21.223   C7.241,28.44,11.01,30,15.023,30s7.781-1.56,10.611-4.389l0.293-0.294l-3.914-3.914L21.72,21.697z" />
-                                        <circle cx="14.875" cy="15.146" r="3.248" />
-                                    </g>
-                                </svg>
+                            <div ng-show="repo.default_environment.status === 'BLD'">
+                                <div title="Deploying..." class="spin circle-icon circle-icon--yellow inline margin-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+                                        <g>
+                                            <path d="M21.72,21.697c-1.786,1.786-4.164,2.77-6.697,2.77s-4.912-0.984-6.698-2.77c-3.694-3.693-3.694-9.703,0-13.396   c1.786-1.786,4.165-2.77,6.698-2.77c2.394,0,4.65,0.878,6.397,2.483l-3.018,3.02l11.575,1.721L28.256,1.18l-2.919,2.919   C22.543,1.452,18.896,0,15.023,0C11.01,0,7.241,1.559,4.411,4.389c-5.851,5.851-5.851,15.37,0,21.223   C7.241,28.44,11.01,30,15.023,30s7.781-1.56,10.611-4.389l0.293-0.294l-3.914-3.914L21.72,21.697z" />
+                                            <circle cx="14.875" cy="15.146" r="3.248" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <!-- <p class="inline copy description-copy description-copy--inactive copy-jumbo margin-left">Deploying...</p> -->
+                                Deploying...
                             </div>
                         </td>
                     </tr>
