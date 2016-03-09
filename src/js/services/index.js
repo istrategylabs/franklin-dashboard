@@ -4,6 +4,7 @@ import angular from 'angular';
 import 'angular-resource';
 import '../config';
 
+import EnvironmentsService from './environments.service';
 import FranklinAPIService from './franklinAPI.service';
 import DetailRepoService from './detail-repo.service';
 import FranklinReposModel from './franklin-repos.model';
@@ -16,4 +17,5 @@ angular.module('franklin-dashboard.services', ['ngResource',
 
   .service('franklinAPIService', FranklinAPIService)
   .factory('detailRepoService', DetailRepoService)
-  .factory('franklinReposModel', FranklinReposModel);
+  .factory('franklinReposModel', FranklinReposModel)
+  .factory('environmentsService', EnvironmentsService);

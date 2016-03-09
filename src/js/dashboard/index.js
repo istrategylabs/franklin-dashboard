@@ -6,7 +6,7 @@ from './dashboard.controller';
 import {
   DetailComponent
 }
-from './repo-detail.controller';
+from './repo/repo-detail.controller';
 
 import {
   DashboardModalComponent

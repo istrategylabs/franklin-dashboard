@@ -3,7 +3,7 @@
 h1 {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 1.5em; //36px desk
+    font-size: 2.25rem; //36px desk
     margin-bottom: 0.2em;
     margin-top: 0;
     letter-spacing: 5px;
@@ -37,7 +37,7 @@ h1 {
 h2 {
     // heading of bottom section
     font-family: 'Lato', sans-serif;
-    font-size: 0.75em; //18px desk;
+    font-size: 1.125rem; //18px desk;
     line-height: 1.4;
     margin-top: 0.5em;
     color: $franklin-gray;
@@ -51,7 +51,7 @@ h2 {
 
 h3 {
     font-family: 'Lato', sans-serif;
-    font-size: 0.66667em; //16px desk;
+    font-size: 1rem; //16px desk;
     line-height: .75;
     margin-top: 0;
     margin-bottom: 1em;
@@ -67,7 +67,7 @@ h3 {
 
 h4 {
     font-family: 'Lato', sans-serif;
-    font-size: 0.5em; //12px desk
+    font-size: 0.75rem; //12px desk
     line-height: .75;
     margin-top: 0;
     color: $franklin-softgray;
@@ -85,7 +85,7 @@ h4 {
 h5 {
     //blockquote attribution
     font-family: 'Lato', sans-serif;
-    font-size: 0.75em; //18px desk;
+    font-size: 1.125rem; //18px desk;
     // line-height: 1.2;
     margin-top: 0;
 }
@@ -98,7 +98,7 @@ h6 {
     //link in bottom section
     font-family: 'Lato', sans-serif;
     font-weight: 400;
-    font-size: 0.75em; //18px desk;
+    font-size: 1.125rem; //18px desk;
     margin-bottom: 1.2em;
     line-height: 1.2;
     text-transform: uppercase;
@@ -112,7 +112,7 @@ h6 {
 
 p {
     font-family: 'Lato', sans-serif;
-    font-size: 0.5em; //12px desk
+    font-size: 0.75rem; //12px desk
     color: $franklin-softgray;
 }
 
@@ -122,12 +122,12 @@ p {
 
 .copy-large{
     @extend p;
-    font-size: 0.58333em; //14px desk
+    font-size: 0.875rem; //14px desk
 }
 
 .copy-jumbo{
     @extend p;
-    font-size: 0.65em; //24px desk
+    font-size: 1.5rem; //24px desk
     color: $franklin-gray;
 }
 

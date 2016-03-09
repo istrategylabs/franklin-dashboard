@@ -33,7 +33,7 @@ describe('DashboardComponent', function() {
     "environments": [{
       "name": "Production",
       "url": "",
-      "status": "REG"
+      "status": "registered"
     }]
   }];
   var deployableReposResolve = [{
@@ -77,7 +77,7 @@ describe('DashboardComponent', function() {
     "environments": [{
       "name": "Production",
       "url": "",
-      "status": "REG"
+      "status": "registered"
     }]
   }, {
     "name": "proj1",

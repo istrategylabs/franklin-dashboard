@@ -147,7 +147,7 @@
         transform: rotate(45deg);
         fill: $color-white;
     }
-    &:hover{
+    &:hover {
         background-color: $franklin-corn;
     }
 }
@@ -157,18 +157,6 @@
     max-height: 70vh;
     overflow-y: scroll;
     margin-top: 1em;
-}
-
-.REPO_NAME {
-    font-size: 12px;
-    font-family: "Lato";
-    color: rgb(44, 44, 44);
-    line-height: 1.2;
-    text-align: left;
-    position: absolute;
-    left: 155.906px;
-    top: 283.8px;
-    z-index: 83;
 }
 
 .dashboard__table {
@@ -190,7 +178,8 @@
     }
     tbody > tr {
         border-bottom: 1px solid rgb(242, 242, 242);
-        &:hover td, &:hover td a{
+        &:hover td,
+        &:hover td a {
             color: $franklin-gray;
             text-decoration: none;
             cursor: pointer;
@@ -235,12 +224,47 @@
     margin-top: 1em;
 }
 
+.arrow {
+    width: 2em;
+    display: inline-block;
+    transform: translateY(100%);
+}
+
 .environment-card {
     border: 1px solid $franklin-lightgray;
     border-radius: 0.2em;
     background-color: $color-white;
     padding: 10px;
     text-align: center;
+    height: 11.5em;
+    position: relative;
+}
+
+.environment-card__menu{
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $franklin-softgray;
+    letter-spacing: 0.2em;
+}
+
+.environment-card--new {
+    border: 1px dashed $franklin-lightgray;
+    background-color: #f2f2f2;
+}
+
+.environment-card__top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .environment-card__menu {
@@ -251,6 +275,10 @@
     margin-top: 1em;
     padding-top: 0.4em;
     border-top: 1px solid $franklin-lightgray;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .environment__url {

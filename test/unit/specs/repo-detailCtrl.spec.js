@@ -23,7 +23,7 @@ describe('DetailComponent', function() {
     "environments": [{
       "name": "Production",
       "url": "proj1.islstatic.com",
-      "status": "REG"
+      "status": "registered"
     }],
     "owner": "isl"
   };

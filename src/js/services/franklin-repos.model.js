@@ -53,7 +53,7 @@ export default function() {
             _self.franklinRepos[index] = repo;
             //TODO: review this when we have more environments
             _self.franklinRepos[index].default_environment = {
-                status: repo.environments[0].status
+                status: repo.environments[repo.environments.length - 1].status
             }
         }
     }

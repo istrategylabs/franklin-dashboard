@@ -71,7 +71,8 @@ const franklinApp = angular
     '$state',
     'toastr',
     'franklinReposModel',
-    '$window', DetailComponent
+    '$window',
+    'environmentsService', DetailComponent
   ]).controller('ConfirmModalComponent', [
     '$scope',
     '$modal', ConfirmModalComponent
@@ -116,7 +117,7 @@ function bootstrapApplication(response) {
           })
           .state('logged.detailInfo', {
             url: '/detail',
-            templateUrl: 'dashboard/repo-detail.html'
+            templateUrl: 'dashboard/repo/repo-detail.html'
           })
           .state('logout', {
             url: '/login',
