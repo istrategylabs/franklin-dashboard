@@ -65,9 +65,9 @@ function DashboardComponent(franklinAPIService, $scope,
 
         //TODO: push if it doesn't exits
         dc.deployedRepos = franklinReposModel.getFranklinRepos();
-        dc.username = data.user.username;
-        if (data.repos.length) {
-            franklinReposModel.setFranklinRepos(data.repos);
+        //TODO: get username
+        if (data.length) {
+            franklinReposModel.setFranklinRepos(data);
         }
     };
 
