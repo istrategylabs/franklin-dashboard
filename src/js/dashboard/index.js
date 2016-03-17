@@ -6,15 +6,15 @@ from './dashboard.controller';
 import {
   DetailComponent
 }
-from './repo/repo-detail.controller';
+from './repos/repo-detail.controller';
 
 import {
-  DashboardModalComponent
+  DeployableReposComponent
 }
-from './modal/dashboardModal.controller';
+from './modal/deployable-repos.controller';
 
 export {
   DashboardComponent,
-  DashboardModalComponent,
+  DeployableReposComponent,
   DetailComponent
 }

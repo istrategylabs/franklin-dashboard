@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardModalComponent($scope, $modalInstance, franklinAPIService,
+function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
     franklinReposModel) {
 
     const dmc = this;
@@ -57,5 +57,5 @@ function DashboardModalComponent($scope, $modalInstance, franklinAPIService,
 }
 
 export {
-    DashboardModalComponent
+    DeployableReposComponent
 }

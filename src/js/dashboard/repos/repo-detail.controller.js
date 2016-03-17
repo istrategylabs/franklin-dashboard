@@ -1,10 +1,11 @@
 'use strict';
 
 function DetailComponent($scope, detailRepoService, franklinAPIService,
-    $modal, $state, toastr, franklinReposModel, $window, environmentsService) {
+    $modal, $state, toastr, franklinReposModel, $window, environmentsService, $stateParams) {
 
     /* jshint validthis: true */
     const dec = this;
+    dec.environmentsService = environmentsService;
 
     const functions = {
         error,
@@ -13,28 +14,33 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         viewSite,
         newEnv,
         deleteEnv,
-        updateRepo
+        updateRepo,
+        promoteRepo
     };
 
     Object.assign(dec, functions);
 
+    let github_id = $state.params.githubId;
     dec.repo = detailRepoService.getSelectedRepo();
-    dec.environmentsService = environmentsService;
 
-    dec.repo.environments.map((env, index) => {
-        dec.environmentsService.setCurrentEnv(dec.repo, index);
-    });
-
-    //Production first
-    environmentsService.reorderEnvs(dec.repo);
-
-    //TODO: find a way to send texts that is not scope related
-    $scope.modalTitle = 'Delete Repo';
-    $scope.modalMessage = 'Are you sure you want to delete this repository?';
+    if (String(dec.repo.github_id) != github_id && github_id) {
+        dec.repo.github_id = github_id;
+        dec.updateRepo();
+    } else {
+        //reorder envs - Production first
+        environmentsService.reorderEnvs(dec.repo);
+        dec.repo.environments.map((env, index) => {
+            dec.environmentsService.setCurrentEnv(dec.repo, index);
+        });
+    }
 
     /**************************************************************************/
 
     function deleteRepo() {
+
+        //TODO: find a way to send texts that is not scope related
+        $scope.modalTitle = 'Delete Repo';
+        $scope.modalMessage = 'Are you sure you want to delete this repository?';
 
         let modalInstance = $modal.open({
             templateUrl: 'common/confirmationModal.html',
@@ -48,6 +54,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
                 let payload = {
                     github_id: dec.repo.github_id
                 };
+
                 //delete repo in franklin 
                 let response =
                     franklinAPIService.userRepos.deleteRepo(payload);
@@ -64,8 +71,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
         let payload = {
             github_id: dec.repo.github_id,
-            branch: dec.repo.environments[index].current_deploy.default_branch,
-            git_hash: dec.repo.environments[index].current_deploy.git_hash
+            branch: dec.repo.environments[index].default_branch.branch,
+            git_hash: dec.repo.environments[index].default_branch.git_hash
         };
 
         //deploy repo in franklin 
@@ -82,6 +89,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
     }
 
     function newEnv() {
+
         if (environmentsService.getNextEnv(dec.repo)) {
             let payload = {
                 github_id: dec.repo.github_id
@@ -99,7 +107,9 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
     }
 
     function deleteEnv() {
+
         if (dec.repo.environments.length > 1) {
+
             let payload = {
                 github_id: dec.repo.github_id
             };
@@ -115,10 +125,36 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         }
     }
 
-    function error(error) {
-        if (error && error != 'backdrop click') {
-            toastr.error(error, "Failed to process repository");
-        }
+    function promoteRepo(index) {
+
+        //TODO: find a way to send texts that is not scope related
+        $scope.modalTitle = 'Promote';
+        $scope.modalMessage = `Are you sure you want to promote from 
+            ${dec.repo.environments[index].name} to 
+            ${dec.repo.environments[index + 1].name}?`;
+
+        let modalInstance = $modal.open({
+            templateUrl: 'common/confirmationModal.html',
+            controller: 'ConfirmModalComponent',
+            controllerAs: 'cmc',
+            scope: $scope
+        });
+
+        modalInstance.result.then(function(answer) {
+            if (answer === 'ok') {
+                let payload = {
+                    github_id: dec.repo.github_id,
+                    env: dec.repo.environments[index].name.toLowerCase()
+                };
+                //promote in franklin 
+                let response =
+                    franklinAPIService.environments.promote(payload);
+                response.$promise.then(() => {
+                    dec.updateRepo();
+                }, dec.error);
+            }
+
+        }, dec.error);
     }
 
     function updateRepo() {
@@ -130,15 +166,28 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         //get detail info repo from franklin 
         let responseRepo = franklinAPIService.userRepos.getRepo(payload);
         responseRepo.$promise.then((data) => {
+
             Object.assign(dec.repo, data.repo);
 
-            //Production first
+            //reorder envs - Production first
             environmentsService.reorderEnvs(dec.repo);
 
             franklinReposModel.updateFranklinRepo(dec.repo);
 
+            dec.repo.environments.map((env, index) => {
+                dec.environmentsService.setCurrentEnv(dec.repo, index);
+            });
+
         }, dec.error);
     }
+
+    function error(error) {
+        if (error && error != 'backdrop click') {
+            toastr.error(error.data ? error.data.error : error,
+                "Failed to process repository");
+        }
+    }
+
 };
 
 export {

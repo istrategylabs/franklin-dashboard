@@ -2,7 +2,7 @@
 
 function DashboardComponent(franklinAPIService, $scope,
     $auth, toastr, $state, $modal, detailRepoService, franklinReposModel,
-    $document) {
+    $document, $location) {
 
 
     /* jshint validthis: true */
@@ -29,7 +29,9 @@ function DashboardComponent(franklinAPIService, $scope,
     //Scope used because of foundation modal directive
     $scope.deployableRepos = [];
 
+
     dc.getFranklinRepos();
+
 
     //watch changes in franklin repos model
     $scope.$watch(franklinReposModel.getFranklinRepos,
@@ -39,11 +41,13 @@ function DashboardComponent(franklinAPIService, $scope,
     /**************************************************************************/
 
     function getFranklinRepos() {
+
         let repos = franklinAPIService.userRepos.getFranklinRepos();
         repos.$promise.then(dc.listFranklinRepos);
     };
 
     function getDeployableRepos() {
+
         dc.showLoader = true;
         let repos = franklinAPIService.userRepos.getDeployableRepos();
         repos.$promise.then(dc.listDeployableRepos,
@@ -55,8 +59,9 @@ function DashboardComponent(franklinAPIService, $scope,
     };
 
     function listFranklinRepos(data) {
-
-        $state.go("logged.franklinRepos");
+        if ($state.current.name == 'logged') {
+            $state.go("logged.franklinRepos");
+        }
 
         //TODO: push if it doesn't exits
         dc.deployedRepos = franklinReposModel.getFranklinRepos();
@@ -67,11 +72,12 @@ function DashboardComponent(franklinAPIService, $scope,
     };
 
     function listDeployableRepos(data) {
+
         //TODO: push if it doesn't exits
         $scope.deployableRepos = [];
         let modalInstance = $modal.open({
-            templateUrl: 'dashboard/modal/listDeployableRepos.html',
-            controller: 'DashboardModalComponent',
+            templateUrl: 'dashboard/modal/deployable-repos.html',
+            controller: 'DeployableReposComponent',
             controllerAs: 'dmc',
             scope: $scope,
             resolve: {
@@ -128,18 +134,21 @@ function DashboardComponent(franklinAPIService, $scope,
         response.$promise.then((data) => {
             Object.assign(repo, data.repo);
             detailRepoService.setSelectedRepo(repo);
-            $state.go('logged.detailInfo');
+            $location.path(`/dashboard/detail/${repo.github_id}`);
+            //$state.go('logged.detailInfo');
         }, dc.error);
     };
 
     function logout() {
+
         $auth.logout().then(() => {
             $state.go('logout');
         });
     };
 
     function error(error, message) {
-        toastr.error(error, message);
+
+        toastr.error(error.data ? error.data.error : error, message);
     };
 
 };

@@ -32,7 +32,7 @@ export default function() {
             .findIndex((r) => r.github_id === repo.github_id) === -1) {
             //TODO: review this when we have more environments
             repo.default_environment = {
-                status: repo.environments[0].status
+                status: repo.environments[repo.environments.length - 1].status
             };
             _self.franklinRepos.push(repo);
         }

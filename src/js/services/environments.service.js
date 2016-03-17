@@ -5,7 +5,7 @@ export default function() {
     const _self = this;
 
     /* Potentially define this as env var */
-    _self.possibleEnvs = ['Production', 'Staging', 'Development'];
+    _self.possibleEnvs = ['Production', 'Staging'];
 
     let functions = {
         getCurrentEnv,

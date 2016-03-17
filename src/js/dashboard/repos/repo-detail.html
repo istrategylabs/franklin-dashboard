@@ -1,4 +1,4 @@
-<div ng-controller="DetailComponent as dec" ng-init="init('dec.repo', dc.selectedRepo)">
+<div ng-controller="DetailComponent as dec">
     <div class="repo-detail">
         <div class="row">
             <div class="columns small-12">
@@ -43,7 +43,7 @@
                         <p class="copy">Improve your process flow by creating a new environment.</p>
                     </div>
                     <div class="environment-card__action">
-                        <button ng-click="dec.newEnv()" class="button secondary-button secondary-button-small">Add Environment</button>
+                        <button ng-click="dec.newEnv()" class="button secondary-button secondary-button--small">Add Environment</button>
                     </div>
                 </div>
             </div>
@@ -54,16 +54,16 @@
                     <div class="row">
                         <div class="columns small-12">
                             <h4 class="inline delta">[[environment.name]]</h4>
-                            <!-- <img ng-show="environment.deploy_type === 'branch'" class="arrow float-right" src="/img/arrow.png" alt=""> -->
+                            <img ng-show="$index < dec.repo.environments.length - 1" class="arrow float-right" src="/img/arrow.png" alt="">
                         </div>
                     </div>
                     <div class="environment-card">
-                        <div dropdown-toggle="#dropdown-env-menu" ng-show="dec.environmentsService.getCurrentEnv(dec.repo) == environment.name && dec.repo.environments.length > 1" class="environment-card__menu alpha">...</div>
+                        <!-- <div dropdown-toggle="#dropdown-env-menu" ng-show="dec.environmentsService.getCurrentEnv(dec.repo) == environment.name && dec.repo.environments.length > 1" class="environment-card__menu alpha">...</div>
                         <ul id="dropdown-env-menu" class="dropdown-menu tiny f-dropdown">
                             <li>
                                 <a class="dropdown-menu-item" href="" ng-click="dec.deleteEnv()">Delete</a>
                             </li>
-                        </ul>
+                        </ul> -->
                         <div class="environment-card__top">
                             <!-- Menu -->
                             <!-- Status icon -->
@@ -92,8 +92,8 @@
                                 </svg>
                             </div>
                             <!-- TODO: left only one attr once api is refactored -->
-                            <!-- <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.default_branch]]" target="_blank" class="beta">[[environment.current_deploy.default_branch]]</a>
-                        <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.branch]]" target="_blank" class="beta">[[environment.current_deploy.branch]]</a> -->
+                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.default_branch]]" target="_blank" class="beta">[[environment.default_branch.branch]]</a>
+                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.branch]]" target="_blank" class="beta">[[environment.current_deploy.branch]]</a>
                             <!-- Message copy -->
                             <p ng-show="environment.status === 'registered'" class="description-copy">Ready</p>
                             <p ng-show="environment.status === 'failed'" class="description-copy">Error</p>
@@ -101,11 +101,14 @@
                             <p ng-show="environment.status === 'building'" class="description-copy">Deploying...</p>
                             <!-- Deploy type -->
                             <p ng-show="environment.deploy_type === 'branch'" class="copy">Auto Deploys</p>
-                             <p ng-show="environment.deploy_type === 'promote'" class="copy">Promotion</p>
+                            <p ng-show="environment.deploy_type === 'promote'" class="copy">Promotion</p>
                         </div>
                         <!-- Action -->
-                        <div ng-show="environment.deploy_type == 'branch'" class="environment-card__action">
-                            <button ng-click="dec.deployRepo($index)" class="button secondary-button secondary-button-small">Deploy [[environment.current_deploy.default_branch]] branch</button>
+                        <div ng-show="environment.deploy_type === 'branch' && environment.status === 'registered'" ng-click="dec.deployRepo($index)" class="environment-card__action">
+                            <button class="button secondary-button secondary-button--small">Deploy [[environment.current_deploy.default_branch]] branch</button>
+                        </div>
+                        <div ng-show="environment.status === 'success' && $index < dec.repo.environments.length - 1" class="environment-card__action">
+                            <button ng-click="dec.promoteRepo($index)" class="button secondary-button secondary-button--small">Promote</button>
                         </div>
                     </div>
                 </div>

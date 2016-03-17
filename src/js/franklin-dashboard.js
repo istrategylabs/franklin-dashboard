@@ -15,7 +15,7 @@ import 'angular-foundation/mm-foundation-tpls.min';
 import './config';
 import './services';
 import {
-  DashboardComponent, DashboardModalComponent, DetailComponent
+  DashboardComponent, DeployableReposComponent, DetailComponent
 }
 from './dashboard';
 import {
@@ -55,14 +55,15 @@ const franklinApp = angular
     'detailRepoService',
     'franklinReposModel',
     '$document',
+    '$location',
      DashboardComponent
   ])
-  .controller('DashboardModalComponent', [
+  .controller('DeployableReposComponent', [
     '$scope',
     '$modalInstance',
     'franklinAPIService',
     'franklinReposModel',
-    DashboardModalComponent
+    DeployableReposComponent
   ]).controller('DetailComponent', [
     '$scope',
     'detailRepoService',
@@ -83,6 +84,7 @@ getClientId().then(bootstrapApplication, error);
 
 //call to franklin-api to get client-id
 function getClientId() {
+
   let initInjector = angular.injector(["ng", 'franklin-dashboard.config']);
   let $http = initInjector.get("$http");
   let ENV = initInjector.get("ENV");
@@ -92,6 +94,7 @@ function getClientId() {
 
 //bootstrap franklin-dashboard angular app
 function bootstrapApplication(response) {
+
   angular.element(document).ready(function() {
 
     franklinApp
@@ -100,6 +103,7 @@ function bootstrapApplication(response) {
       .config(($authProvider, ENV, $stateProvider, $urlRouterProvider,
         toastrConfig, $resourceProvider, $interpolateProvider) => {
 
+        //change angular interpolation for 
         $interpolateProvider.startSymbol('[[').endSymbol(']]');
 
         //angular routing depending on login status
@@ -116,8 +120,11 @@ function bootstrapApplication(response) {
             templateUrl: 'dashboard/franklin-repos.html'
           })
           .state('logged.detailInfo', {
-            url: '/detail',
-            templateUrl: 'dashboard/repo/repo-detail.html'
+            url: '/detail/:githubId',
+            templateUrl: 'dashboard/repos/repo-detail.html',
+            resolve: {
+              loginRequired: loginRequired
+            }
           })
           .state('logout', {
             url: '/login',

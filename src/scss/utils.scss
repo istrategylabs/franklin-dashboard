@@ -1,19 +1,7 @@
 @import "settings";
-.no-padding {
-    padding: 0;
-}
 
-.no-padding-right {
-    padding-right: 0;
-}
-
-.no-vertical-margin {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.no-margin {
-    margin: 0;
+.uppercase{
+    text-transform: uppercase;
 }
 
 .centered {
@@ -33,17 +21,8 @@
     cursor: pointer;
 }
 
-.no-side-margin {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.center {
+.text-center {
     text-align: center;
-}
-
-.relative {
-    position: relative;
 }
 
 .inline {
@@ -56,10 +35,6 @@
 
 .margin-right {
     margin-right: 1em;
-}
-
-.full-height {
-    height: 100%;
 }
 
 .loader {

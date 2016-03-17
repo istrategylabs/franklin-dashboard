@@ -1,0 +1,61 @@
+@import "settings";
+
+.dashboard__table {
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    background-color: $white;
+    border-collapse: collapse;
+    font-family: 'Lato', sans-serif;
+    &.expanded {
+        th {
+            line-height: 3.4em;
+        }
+    }
+    thead > tr {
+        border: 1px solid rgb(224, 224, 224);
+        padding: 1em;
+    }
+    tbody > tr {
+        border-bottom: 1px solid rgb(242, 242, 242);
+        &:hover td,
+        &:hover td a {
+            color: $franklin-gray;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+    tbody > tr:last-child {
+        border-bottom: none;
+    }
+    th {
+        font-size: 1rem;
+        background-color: $white;
+        text-align: left;
+        text-transform: uppercase;
+        font-weight: normal;
+        line-height: 1.4em;
+        color: $franklin-softgray;
+    }
+    td {
+        font-size: 1rem;
+        color: $franklin-softgray;
+        background-color: $white;
+        line-height: 3em;
+        height: 3em;
+    }
+    a {
+        color: $franklin-softgray;
+        text-decoration: none;
+    }
+    .dashboard__table--large {
+        width: 40%;
+    }
+    .dashboard__table--medium {
+        width: 35%
+    }
+    .dashboard__table--small {
+        width: 25%;
+    }
+}

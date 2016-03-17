@@ -1,4 +1,5 @@
 @import "settings";
+// Navigation
 .nav {
     box-sizing: border-box;
     height: 4em;
@@ -72,34 +73,6 @@
     -moz-border-radius: 1em;
 }
 
-.content {
-    background-color: $franklin-snow;
-    height: calc(100% - 4em);
-    min-height: calc(100vh - 4em);
-    padding-top: 2em;
-}
-
-.dropdown-menu {
-    width: auto;
-    padding-right: rem-calc(40);
-    font-family: 'Lato', sans-serif;
-    margin-top: 1em;
-    li:hover {
-        background-color: $color-white;
-    }
-    svg {
-        width: 0.5em;
-        height: 0.5em;
-    }
-    .dropdown-menu-item {
-        width: 6em;
-        text-decoration: none;
-    }
-    .dropdown-menu-item--disabled {
-        color: $franklin-softgray;
-    }
-}
-
 .user-menu {
     width: auto;
     padding-right: rem-calc(40);
@@ -126,6 +99,35 @@
     &::before {
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+// Dashboard body
+.content {
+    background-color: $franklin-snow;
+    height: calc(100% - 4em);
+    min-height: calc(100vh - 4em);
+    padding-top: 2em;
+}
+
+.dropdown-menu {
+    width: auto;
+    padding-right: rem-calc(40);
+    font-family: 'Lato', sans-serif;
+    margin-top: 1em;
+    li:hover {
+        background-color: $color-white;
+    }
+    svg {
+        width: 0.5em;
+        height: 0.5em;
+    }
+    .dropdown-menu-item {
+        width: 6em;
+        text-decoration: none;
+    }
+    .dropdown-menu-item--disabled {
+        color: $franklin-softgray;
     }
 }
 
@@ -159,66 +161,7 @@
     margin-top: 1em;
 }
 
-.dashboard__table {
-    border: 1px solid rgb(224, 224, 224);
-    border-radius: 6px;
-    font-size: 1rem;
-    width: 100%;
-    background-color: $white;
-    border-collapse: collapse;
-    font-family: 'Lato', sans-serif;
-    &.expanded {
-        th {
-            line-height: 3.4em;
-        }
-    }
-    thead > tr {
-        border: 1px solid rgb(224, 224, 224);
-        padding: 1em;
-    }
-    tbody > tr {
-        border-bottom: 1px solid rgb(242, 242, 242);
-        &:hover td,
-        &:hover td a {
-            color: $franklin-gray;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    }
-    tbody > tr:last-child {
-        border-bottom: none;
-    }
-    th {
-        font-size: 1rem;
-        background-color: $white;
-        text-align: left;
-        text-transform: uppercase;
-        font-weight: normal;
-        line-height: 1.4em;
-        color: $franklin-softgray;
-    }
-    td {
-        font-size: 1rem;
-        color: $franklin-softgray;
-        background-color: $white;
-        line-height: 3em;
-        height: 3em;
-    }
-    a {
-        color: $franklin-softgray;
-        text-decoration: none;
-    }
-    .dashboard__table--large {
-        width: 40%;
-    }
-    .dashboard__table--medium {
-        width: 35%
-    }
-    .dashboard__table--small {
-        width: 25%;
-    }
-}
-
+// Environments
 .environment {
     width: 100%;
     margin-top: 1em;
@@ -240,7 +183,7 @@
     position: relative;
 }
 
-.environment-card__menu{
+.environment-card__menu {
     position: absolute;
     right: 0.5em;
     top: 0.5em;

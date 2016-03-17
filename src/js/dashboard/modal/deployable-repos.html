@@ -20,14 +20,14 @@
                 <tr>
                     <th>Repo Name</th>
                     <th>Owner</th>
-                    <th class="center">Add</th>
+                    <th class="text-center">Add</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="repo in deployableRepos">
                     <td><a href="[[repo.url]]" target="blank">[[repo.name]]</a></td>
                     <td><a href="[[repo.url]]" target="blank">[[repo.owner.name]]</a></td>
-                    <td class="center">
+                    <td class="text-center">
                         <a href="" title="Add repo" ng-click="dmc.registerRepo(repo, $index)">
                             <div ng-show="!dmc.showLoaders[$index]" class="circle-icon circle-icon--big circle-icon--yellow circle-icon--rotate">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
