@@ -26,7 +26,7 @@
             <tbody>
                 <tr ng-repeat="repo in deployableRepos">
                     <td><a href="[[repo.url]]" target="blank">[[repo.name]]</a></td>
-                    <td><a href="[[repo.url]]" target="blank">[[repo.owner.name]]</a></td>
+                    <td><a href="[[repo.url]]" target="blank">[[repo.owner.login]]</a></td>
                     <td class="text-center">
                         <a href="" title="Add repo" ng-click="dmc.registerRepo(repo, $index)">
                             <div ng-show="!dmc.showLoaders[$index]" class="circle-icon circle-icon--big circle-icon--yellow circle-icon--rotate">

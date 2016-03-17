@@ -12,9 +12,6 @@
                             <li>
                                 <a class="dropdown-menu-item" href="" ng-click="dec.deleteRepo()">Delete</a>
                             </li>
-                            <li>
-                                <a class="dropdown-menu-item" ng-click="dec.viewSite()">View Site</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -58,12 +55,12 @@
                         </div>
                     </div>
                     <div class="environment-card">
-                        <!-- <div dropdown-toggle="#dropdown-env-menu" ng-show="dec.environmentsService.getCurrentEnv(dec.repo) == environment.name && dec.repo.environments.length > 1" class="environment-card__menu alpha">...</div>
-                        <ul id="dropdown-env-menu" class="dropdown-menu tiny f-dropdown">
+                        <div dropdown-toggle="#dropdown-env-menu-[[environment.name]]" class="environment-card__menu alpha">...</div>
+                        <ul id="dropdown-env-menu-[[environment.name]]" class="dropdown-menu tiny f-dropdown">
                             <li>
-                                <a class="dropdown-menu-item" href="" ng-click="dec.deleteEnv()">Delete</a>
+                                <a class="dropdown-menu-item" ng-click="dec.viewSite(environment)">View Site</a>
                             </li>
-                        </ul> -->
+                        </ul>
                         <div class="environment-card__top">
                             <!-- Menu -->
                             <!-- Status icon -->
@@ -92,7 +89,7 @@
                                 </svg>
                             </div>
                             <!-- TODO: left only one attr once api is refactored -->
-                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.default_branch]]" target="_blank" class="beta">[[environment.default_branch.branch]]</a>
+                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.default_branch.branch]]" target="_blank" class="beta">[[environment.default_branch.branch]]</a>
                             <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.branch]]" target="_blank" class="beta">[[environment.current_deploy.branch]]</a>
                             <!-- Message copy -->
                             <p ng-show="environment.status === 'registered'" class="description-copy">Ready</p>

@@ -84,8 +84,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
     }
 
-    function viewSite() {
-        $window.open('http://' + dec.repo.environments[0].url, '_blank');
+    function viewSite(environment) {
+        $window.open('http://' + environment.url, '_blank');
     }
 
     function newEnv() {
@@ -167,7 +167,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         let responseRepo = franklinAPIService.userRepos.getRepo(payload);
         responseRepo.$promise.then((data) => {
 
-            Object.assign(dec.repo, data.repo);
+            Object.assign(dec.repo, data);
 
             //reorder envs - Production first
             environmentsService.reorderEnvs(dec.repo);
@@ -183,8 +183,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
     function error(error) {
         if (error && error != 'backdrop click') {
-            toastr.error(error.data ? error.data.error : error,
-                "Failed to process repository");
+            toastr.error(error.data ? error.data.error : error.detail ? 
+                error.detail : error, "Failed to process repository");
         }
     }
 

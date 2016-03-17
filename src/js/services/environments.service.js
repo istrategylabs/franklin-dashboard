@@ -57,12 +57,5 @@ export default function() {
             newEnvList.push(env);
         }
         repo.environments = newEnvList.reverse();
-        
-
-        // var newList = repo.environments.sort((a, b) => {
-        //     _self.possibleEnvs.findIndex(x => x == a.name) < 
-        //         _self.possibleEnvs.findIndex(x => x == b.name) ? 1 : -1;
-        // });
-        // repo.environments = newList;
     }
 };

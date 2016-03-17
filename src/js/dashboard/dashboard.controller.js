@@ -54,7 +54,8 @@ function DashboardComponent(franklinAPIService, $scope,
             function(error) {
                 //hide loader
                 dc.showLoader = false;
-                toastr.error(error, "Get deployable repos failed");
+                toastr.error(error.detail ? error.detail : error, 
+                    "Get deployable repos failed");
             });
     };
 
@@ -82,19 +83,8 @@ function DashboardComponent(franklinAPIService, $scope,
             scope: $scope,
             resolve: {
                 deployableRepos: function() {
-                    if (data.repos.length) {
-                        let repos = data.repos;
-                        for (let repo of repos) {
-                            $scope.deployableRepos.push({
-                                name: repo.name,
-                                url: repo.url,
-                                github_id: repo.id,
-                                owner: {
-                                    name: repo.owner.name,
-                                    github_id: repo.owner.id
-                                }
-                            });
-                        };
+                    if (data.length) {
+                        $scope.deployableRepos = data;
                     }
                     return $scope.deployableRepos;
                 }
@@ -113,7 +103,7 @@ function DashboardComponent(franklinAPIService, $scope,
             //TODO: remove this once we get info from register itself
             let responseRepo = franklinAPIService.userRepos.getRepo(payload);
             responseRepo.$promise.then((res) => {
-                franklinReposModel.addFranklinRepo(res.repo);
+                franklinReposModel.addFranklinRepo(res);
             }, dc.error);
 
         }, function(data) {
@@ -132,10 +122,9 @@ function DashboardComponent(franklinAPIService, $scope,
         //get detail info repo from franklin 
         let response = franklinAPIService.userRepos.getRepo(payload);
         response.$promise.then((data) => {
-            Object.assign(repo, data.repo);
+            Object.assign(repo, data);
             detailRepoService.setSelectedRepo(repo);
             $location.path(`/dashboard/detail/${repo.github_id}`);
-            //$state.go('logged.detailInfo');
         }, dc.error);
     };
 
@@ -147,10 +136,9 @@ function DashboardComponent(franklinAPIService, $scope,
     };
 
     function error(error, message) {
-
-        toastr.error(error.data ? error.data.error : error, message);
+        toastr.error(error.data ? error.data.error : error.detail ? 
+            error.detail : error, message);
     };
-
 };
 
 export {

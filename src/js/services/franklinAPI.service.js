@@ -20,10 +20,11 @@ export default ['$resource', 'ENV', '$auth',
       //call API to get franklin deployable repos
       getDeployableRepos: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/repos/all/',
+        url: ENV.FRANKLIN_API_URL + '/repos/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
+        isArray: true
       },
       //call API to register a franklin repo
       registerRepo: {

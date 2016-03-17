@@ -30,10 +30,6 @@ export default function() {
     function addFranklinRepo(repo) {
         if (_self.franklinRepos
             .findIndex((r) => r.github_id === repo.github_id) === -1) {
-            //TODO: review this when we have more environments
-            repo.default_environment = {
-                status: repo.environments[repo.environments.length - 1].status
-            };
             _self.franklinRepos.push(repo);
         }
     }
@@ -51,10 +47,6 @@ export default function() {
             .findIndex((r) => r.github_id === repo.github_id);
         if (index > -1) {
             _self.franklinRepos[index] = repo;
-            //TODO: review this when we have more environments
-            _self.franklinRepos[index].default_environment = {
-                status: repo.environments[repo.environments.length - 1].status
-            }
         }
     }
 

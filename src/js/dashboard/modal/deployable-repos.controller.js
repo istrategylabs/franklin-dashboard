@@ -43,15 +43,18 @@ function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
         //create POST payload
         dmc.registeredRepo = {
             name: repo.name,
-            github_id: repo.github_id,
+            github_id: repo.id,
             owner: {
-                name: repo.owner.name,
-                github_id: repo.owner.github_id
+                name: repo.owner.login,
+                github_id: repo.owner.id
             }
         };
+        let payload = {
+            github: `${repo.full_name}`
+        }
         //register repo in Franklin API
         let response =
-            franklinAPIService.userRepos.registerRepo(dmc.registeredRepo);
+            franklinAPIService.userRepos.registerRepo(payload);
         response.$promise.then(dmc.solve, dmc.error);
     }
 }
