@@ -57,7 +57,7 @@ export default ['$resource', 'ENV', '$auth',
       },
       deployRepo: {
         method: 'POST',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/deploy`,
+        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id/builds`,
         params: {
           github_id: "@github_id"
         },

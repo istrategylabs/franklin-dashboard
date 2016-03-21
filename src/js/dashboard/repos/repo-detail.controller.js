@@ -69,9 +69,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
     function deployRepo(index) {
         let payload = {
-            github_id: dec.repo.github_id,
-            branch: dec.repo.environments[index].build.branch,
-            git_hash: dec.repo.environments[index].build.git_hash
+            github_id: dec.repo.github_id
         };
 
         //deploy repo in franklin 
