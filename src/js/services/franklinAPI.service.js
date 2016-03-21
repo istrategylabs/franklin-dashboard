@@ -68,26 +68,6 @@ export default ['$resource', 'ENV', '$auth',
     });
 
 let environments = $resource(ENV.FRANKLIN_API_URL, {}, {      
-      removeEnvironment: {
-        method: 'DELETE',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/environments`,
-        params: {
-          github_id: "@github_id"
-        },
-        headers: {
-          'Authorization': 'Bearer ' + $auth.getToken()
-        }
-      },
-      addEnvironment: {
-        method: 'POST',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/environments`,
-        params: {
-          github_id: "@github_id"
-        },
-        headers: {
-          'Authorization': 'Bearer ' + $auth.getToken()
-        }
-      },
       promote: {
         method: 'POST',
         url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/environments/:env/promote`,

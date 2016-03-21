@@ -27,24 +27,6 @@
         </div>
     </div>
     <div class="row">
-        <div ng-show="dec.environmentsService.getNextEnv(dec.repo)" class="columns small-12 medium-4 large-4">
-            <div class="environment">
-                <div class="row">
-                    <div class="columns small-12">
-                        <h4 class="inline delta">[[dec.environmentsService.getNextEnv(dec.repo)]]</h4>
-                        <img class="arrow float-right" src="/img/arrow.png" alt="">
-                    </div>
-                </div>
-                <div class="environment-card environment-card--new">
-                    <div class="environment-card__top">
-                        <p class="copy">Improve your process flow by creating a new environment.</p>
-                    </div>
-                    <div class="environment-card__action">
-                        <button ng-click="dec.newEnv()" class="button secondary-button secondary-button--small">Add Environment</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div ng-repeat="environment in dec.repo.environments">
             <div class="columns small-12 medium-4 large-4">
                 <div class="environment">

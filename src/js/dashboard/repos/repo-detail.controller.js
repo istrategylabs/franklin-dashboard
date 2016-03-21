@@ -13,8 +13,6 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         deleteRepo,
         deployRepo,
         viewSite,
-        newEnv,
-        deleteEnv,
         updateRepo,
         promoteRepo
     };
@@ -29,10 +27,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         dec.updateRepo();
     } else {
         //reorder envs - Production first
-        environmentsService.reorderEnvs(dec.repo);
-        dec.repo.environments.map((env, index) => {
-            dec.environmentsService.setCurrentEnv(dec.repo, index);
-        });
+        environmentsService.reorderEnvs(dec.repo);        
     }
 
     /**************************************************************************/
@@ -84,41 +79,6 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         $window.open('http://' + environment.url, '_blank');
     }
 
-    function newEnv() {
-        if (environmentsService.getNextEnv(dec.repo)) {
-            let payload = {
-                github_id: dec.repo.github_id
-            };
-
-            let response =
-                franklinAPIService.environments.addEnvironment(payload);
-            response.$promise.then(() => {
-                //update current env
-                dec.environmentsService.forwardEnv(dec.repo);
-                dec.updateRepo();
-
-            }, dec.error);
-        }
-    }
-
-    function deleteEnv() {
-        if (dec.repo.environments.length > 1) {
-
-            let payload = {
-                github_id: dec.repo.github_id
-            };
-
-            let response =
-                franklinAPIService.environments.removeEnvironment(payload);
-            response.$promise.then(() => {
-                //update current env
-                dec.environmentsService.rewindEnv(dec.repo);
-                dec.updateRepo();
-
-            }, dec.error);
-        }
-    }
-
     function promoteRepo(index) {
         //TODO: find a way to send texts that is not scope related
         $scope.modalTitle = 'Promote';
@@ -165,10 +125,6 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             environmentsService.reorderEnvs(dec.repo);
 
             franklinReposModel.updateFranklinRepo(dec.repo);
-
-            dec.repo.environments.map((env, index) => {
-                dec.environmentsService.setCurrentEnv(dec.repo, index);
-            });
 
         }, dec.error);
     }
