@@ -33,12 +33,11 @@ export default ['$resource', 'ENV', '$auth',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + $auth.getToken()
-        },
-        isArray: true
+        }
       },
       deleteRepo: {
         method: 'DELETE',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id`,
+        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id`,
         params: {
           github_id: "@github_id"
         },
@@ -48,7 +47,7 @@ export default ['$resource', 'ENV', '$auth',
       },
       getRepo: {
         method: 'GET',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id`,
+        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id`,
         params: {
           github_id: "@github_id"
         },

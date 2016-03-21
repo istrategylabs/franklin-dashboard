@@ -55,6 +55,7 @@
                         </div>
                     </div>
                     <div class="environment-card">
+                        <!-- Menu -->
                         <div dropdown-toggle="#dropdown-env-menu-[[environment.name]]" class="environment-card__menu alpha">...</div>
                         <ul id="dropdown-env-menu-[[environment.name]]" class="dropdown-menu tiny f-dropdown">
                             <li>
@@ -62,49 +63,53 @@
                             </li>
                         </ul>
                         <div class="environment-card__top">
-                            <!-- Menu -->
+
                             <!-- Status icon -->
-                            <div ng-show="environment.status === 'success'" class="centered circle-icon circle-icon--small circle-icon--green">
+                            <!-- <div ng-show="environment.build.status === 'success'" class="centered circle-icon circle-icon--small circle-icon--green">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
                                     <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
                                 </svg>
                             </div>
-                            <div ng-show="environment.status === 'registered'" class="centered circle-icon circle-icon--small circle-icon--blue">
+                            <div ng-show="environment.build.status === 'registered'" class="centered circle-icon circle-icon--small circle-icon--blue">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
                                     <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
                                 </svg>
                             </div>
-                            <div ng-show="environment.status === 'failed'" class="centered circle-icon circle-icon--small circle-icon--orange">
+                            <div ng-show="environment.build.status === 'failed'" class="centered circle-icon circle-icon--small circle-icon--orange">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
                                     <rect x="43.379" y="81.822" width="13.179" height="13.178" />
                                     <polygon points="39.736,5 43.405,74.035 56.596,74.035 60.264,5 " />
                                 </svg>
                             </div>
-                            <div ng-show="environment.status === 'building'" class="centered spin circle-icon circle-icon--small circle-icon--yellow">
+                            <div ng-show="environment.build.status === 'building'" class="centered spin circle-icon circle-icon--small circle-icon--yellow">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
                                     <g>
                                         <path d="M21.72,21.697c-1.786,1.786-4.164,2.77-6.697,2.77s-4.912-0.984-6.698-2.77c-3.694-3.693-3.694-9.703,0-13.396   c1.786-1.786,4.165-2.77,6.698-2.77c2.394,0,4.65,0.878,6.397,2.483l-3.018,3.02l11.575,1.721L28.256,1.18l-2.919,2.919   C22.543,1.452,18.896,0,15.023,0C11.01,0,7.241,1.559,4.411,4.389c-5.851,5.851-5.851,15.37,0,21.223   C7.241,28.44,11.01,30,15.023,30s7.781-1.56,10.611-4.389l0.293-0.294l-3.914-3.914L21.72,21.697z" />
                                         <circle cx="14.875" cy="15.146" r="3.248" />
                                     </g>
                                 </svg>
-                            </div>
-                            <!-- TODO: left only one attr once api is refactored -->
-                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.default_branch.branch]]" target="_blank" class="beta">[[environment.default_branch.branch]]</a>
-                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[environment.current_deploy.branch]]" target="_blank" class="beta">[[environment.current_deploy.branch]]</a>
+                            </div> -->
+
+                            <!-- Info -->
+                            <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[dec.repo.default_branch]]" target="_blank" class="beta">[[dec.repo.default_branch]]</a>
+                            <!-- <p class="description-copy">[[environment.build.created | date:'yyyy-MM-dd HH:mm Z']]</p> -->
+
                             <!-- Message copy -->
-                            <p ng-show="environment.status === 'registered'" class="description-copy">Ready</p>
-                            <p ng-show="environment.status === 'failed'" class="description-copy">Error</p>
-                            <p ng-show="environment.status === 'success'" class="description-copy">Deployed</p>
-                            <p ng-show="environment.status === 'building'" class="description-copy">Deploying...</p>
+                            <!-- <p ng-show="environment.build.status === 'registered'" class="description-copy">Ready</p>
+                            <p ng-show="environment.build.status === 'failed'" class="description-copy">Error</p>
+                            <p ng-show="environment.build.status === 'success'" class="description-copy">Deployed</p>
+                            <p ng-show="environment.build.status === 'building'" class="description-copy">Deploying...</p> -->
+
                             <!-- Deploy type -->
-                            <p ng-show="environment.deploy_type === 'branch'" class="copy">Auto Deploys</p>
-                            <p ng-show="environment.deploy_type === 'promote'" class="copy">Promotion</p>
+                            <!-- <p ng-show="environment.deploy_type === 'branch'" class="copy">Auto Deploys</p>
+                            <p ng-show="environment.deploy_type === 'promote'" class="copy">Promotion</p> -->
+
                         </div>
                         <!-- Action -->
-                        <div ng-show="environment.deploy_type === 'branch' && environment.status === 'registered'" ng-click="dec.deployRepo($index)" class="environment-card__action">
-                            <button class="button secondary-button secondary-button--small">Deploy [[environment.current_deploy.default_branch]] branch</button>
+                        <div ng-show="!environment.build.branch && $index < dec.repo.environments.length - 1" ng-click="dec.deployRepo($index)" class="environment-card__action">
+                            <button class="button secondary-button secondary-button--small">Deploy</button>
                         </div>
-                        <div ng-show="environment.status === 'success' && $index < dec.repo.environments.length - 1" class="environment-card__action">
+                        <div ng-show="environment.build.git_hash && $index < dec.repo.environments.length - 1" class="environment-card__action">
                             <button ng-click="dec.promoteRepo($index)" class="button secondary-button secondary-button--small">Promote</button>
                         </div>
                     </div>

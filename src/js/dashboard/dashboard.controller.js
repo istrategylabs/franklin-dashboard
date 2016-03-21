@@ -77,7 +77,7 @@ function DashboardComponent(franklinAPIService, $scope,
         //TODO: push if it doesn't exits
         $scope.deployableRepos = [];
         let modalInstance = $modal.open({
-            templateUrl: 'dashboard/modal/deployable-repos.html',
+            templateUrl: 'dashboard/deployable-repos/deployable-repos.html',
             controller: 'DeployableReposComponent',
             controllerAs: 'dmc',
             scope: $scope,

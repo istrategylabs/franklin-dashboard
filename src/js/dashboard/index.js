@@ -11,7 +11,7 @@ from './repos/repo-detail.controller';
 import {
   DeployableReposComponent
 }
-from './modal/deployable-repos.controller';
+from './deployable-repos/deployable-repos.controller';
 
 export {
   DashboardComponent,
