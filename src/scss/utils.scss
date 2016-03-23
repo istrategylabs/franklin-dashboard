@@ -122,6 +122,9 @@
     &:hover {
         background-color: $franklin-corn;
     }
+    &.circle-icon--no-hover:hover{
+        background-color: $franklin-yellow;
+    }
 }
 
 
