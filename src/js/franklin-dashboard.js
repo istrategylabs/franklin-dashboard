@@ -15,7 +15,7 @@ import 'angular-foundation/mm-foundation-tpls.min';
 import './config';
 import './services';
 import {
-  DashboardComponent, DeployableReposComponent, DetailComponent
+  DashboardComponent, GithubReposComponent, DetailComponent
 }
 from './dashboard';
 import {
@@ -58,12 +58,12 @@ const franklinApp = angular
     '$location',
      DashboardComponent
   ])
-  .controller('DeployableReposComponent', [
+  .controller('GithubReposComponent', [
     '$scope',
     '$modalInstance',
     'franklinAPIService',
     'franklinReposModel',
-    DeployableReposComponent
+    GithubReposComponent
   ]).controller('DetailComponent', [
     '$scope',
     'detailRepoService',

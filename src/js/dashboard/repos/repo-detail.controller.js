@@ -58,7 +58,6 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
                     $state.go("logged.franklinRepos");
                 }, dec.error);
             }
-
         }, dec.error);
     };
 

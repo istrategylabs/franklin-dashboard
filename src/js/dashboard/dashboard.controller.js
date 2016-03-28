@@ -89,7 +89,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
         let modalInstance = $modal.open({
             templateUrl: 'dashboard/deployable-repos/deployable-repos.html',
-            controller: 'DeployableReposComponent',
+            controller: 'GithubReposComponent',
             controllerAs: 'dmc',
             scope: $scope,
             resolve: {

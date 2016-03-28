@@ -10,7 +10,7 @@ describe('login implementation and redirection', function() {
 
   it('should be in the login page if not logged in', function() {
 
-    browser.get('/');
+    browser.get(process.env.BASE_URL + '/');
 
     expect(browser.getTitle()).toEqual('franklin-dashboard');
     expect(element(by.id('login-button')).isPresent()).toBe(true);
@@ -18,13 +18,11 @@ describe('login implementation and redirection', function() {
     var button = element(by.id('login-button'));
     expect(button.getText()).toEqual('LOG IN WITH GITHUB');
 
-    console.log("Termino");
-
   });
 
   it('should redirect to login page if not logged in', function() {
 
-    browser.get('/#/otherpage');
+    browser.get(process.env.BASE_URL + '/#/otherpage');
 
     expect(browser.getTitle()).toEqual('franklin-dashboard');
     expect(element(by.id('login-button')).isPresent()).toBe(true);
@@ -36,7 +34,7 @@ describe('login implementation and redirection', function() {
 
   it('should redirect to dashboard page after logging in', function() {
 
-    browser.get('/');
+    browser.get(process.env.BASE_URL + '/');
 
     //load app and click on github login button
     browser.findElement(protractor.By.id('login-button')).click();

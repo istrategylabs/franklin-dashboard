@@ -13,15 +13,24 @@ module.exports = function(config){
 
     autoWatch : true,
 
-    frameworks: ['jasmine'],
+    frameworks: ['browserify', 'jasmine'],
 
     browsers : ['Chrome'],
 
     colors: true,
 
+    preprocessors: {
+      './**/*.js': [ 'browserify' ]
+    },
+
+    browserify: {
+      debug: true,
+    },
+
     plugins : [
             'karma-chrome-launcher',
-            'karma-jasmine'
+            'karma-jasmine',
+            'karma-browserify'
             ]
 
   });

@@ -9,12 +9,12 @@ import {
 from './repos/repo-detail.controller';
 
 import {
-  DeployableReposComponent
+  GithubReposComponent
 }
 from './deployable-repos/deployable-repos.controller';
 
 export {
   DashboardComponent,
-  DeployableReposComponent,
+  GithubReposComponent,
   DetailComponent
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
+function GithubReposComponent($scope, $modalInstance, franklinAPIService,
     franklinReposModel) {
 
     const dmc = this;
@@ -54,5 +54,5 @@ function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
 }
 
 export {
-    DeployableReposComponent
+    GithubReposComponent
 }
