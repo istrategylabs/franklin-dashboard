@@ -9,6 +9,14 @@ export default ['$resource', 'ENV', '$auth',
     //manage user repos within Franklin 
     let userRepos = $resource(ENV.FRANKLIN_API_URL, {}, {
       //call API to get franklin registered repos
+      getUserInfo: {
+        method: 'GET',
+        url: ENV.FRANKLIN_API_URL + '/user/',
+        headers: {
+          'Authorization': 'Bearer ' + $auth.getToken()
+        }
+      },
+      //call API to get franklin registered repos
       getFranklinRepos: {
         method: 'GET',
         url: ENV.FRANKLIN_API_URL + '/projects/',

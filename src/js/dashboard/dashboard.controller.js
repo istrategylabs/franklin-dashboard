@@ -15,6 +15,8 @@ function DashboardComponent(franklinAPIService, $scope,
     }
 
     const functions = {
+        getUserInfo,
+        updateUserInfo,
         getFranklinRepos,
         getDeployableRepos,
         listFranklinRepos,
@@ -31,6 +33,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
 
     dc.getFranklinRepos();
+    dc.getUserInfo();
 
 
     //watch changes in franklin repos model
@@ -43,6 +46,16 @@ function DashboardComponent(franklinAPIService, $scope,
 
         let repos = franklinAPIService.userRepos.getFranklinRepos();
         repos.$promise.then(dc.listFranklinRepos);
+    };
+
+    function getUserInfo() {
+
+        let repos = franklinAPIService.userRepos.getUserInfo();
+        repos.$promise.then(dc.updateUserInfo);
+    };
+
+    function updateUserInfo(user) {
+        dc.username = user.username;
     };
 
     function getDeployableRepos() {
@@ -63,9 +76,6 @@ function DashboardComponent(franklinAPIService, $scope,
             $state.go("logged.franklinRepos");
         }
 
-        //TODO: push if it doesn't exits
-        dc.deployedRepos = franklinReposModel.getFranklinRepos();
-
         //TODO: get username
         if (data.length) {
             franklinReposModel.setFranklinRepos(data);
@@ -76,7 +86,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
         //TODO: push if it doesn't exits
         $scope.deployableRepos = [];
-        
+
         let modalInstance = $modal.open({
             templateUrl: 'dashboard/deployable-repos/deployable-repos.html',
             controller: 'DeployableReposComponent',
