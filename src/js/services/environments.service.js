@@ -13,7 +13,8 @@ export default function() {
         forwardEnv,
         rewindEnv,
         setCurrentEnv,
-        reorderEnvs
+        reorderEnvs,
+        envHasBuild
     }
 
     Object.assign(_self, functions);
@@ -57,5 +58,9 @@ export default function() {
             newEnvList.push(env);
         }
         repo.environments = newEnvList.reverse();
+    }
+
+    function envHasBuild(env){
+        return !angular.equals(env.build, {});
     }
 };

@@ -70,7 +70,7 @@ export default ['$resource', 'ENV', '$auth',
 let environments = $resource(ENV.FRANKLIN_API_URL, {}, {      
       promote: {
         method: 'POST',
-        url: `${ENV.FRANKLIN_API_URL}/repos/:github_id/environments/:env/promote`,
+        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id/environments/:env/promote`,
         params: {
           github_id: "@github_id",
           env: "@env"

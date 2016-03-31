@@ -4,7 +4,6 @@ function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
     franklinReposModel) {
 
     const dmc = this;
-    dmc.registeredRepo = {};
     dmc.showLoader = false;
     dmc.showLoaders = new Array($scope.deployableRepos.length);
     dmc.showLoaders.map((x) => x = false);
@@ -33,25 +32,20 @@ function DeployableReposComponent($scope, $modalInstance, franklinAPIService,
 
     function solve(data) {
         dmc.showLoaders.map((x) => x = false);
-        $modalInstance.close(dmc.registeredRepo);
+        $modalInstance.close(data);
         dmc.showLoader = false;
     }
 
     function registerRepo(repo, index) {
+
         dmc.showLoader = true;
         dmc.showLoaders[index] = true;
+
         //create POST payload
-        dmc.registeredRepo = {
-            name: repo.name,
-            github_id: repo.id,
-            owner: {
-                name: repo.owner.login,
-                github_id: repo.owner.id
-            }
-        };
         let payload = {
             github: `${repo.full_name}`
         }
+
         //register repo in Franklin API
         let response =
             franklinAPIService.userRepos.registerRepo(payload);

@@ -35,8 +35,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
     //watch changes in franklin repos model
     $scope.$watch(franklinReposModel.getFranklinRepos,
-        (newValue, oldValue) => dc.deployedRepos = newValue,
-        true);
+        (newValue, oldValue) => dc.deployedRepos = newValue, true);
 
     /**************************************************************************/
 
@@ -47,14 +46,14 @@ function DashboardComponent(franklinAPIService, $scope,
     };
 
     function getDeployableRepos() {
-
         dc.showLoader = true;
+
         let repos = franklinAPIService.userRepos.getDeployableRepos();
         repos.$promise.then(dc.listDeployableRepos,
-            function(error) {
+            function(error) {                
                 //hide loader
                 dc.showLoader = false;
-                toastr.error(error.detail ? error.detail : error, 
+                toastr.error(error.detail ? error.detail : error,
                     "Get deployable repos failed");
             });
     };
@@ -66,6 +65,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
         //TODO: push if it doesn't exits
         dc.deployedRepos = franklinReposModel.getFranklinRepos();
+
         //TODO: get username
         if (data.length) {
             franklinReposModel.setFranklinRepos(data);
@@ -76,6 +76,7 @@ function DashboardComponent(franklinAPIService, $scope,
 
         //TODO: push if it doesn't exits
         $scope.deployableRepos = [];
+        
         let modalInstance = $modal.open({
             templateUrl: 'dashboard/deployable-repos/deployable-repos.html',
             controller: 'DeployableReposComponent',
@@ -96,15 +97,8 @@ function DashboardComponent(franklinAPIService, $scope,
 
         //when the modal is closed, update franklin repos list
         modalInstance.result.then(function(repo) {
-            let payload = {
-                github_id: repo.github_id
-            };
-            //get detail info repo from franklin 
-            //TODO: remove this once we get info from register itself
-            let responseRepo = franklinAPIService.userRepos.getRepo(payload);
-            responseRepo.$promise.then((res) => {
-                franklinReposModel.addFranklinRepo(res);
-            }, dc.error);
+
+            franklinReposModel.addFranklinRepo(repo);
 
         }, function(data) {
             if (data.statusText) {
@@ -119,6 +113,7 @@ function DashboardComponent(franklinAPIService, $scope,
         let payload = {
             github_id: repo.github_id
         };
+
         //get detail info repo from franklin 
         let response = franklinAPIService.userRepos.getRepo(payload);
         response.$promise.then((data) => {
@@ -129,14 +124,13 @@ function DashboardComponent(franklinAPIService, $scope,
     };
 
     function logout() {
-
         $auth.logout().then(() => {
             $state.go('logout');
         });
     };
 
     function error(error, message) {
-        toastr.error(error.data ? error.data.error : error.detail ? 
+        toastr.error(error.data ? error.data.error : error.detail ?
             error.detail : error, message);
     };
 };

@@ -27,7 +27,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         dec.updateRepo();
     } else {
         //reorder envs - Production first
-        environmentsService.reorderEnvs(dec.repo);        
+        environmentsService.reorderEnvs(dec.repo);
     }
 
     /**************************************************************************/
@@ -66,12 +66,15 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         let payload = {
             github_id: dec.repo.github_id
         };
-
+        
         //deploy repo in franklin 
         let response =
             franklinAPIService.userRepos.deployRepo(payload);
-        response.$promise.then((data) => {
-            dec.updateRepo();
+        response.$promise.then((build) => {
+            if(build.status === `success`){
+                dec.repo.environments[index].build = build;
+            }
+            dec.repo.build = build;
         }, dec.error);
     }
 
@@ -80,34 +83,40 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
     }
 
     function promoteRepo(index) {
-        //TODO: find a way to send texts that is not scope related
-        $scope.modalTitle = 'Promote';
-        $scope.modalMessage = `Are you sure you want to promote from 
+
+        if (dec.environmentsService.envHasBuild(dec.repo.environments[index])) {
+
+            //TODO: find a way to send texts that is not scope related
+            $scope.modalTitle = 'Promote';
+            $scope.modalMessage = `Are you sure you want to promote from 
             ${dec.repo.environments[index].name} to 
             ${dec.repo.environments[index + 1].name}?`;
 
-        let modalInstance = $modal.open({
-            templateUrl: 'common/confirmationModal.html',
-            controller: 'ConfirmModalComponent',
-            controllerAs: 'cmc',
-            scope: $scope
-        });
+            let modalInstance = $modal.open({
+                templateUrl: 'common/confirmationModal.html',
+                controller: 'ConfirmModalComponent',
+                controllerAs: 'cmc',
+                scope: $scope
+            });
 
-        modalInstance.result.then(function(answer) {
-            if (answer === 'ok') {
-                let payload = {
-                    github_id: dec.repo.github_id,
-                    env: dec.repo.environments[index].name.toLowerCase()
-                };
-                //promote in franklin 
-                let response =
-                    franklinAPIService.environments.promote(payload);
-                response.$promise.then(() => {
-                    dec.updateRepo();
-                }, dec.error);
-            }
+            modalInstance.result.then(function(answer) {
+                if (answer === 'ok') {
+                    let payload = {
+                        github_id: dec.repo.github_id,
+                        env: dec.repo.environments[index + 1].name.name.toLowerCase(),
+                        git_hash: dec.repo.environments[index].build.git_hash
+                    };
 
-        }, dec.error);
+                    //promote in franklin 
+                    let response =
+                        franklinAPIService.environments.promote(payload);
+                    response.$promise.then(() => {
+                        dec.updateRepo();
+                    }, dec.error);
+                }
+
+            }, dec.error);
+        }
     }
 
     function updateRepo() {
@@ -123,7 +132,6 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
             //reorder envs - Production first
             environmentsService.reorderEnvs(dec.repo);
-
             franklinReposModel.updateFranklinRepo(dec.repo);
 
         }, dec.error);

@@ -47,12 +47,12 @@
                         <div class="environment-card__top">
 
                             <!-- Status icon -->
-                            <!-- <div ng-show="environment.build.status === 'success'" class="centered circle-icon circle-icon--small circle-icon--green">
+                            <div ng-show="environment.build.status === 'success'" class="centered circle-icon circle-icon--small circle-icon--green">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
                                     <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
                                 </svg>
                             </div>
-                            <div ng-show="environment.build.status === 'registered'" class="centered circle-icon circle-icon--small circle-icon--blue">
+                            <div ng-show="environment.build.status === 'new'" class="centered circle-icon circle-icon--small circle-icon--blue">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
                                     <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
                                 </svg>
@@ -70,28 +70,28 @@
                                         <circle cx="14.875" cy="15.146" r="3.248" />
                                     </g>
                                 </svg>
-                            </div> -->
+                            </div>
 
                             <!-- Info -->
                             <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[dec.repo.default_branch]]" target="_blank" class="beta">[[dec.repo.default_branch]]</a>
                             <p class="description-copy">[[environment.build.created | date:'MM-dd-yyyy HH:mm']]</p>
 
                             <!-- Message copy -->
-                            <!-- <p ng-show="environment.build.status === 'registered'" class="description-copy">Ready</p>
+                            <p ng-show="environment.build.status === 'new'" class="description-copy">Ready</p>
                             <p ng-show="environment.build.status === 'failed'" class="description-copy">Error</p>
                             <p ng-show="environment.build.status === 'success'" class="description-copy">Deployed</p>
-                            <p ng-show="environment.build.status === 'building'" class="description-copy">Deploying...</p> -->
+                            <p ng-show="environment.build.status === 'building'" class="description-copy">Deploying...</p>
 
                             <!-- Deploy type -->
-                            <!-- <p ng-show="environment.deploy_type === 'branch'" class="copy">Auto Deploys</p>
-                            <p ng-show="environment.deploy_type === 'promote'" class="copy">Promotion</p> -->
+                            <p ng-show="!dec.environmentsService.envHasBuild(environment) && $index < dec.repo.environments.length - 1" class="copy">Auto Deploys</p>
+                            <p ng-show="dec.environmentsService.envHasBuild(environment) && environment.build.status === 'success' && $index < dec.repo.environments.length - 1" class="copy">Promotion</p>
 
                         </div>
                         <!-- Action -->
-                        <div ng-show="!environment.build.branch && $index < dec.repo.environments.length - 1" ng-click="dec.deployRepo($index)" class="environment-card__action">
+                        <div ng-show="!dec.environmentsService.envHasBuild(environment) && $index < dec.repo.environments.length - 1" ng-click="dec.deployRepo($index)" class="environment-card__action">
                             <button class="button secondary-button secondary-button--small">Deploy</button>
                         </div>
-                        <div ng-show="environment.build.git_hash && $index < dec.repo.environments.length - 1" class="environment-card__action">
+                        <div ng-show="dec.environmentsService.envHasBuild(environment) && environment.build.status === 'success' && $index < dec.repo.environments.length - 1" class="environment-card__action">
                             <button ng-click="dec.promoteRepo($index)" class="button secondary-button secondary-button--small">Promote</button>
                         </div>
                     </div>
