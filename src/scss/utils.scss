@@ -41,7 +41,7 @@
     float: right;
     width: 1.5em;
     height: 1.5em;
-    fill: $franklin-yellow;
+    fill: $franklin-meadow;
     &.loader--big {
         width: 2em;
         height: 2em;
@@ -69,6 +69,12 @@
         display: block;
         margin: auto;
     }
+}
+
+.github__icon {
+    height: 1.75em;
+    width: 1.75em;
+    margin-right: 0.5rem;
 }
 
 .circle-icon {
@@ -106,25 +112,17 @@
 }
 
 .circle-icon--green {
-    background-color: $franklin-applegreen;
-}
-
-.circle-icon--blue {
-    background-color: $franklin-turquoise;
-}
-
-.circle-icon--orange {
-    background-color: $franklin-orange;
-}
-
-.circle-icon--yellow {
-    background-color: $franklin-yellow;
+    background-color: $franklin-meadow;
     &:hover {
-        background-color: $franklin-corn;
+        background-color: $franklin-dark-meadow;
     }
     &.circle-icon--no-hover:hover{
-        background-color: $franklin-yellow;
+        background-color: $franklin-meadow;
     }
+}
+
+.circle-icon--violet {
+    background-color: $franklin-violeta;
 }
 
 

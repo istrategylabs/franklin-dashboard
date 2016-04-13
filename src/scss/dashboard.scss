@@ -3,23 +3,30 @@
 .nav {
     box-sizing: border-box;
     height: 4em;
-    background-color: $franklin-turquoise;
+    background-color: $franklin-purpura;
     color: $white;
-    border-bottom: 5px solid $franklin-petroleum;
+    border-bottom: 3px solid $franklin-violeta;
     .nav--right-shadow {
-        border-right: 1px solid #13a4ad;
+        border-right: 1px solid #8800cc;
     }
     .nav--left-shadow {
-        border-left: 1px solid #3bd5df;
+        border-left: 1px solid $franklin-violeta;
     }
 }
 
 .input {
-    height: 2.5rem;
-    width: 100%;
-    font-size: 1rem;
-    &:focus {
+    border: 1px solid $franklin-soft-lavanda;
+    padding: 0.1rem;
+    border-radius: 5px;
+    // text-shadow: 3px 0px 0px rgba($franklin-lavanda, 0.35);
+    input {
         border: none;
+        height: 2.5rem;
+        width: 100%;
+        font-size: 1rem;
+        &:focus {
+            outline: none;
+        }
     }
 }
 
@@ -28,11 +35,10 @@
 }
 
 .title {
-    .alpha {
-        line-height: 5.7rem;
-        color: $white;
-        font-size: 1.1em;
-        text-shadow: 0px 1px 0px rgba(19, 164, 173, 0.35);
+    svg {
+        width: 4rem;
+        height: 4rem;
+        margin-top: 25%;
     }
 }
 
@@ -150,7 +156,7 @@
     height: 2em;
     border-radius: 1em;
     line-height: 1.8em;
-    background-color: $franklin-yellow;
+    background-color: $franklin-meadow;
     float: right;
     text-align: center;
     svg {
@@ -159,7 +165,7 @@
         fill: $color-white;
     }
     &:hover {
-        background-color: $franklin-corn;
+        background-color: $franklin-dark-meadow;
     }
 }
 

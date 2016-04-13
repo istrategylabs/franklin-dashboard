@@ -1,5 +1,4 @@
 @import "settings";
-
 .login {
     height: 100vh;
     width: 100%;
@@ -7,24 +6,43 @@
     text-align: center;
 }
 
+.login__button {
+    font-weight: bold;
+    position: relative;
+    padding: 11px 27px 12px;
+    padding-left: 3rem;
+    svg {
+        height: 1.75em;
+        width: 1.75em;
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        fill: $franklin-violeta
+    }
+}
+
 .login__button-area {
-    height: 45vh;
+    height: 30vh;
     background-color: #FFF;
     padding-top: 5vh;
 }
 
 .login__title-area {
-    background-color: $franklin-turquoise;
-    height: 55vh;
+    background-color: $franklin-purpura;
+    height: 70vh;
     min-height: 12em;
-    padding-top: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     @media(min-width: $small-breakpoint) {
         margin-bottom: 0%;
-        padding-top: 30vh;
+        padding-top: 5vh;
+    }
+    svg {
+        width: 50%;
+        height: 30vh;
     }
 }
 
-.login__icon{
-    height: 1.75em;
-    width: 1.75em;
-}

@@ -1,17 +1,36 @@
 <div class="login" ng-controller="LoginComponent as lc">
     <div class="login__title-area">
-        <div class="row">
-            <div class="columns small-12 medium-7 large-7 small-centered">
-                <p class="jumbo">Franklin</p>
-                <p class="copy-jumbo">"One click" static site deploys? You betcha!</p>
-            </div>
-        </div>
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+            <style type="text/css">
+            .st0 {
+                fill: #FFFFFF;
+            }
+            </style>
+            <g>
+                <path class="st0" d="M714.8,234H365.9v0.5c-37,0.9-66.8,31.2-66.8,68.3c0,31.6,25.7,57.3,57.3,57.3c26.7,0,48.4-21.7,48.4-48.4
+                h-25.5c0,12.6-10.3,22.9-22.9,22.9c-17.5,0-31.8-14.2-31.8-31.8c0-23.6,19.2-42.9,42.9-42.9v-0.5h67.9v505.3l-51.5,0v0
+                c-13.2,0-24-10.8-24-24c0-9.2,7.5-16.7,16.7-16.7c5.9,0,10.8,4.8,10.8,10.8h25.5c0-20-16.3-36.3-36.3-36.3
+                c-23.3,0-42.2,18.9-42.2,42.2c0,27.3,22.1,49.5,49.4,49.5v0h210.2l1.2,0c27.1,0,48.4-21.8,48.4-49.6c0-23.3-18.9-42.2-42.2-42.2
+                c-20,0-36.3,16.3-36.3,36.3h25.5c0-5.9,4.8-10.8,10.8-10.8c9.2,0,16.7,7.5,16.7,16.7c0,13.5-10.1,24.1-22.8,24.1l-52.9,0V499.5
+                h81.1v0.1v0.1c13.2,0,24,10.8,24,24c0,9.2-7.5,16.7-16.7,16.7c-5.9,0-10.8-4.8-10.8-10.8h-25.5c0,20,16.3,36.3,36.3,36.3
+                c23.3,0,42.2-18.9,42.2-42.2c0-14.6-6.4-27.8-16.5-36.9c10.1-9.1,16.5-22.2,16.5-36.9c0-23.3-18.9-42.2-42.2-42.2
+                c-20,0-36.3,16.3-36.3,36.3h25.5c0-5.9,4.8-10.8,10.8-10.8c9.2,0,16.7,7.5,16.7,16.7c0,12.9-10.2,23.4-22.9,24v0h-82.3V259.5h172.3
+                c24,0,42.9,18.5,42.9,42c0,17.5-14.2,31.8-31.8,31.8c-12.6,0-22.9-10.3-22.9-22.9h-25.5c0,26.7,21.7,48.4,48.4,48.4
+                c31.6,0,57.3-25.7,57.3-57.3C783.2,264.3,752.5,234,714.8,234z M516.9,764.8H461V259.5h55.9V764.8z" />
+                <path class="st0" d="M512.5,37.5c-261.7,0-474.7,212.9-474.7,474.7c0,261.7,212.9,474.7,474.7,474.7s474.7-212.9,474.7-474.7
+                C987.1,250.4,774.2,37.5,512.5,37.5z M512.5,961.3c-247.7,0-449.2-201.5-449.2-449.2S264.8,63,512.5,63s449.2,201.5,449.2,449.2
+                S760.1,961.3,512.5,961.3z" />
+            </g>
+        </svg>
+        <p class="copy-jumbo">"One click" static site deploys? You betcha!</p>
     </div>
     <div class="login__button-area">
         <div class="row">
-            <a id="login-button" href="" class="button secondary-button secondary-button--large" ng-click="lc.authenticate('github')">
-            <img id="github-icon" src="/img/github.png" alt="" class="login__icon">
-            Log in with GitHub</a>
+            <a id="login-button" href="" class="button login__button secondary-button secondary-button--large" ng-click="lc.authenticate('github')">
+                <svg id="github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
+                    <path d="M0 18 C0 12 3 10 3 9 C2.5 7 2.5 4 3 3 C6 3 9 5 10 6 C12 5 14 5 16 5 C18 5 20 5 22 6 C23 5 26 3 29 3 C29.5 4 29.5 7 29 9 C29 10 32 12 32 18 C32 25 30 30 16 30 C2 30 0 25 0 18 M3 20 C3 24 4 28 16 28 C28 28 29 24 29 20 C29 16 28 14 16 14 C4 14 3 16 3 20 M8 21 A1.5 2.5 0 0 0 13 21 A1.5 2.5 0 0 0 8 21 M24 21 A1.5 2.5 0 0 0 19 21 A1.5 2.5 0 0 0 24 21 z"></path>
+                </svg>
+                Log in with GitHub</a>
         </div>
     </div>
 </div>

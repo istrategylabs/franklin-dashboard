@@ -1,8 +1,9 @@
 @import "settings";
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic);
 h1 {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     font-size: 2.25rem; //36px desk
     margin-bottom: 0.2em;
     margin-top: 0;
@@ -23,7 +24,6 @@ h1 {
 .jumbo,
 %jumbo {
     @extend h1;
-    font-family: 'Lato', sans-serif;
     color: $color-white;
     font-size: 1.66667em;
     line-height: 0.7em;
@@ -36,12 +36,13 @@ h1 {
 
 h2 {
     // heading of bottom section
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.125rem; //18px desk;
     line-height: 1.4;
     margin-top: 0.5em;
     color: $franklin-gray;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .beta,
@@ -50,14 +51,14 @@ h2 {
 }
 
 h3 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1rem; //16px desk;
     line-height: .75;
     margin-top: 0;
     margin-bottom: 1em;
     position: relative;
     color: $franklin-gray;
-    font-weight: 700;
+    font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -66,12 +67,13 @@ h3 {
 }
 
 h4 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem; //12px desk
     line-height: .75;
     margin-top: 0;
     color: $franklin-softgray;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .delta {
@@ -84,7 +86,7 @@ h4 {
 
 h5 {
     //blockquote attribution
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.125rem; //18px desk;
     // line-height: 1.2;
     margin-top: 0;
@@ -96,7 +98,7 @@ h5 {
 
 h6 {
     //link in bottom section
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 1.125rem; //18px desk;
     margin-bottom: 1.2em;
@@ -110,8 +112,35 @@ h6 {
     @extend h6;
 }
 
+.header-link {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        bottom: 0px;
+        left: -.15em;
+        width: 100%;
+        width: calc(100% + .3em);
+        height: 2px;
+        background: #ecd8ff;
+        background: $franklin-soft-lavanda;
+    }
+}
+
+.link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem; //12px desk
+    color: $franklin-meadow;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 p {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 0.75rem; //12px desk
     color: $franklin-softgray;
 }
@@ -120,22 +149,15 @@ p {
     @extend p;
 }
 
-.copy-large{
+.copy-large {
     @extend p;
     font-size: 0.875rem; //14px desk
 }
 
-.copy-jumbo{
+.copy-jumbo {
     @extend p;
     font-size: 1.5rem; //24px desk
-    color: $franklin-gray;
-}
-
-.link{
-     @extend .copy;
-     color: $franklin-turquoise;
-     text-decoration: none;
-     cursor: pointer;
+    color: $franklin-soft-lavanda;
 }
 
 .description-copy {
