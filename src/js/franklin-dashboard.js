@@ -89,7 +89,7 @@ function getClientId() {
   let $http = initInjector.get("$http");
   let ENV = initInjector.get("ENV");
 
-  return $http.get(`${ENV.FRANKLIN_API_URL}/auth/github/`);
+  return $http.get(`${ENV.FRANKLIN_API_URL}/v1/auth/github/`);
 }
 
 //bootstrap franklin-dashboard angular app

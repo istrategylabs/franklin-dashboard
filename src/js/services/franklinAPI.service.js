@@ -5,13 +5,14 @@ export default ['$resource', 'ENV', '$auth',
 
     const _self = this;
     const tokenKey = 'token';
+    const base_url = ENV.FRANKLIN_API_URL + '/v1';
 
     //manage user repos within Franklin 
-    let userRepos = $resource(ENV.FRANKLIN_API_URL, {}, {
+    let userRepos = $resource(base_url, {}, {
       //call API to get franklin registered repos
       getUserInfo: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/user/',
+        url: base_url + '/user/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         }
@@ -19,7 +20,7 @@ export default ['$resource', 'ENV', '$auth',
       //call API to get franklin registered repos
       getFranklinRepos: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/projects/',
+        url: base_url + '/projects/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
@@ -28,7 +29,7 @@ export default ['$resource', 'ENV', '$auth',
       //call API to get franklin deployable repos
       getDeployableRepos: {
         method: 'GET',
-        url: ENV.FRANKLIN_API_URL + '/repos/',
+        url: base_url + '/repos/',
         headers: {
           'Authorization': 'Bearer ' + $auth.getToken()
         },
@@ -37,7 +38,7 @@ export default ['$resource', 'ENV', '$auth',
       //call API to register a franklin repo
       registerRepo: {
         method: 'POST',
-        url: ENV.FRANKLIN_API_URL + '/projects/',
+        url: base_url + '/projects/',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + $auth.getToken()
@@ -45,7 +46,7 @@ export default ['$resource', 'ENV', '$auth',
       },
       deleteRepo: {
         method: 'DELETE',
-        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id`,
+        url: `${base_url}/projects/:github_id`,
         params: {
           github_id: "@github_id"
         },
@@ -55,7 +56,7 @@ export default ['$resource', 'ENV', '$auth',
       },
       getRepo: {
         method: 'GET',
-        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id`,
+        url: `${base_url}/projects/:github_id`,
         params: {
           github_id: "@github_id"
         },
@@ -65,7 +66,7 @@ export default ['$resource', 'ENV', '$auth',
       },
       deployRepo: {
         method: 'POST',
-        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id/builds`,
+        url: `${base_url}/projects/:github_id/builds`,
         params: {
           github_id: "@github_id"
         },
@@ -75,10 +76,10 @@ export default ['$resource', 'ENV', '$auth',
       }
     });
 
-let environments = $resource(ENV.FRANKLIN_API_URL, {}, {      
+let environments = $resource(base_url, {}, {      
       promote: {
         method: 'POST',
-        url: `${ENV.FRANKLIN_API_URL}/projects/:github_id/environments/:env/promote`,
+        url: `${base_url}/projects/:github_id/environments/:env`,
         params: {
           github_id: "@github_id",
           env: "@env"

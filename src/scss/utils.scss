@@ -25,6 +25,11 @@
     text-align: center;
 }
 
+.vertical-center{
+    display: inline-flex;
+    align-items: center;
+}
+
 .inline {
     display: inline-block;
 }

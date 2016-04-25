@@ -15,6 +15,32 @@
                         </ul>
                     </div>
                 </div>
+                <div ng-show="dec.failedBuild" class="inline clickable" dropdown-toggle="#dropdown-error">
+                    <div class="circle-icon circle-icon--big circle-icon--violet inline margin-left">
+                        <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                            <g>
+                                <path d="M41.8,86.5c0-5,3.2-8.7,7.6-8.7c4.6,0,7.6,3.6,7.6,8.7c0,4.9-3,8.7-7.6,8.7C44.9,95.1,41.8,91.4,41.8,86.5z" />
+                                <polygon points="45.4,71.4 43.6,4.2 56,4.2 54.2,71.4 " />
+                            </g>
+                        </svg>
+                    </div>
+                    <ul id="dropdown-error" class="dropdown-menu tiny f-dropdown">
+                        <li>
+                            <p class="copy">There's something wrong with your base code and Franklin could't build it. Please check and push code to continue.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="columns small-12 vertical-center">
+                <div ng-show="dec.repo.build.status === 'building'" class="inline spin circle-icon circle-icon--violet">
+                    <svg xmlns="http://www.w3.org/2000/svg" title="Building..." xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+                        <g>
+                            <path d="M21.72,21.697c-1.786,1.786-4.164,2.77-6.697,2.77s-4.912-0.984-6.698-2.77c-3.694-3.693-3.694-9.703,0-13.396   c1.786-1.786,4.165-2.77,6.698-2.77c2.394,0,4.65,0.878,6.397,2.483l-3.018,3.02l11.575,1.721L28.256,1.18l-2.919,2.919   C22.543,1.452,18.896,0,15.023,0C11.01,0,7.241,1.559,4.411,4.389c-5.851,5.851-5.851,15.37,0,21.223   C7.241,28.44,11.01,30,15.023,30s7.781-1.56,10.611-4.389l0.293-0.294l-3.914-3.914L21.72,21.697z" />
+                            <circle cx="14.875" cy="15.146" r="3.248" />
+                        </g>
+                    </svg>
+                </div>
+                <p ng-show="dec.repo.build.status === 'building'" class="description-copy inline margin-left">Building...</p>
             </div>
         </div>
         <div class="row">
@@ -45,7 +71,6 @@
                             </li>
                         </ul>
                         <div class="environment-card__top">
-
                             <!-- Status icon -->
                             <div ng-show="environment.build.status === 'success'" class="centered circle-icon circle-icon--small circle-icon--green">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentcolor">
@@ -71,24 +96,20 @@
                                     </g>
                                 </svg>
                             </div>
-
                             <!-- Info -->
                             <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[dec.repo.default_branch]]" target="_blank" class="header-link beta">[[dec.repo.default_branch]]</a>
                             <p class="description-copy">[[environment.build.created | date:'MM-dd-yyyy HH:mm']]</p>
-
                             <!-- Message copy -->
                             <p ng-show="environment.build.status === 'new'" class="description-copy">Ready</p>
                             <p ng-show="environment.build.status === 'failed'" class="description-copy">Error</p>
                             <p ng-show="environment.build.status === 'success'" class="description-copy">Deployed</p>
                             <p ng-show="environment.build.status === 'building'" class="description-copy">Deploying...</p>
-
                             <!-- Deploy type -->
                             <p ng-show="!dec.environmentsService.envHasBuild(environment) && $index < dec.repo.environments.length - 1" class="copy">Auto Deploys</p>
                             <p ng-show="dec.environmentsService.envHasBuild(environment) && environment.build.status === 'success' && $index < dec.repo.environments.length - 1" class="copy">Promotion</p>
-
                         </div>
                         <!-- Action -->
-                        <div ng-show="!dec.environmentsService.envHasBuild(environment) && $index < dec.repo.environments.length - 1" ng-click="dec.deployRepo($index)" class="environment-card__action">
+                        <div ng-show="dec.showDeployButton && $index < dec.repo.environments.length - 1 " ng-click="dec.deployRepo($index)" class="environment-card__action">
                             <button class="button secondary-button secondary-button--small">Deploy</button>
                         </div>
                         <div ng-show="dec.environmentsService.envHasBuild(environment) && environment.build.status === 'success' && $index < dec.repo.environments.length - 1" class="environment-card__action">

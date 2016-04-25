@@ -30,6 +30,11 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         environmentsService.reorderEnvs(dec.repo);
     }
 
+    $scope.$watch(dec.repo.build,
+        (newValue, oldValue) => { 
+            updateIndicators();           
+        }, true);
+
     /**************************************************************************/
 
     function deleteRepo() {
@@ -70,11 +75,20 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         let response =
             franklinAPIService.userRepos.deployRepo(payload);
         response.$promise.then((build) => {
+            dec.repo.build = build;
+            updateIndicators();
+
             if(build.status === `success`){
                 dec.repo.environments[index].build = build;
             }
-            dec.repo.build = build;
-        }, dec.error);
+            
+        }, (error) => {
+            if(error.status == 503){
+                dec.repo.build = error.data.build;
+            }
+            dec.error(error)
+
+        });
     }
 
     function viewSite(environment) {
@@ -133,13 +147,24 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             environmentsService.reorderEnvs(dec.repo);
             franklinReposModel.updateFranklinRepo(dec.repo);
 
+            updateIndicators();
+
         }, dec.error);
+    }
+
+    function updateIndicators(){
+        dec.failedBuild = angular.equals({}, dec.repo.build) ? false :
+            (dec.repo.build.status ? dec.repo.build.status == `failed` 
+            : false);
+        dec.showDeployButton = !dec.failedBuild 
+            && angular.equals({}, dec.repo.build) ? true : 
+            (dec.repo.build.status ? !dec.repo.build.status === 'building' : true);  
     }
 
     function error(error) {
         if (error && error != 'backdrop click') {
-            toastr.error(error.data ? error.data.error : error.detail ?
-                error.detail : error, "Failed to process repository");
+            toastr.error(error.data ? error.data.detail : error.data.error ?
+                error.data.error : error, "Failed to process repository");
         }
     }
 
