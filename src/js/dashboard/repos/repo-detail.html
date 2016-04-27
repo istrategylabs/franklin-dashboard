@@ -98,7 +98,10 @@
                             </div>
                             <!-- Info -->
                             <a href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/tree/[[dec.repo.default_branch]]" target="_blank" class="header-link beta">[[dec.repo.default_branch]]</a>
-                            <p class="description-copy">[[environment.build.created | date:'MM-dd-yyyy HH:mm']]</p>
+                            <a title="Commit" href="https://github.com/[[dec.repo.owner.name]]/[[dec.repo.name]]/commit/[[environment.build.git_hash]]" target="_blank" class="link">
+                                [[environment.build.git_hash.substring(0,7)]]
+                            </a>
+                            <p class="description-copy" title="Date deployed">[[environment.build.deployed | date:'MM-dd-yyyy HH:mm']]</p>
                             <!-- Message copy -->
                             <p ng-show="environment.build.status === 'new'" class="description-copy">Ready</p>
                             <p ng-show="environment.build.status === 'failed'" class="description-copy">Error</p>
@@ -106,7 +109,6 @@
                             <p ng-show="environment.build.status === 'building'" class="description-copy">Deploying...</p>
                             <!-- Deploy type -->
                             <p ng-show="!dec.environmentsService.envHasBuild(environment) && $index < dec.repo.environments.length - 1" class="copy">Auto Deploys</p>
-                            <p ng-show="dec.environmentsService.envHasBuild(environment) && environment.build.status === 'success' && $index < dec.repo.environments.length - 1" class="copy">Promotion</p>
                         </div>
                         <!-- Action -->
                         <div ng-show="dec.showDeployButton && $index < dec.repo.environments.length - 1 " ng-click="dec.deployRepo($index)" class="environment-card__action">

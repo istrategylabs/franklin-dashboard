@@ -116,7 +116,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
                 if (answer === 'ok') {
                     let payload = {
                         github_id: dec.repo.github_id,
-                        env: dec.repo.environments[index + 1].name.name.toLowerCase(),
+                        env: dec.repo.environments[index + 1].name.toLowerCase(),
                         git_hash: dec.repo.environments[index].build.git_hash
                     };
 
