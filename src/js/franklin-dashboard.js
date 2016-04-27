@@ -144,7 +144,7 @@ function bootstrapApplication(response) {
         //configure satellizer with client_id from franklin-api
         $authProvider.github({
           clientId: response.data.client_id,
-          url: ENV.FRANKLIN_API_URL + '/auth/github/',
+          url: ENV.FRANKLIN_API_URL + '/v1/auth/github/',
           //Ask permission for hooks, deploy keys, private repos
           scope: ['user:email', 'admin:repo_hook', 'repo'],
           redirectUri: window.location.origin
