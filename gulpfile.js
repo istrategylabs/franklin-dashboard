@@ -6,6 +6,9 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const del = require('del');
 const concat = require('gulp-concat');
+const dotENV = require('dotenv').load();
+const envify = require('loose-envify/custom')
+const config = require('./config').get();
 const browserSync = require('browser-sync').create();
 const autoprefixer = require('autoprefixer');
 const postcss = require('gulp-postcss');
@@ -23,7 +26,6 @@ const htmlmin = require('gulp-htmlmin');
 const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
 const ngConstant = require('gulp-ng-constant');
-const dotENV = require('dotenv');
 const protractor = require("gulp-protractor").protractor;
 
 const nodeModules = (() => {
@@ -53,7 +55,8 @@ function bundle(options) {
     let bundler = browserify('./src/js/franklin-dashboard.js', bundlerOpts)
         .transform('babelify', {
             presets: ['es2015']
-        });
+        })
+        .transform(envify(config));
 
     function rebundle() {
         return bundler.bundle()
@@ -81,10 +84,6 @@ function bundle(options) {
     return rebundle();
 
 }
-
-gulp.task('env-var', () => {
-    dotENV.load();
-});
 
 gulp.task('browserify', () => {
     return bundle();
@@ -120,22 +119,6 @@ gulp.task('extras', () => {
         .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('config', () => {
-    //Creates angular module with environment variables
-    //Reads env variables from .env file
-    return ngConstant({
-            name: 'franklin-dashboard.config',
-            constants: {
-                ENV: {
-                    FRANKLIN_API_URL: process.env.FRANKLIN_API_URL ? process.env.FRANKLIN_API_URL : 'http://api-head.islstatic.com',
-                }
-            },
-            wrap: "commonjs",
-            stream: true
-        })
-        .pipe(gulp.dest('./src/js/config/'));
-});
-
 gulp.task('start', ['sass', 'extras', 'watchify'], () => {
     browserSync.init({
         server: 'public',
@@ -145,7 +128,6 @@ gulp.task('start', ['sass', 'extras', 'watchify'], () => {
     gulp.watch('./src/scss/**/*.scss', ['sass']);
     gulp.watch('./src/**/*.html', ['html']);
     gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
-    //gulp.watch('./.env', ['env-var', 'config']);
 });
 
 gulp.task('rev', ['default', 'banner'], () => {
@@ -195,7 +177,7 @@ gulp.task('clean', () => {
     return del('./public/');
 });
 
-gulp.task('default', ['env-var', 'config', 'browserify', 'html', 'sass', 'extras']);
+gulp.task('default', ['browserify', 'html', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
     const sequence = ['default', 'start' /*, 'e2e'*/ ];

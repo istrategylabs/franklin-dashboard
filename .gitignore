@@ -5,5 +5,3 @@ public/
 
 .DS_Store
 .env
-
-src/js/config/ngConstants.js
