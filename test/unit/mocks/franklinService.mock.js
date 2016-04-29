@@ -11,13 +11,16 @@ angular.module('franklinAPIServiceMock', [])
 
         var deleteRepo = function() {};
 
+        var getUserInfo = function() {};
+
         return {
             userRepos: {
                 getFranklinRepos,
                 getDeployableRepos,
                 registerRepo,
                 getRepo,
-                deleteRepo
+                deleteRepo,
+                getUserInfo
             }
         };
     });

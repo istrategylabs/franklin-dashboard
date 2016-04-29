@@ -86,8 +86,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             if(error.status == 503){
                 dec.repo.build = error.data.build;
             }
-            dec.error(error)
-
+            dec.error(error);
         });
     }
 

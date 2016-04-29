@@ -86,7 +86,7 @@ describe('DetailComponent', function() {
             DetailComponent.deleteRepo();
 
             //select one repo from modal
-            modalDeferred().reject('cancel');
+            modalDeferred().resolve('cancel');
             $rootScope.$apply();
 
             expect($stateMock().go).not.toHaveBeenCalled();
@@ -114,7 +114,7 @@ describe('DetailComponent', function() {
             //select one repo from modal
             modalDeferred().resolve('ok');
             //dele repo fails
-            deleteRepoDeferred().reject('error');
+            deleteRepoDeferred().reject({data: {error: 'error'}});
             $rootScope.$apply();
 
             //should show error message 

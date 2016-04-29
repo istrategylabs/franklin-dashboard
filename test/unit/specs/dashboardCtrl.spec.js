@@ -13,7 +13,8 @@ var {
     getRepoDeferred,
     deployableReposDeferred,
     registerRepoDeferred,
-    modalDeferred
+    modalDeferred,
+    userInfoDeferred
 } = require('../setup.test.js');
 
 //Local variables
@@ -50,7 +51,7 @@ describe('DashboardComponent', function() {
     beforeEach(function() {
         DashboardComponent = createController();
         franklinReposDeferred().resolve($mockDataService().deployedRepo);
-
+        userInfoDeferred().resolve($mockDataService().userInfo);
     });
 
     describe('DashboardComponent: initial state', function() {
@@ -121,8 +122,8 @@ describe('DashboardComponent', function() {
                 expect($modalMock().open).toHaveBeenCalled();
 
                 //we select one repo from modal
-                modalDeferred().resolve($mockDataService().newRepo);
-                getRepoDeferred().resolve($mockDataService().completeRepo);
+                modalDeferred().resolve($mockDataService().completeRepo);
+                //getRepoDeferred().resolve($mockDataService().completeRepo);
                 $rootScope.$apply();
 
                 //we assumed here that modal calls register repo from franklin api

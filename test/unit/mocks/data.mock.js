@@ -94,12 +94,17 @@ angular.module('mockData', [])
             "build": {}
         }];
 
+        var userInfo = {
+            'username': 'name',
+        };
+
         return {
             deployedRepo,
             deployableRepos,
             newRepo,
             completeRepo,
             updatedFranklinRepos,
-            githubRepo
+            githubRepo,
+            userInfo
         };
     });

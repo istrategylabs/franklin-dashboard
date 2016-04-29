@@ -18,6 +18,7 @@
  var registerRepoDeferred;
  var modalDeferred;
  var deleteRepoDeferred;
+ var userInfoDeferred;
 
  var setup = function() {
 
@@ -54,7 +55,9 @@
              });
 
              $provide.service('toastr', function() {
-                 this.error = jasmine.createSpy('error');
+                 this.error = jasmine.createSpy('error')
+                    .and.callFake(function(error) {
+                     });
              });
 
              $provide.service('$modal', function() {
@@ -124,6 +127,7 @@
          registerRepoDeferred = $q.defer();
          getRepoDeferred = $q.defer();
          deleteRepoDeferred = $q.defer();
+         userInfoDeferred = $q.defer();
 
 
          spyOn(franklinAPIServiceMock.userRepos, 'getFranklinRepos')
@@ -160,6 +164,13 @@
                      $promise: deleteRepoDeferred.promise
                  };
              });
+
+         spyOn(franklinAPIServiceMock.userRepos, 'getUserInfo')
+             .and.callFake(function() {
+                 return {
+                     $promise: userInfoDeferred.promise
+                 };
+             });
      }));
  }
 
@@ -179,5 +190,6 @@
      deployableReposDeferred: function() { return deployableReposDeferred; },
      registerRepoDeferred: function() { return registerRepoDeferred; },
      modalDeferred: function() { return modalDeferred;  },
-     deleteRepoDeferred: function() { return deleteRepoDeferred; }
+     deleteRepoDeferred: function() { return deleteRepoDeferred; },
+     userInfoDeferred: function() { return userInfoDeferred; },
  }
