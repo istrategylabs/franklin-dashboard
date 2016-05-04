@@ -1,32 +1,34 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const gulp = require('gulp');
-const gutil = require('gulp-util');
-const del = require('del');
+const autoprefixer = require('autoprefixer');
+const browserify = require('browserify');
+const browserSync = require('browser-sync').create();
+const buffer = require('vinyl-buffer');
 const concat = require('gulp-concat');
+const config = require('./config').get();
+const del = require('del');
 const dotENV = require('dotenv').load();
 const envify = require('loose-envify/custom')
-const config = require('./config').get();
-const browserSync = require('browser-sync').create();
-const autoprefixer = require('autoprefixer');
+const fs = require('fs');
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const gutil = require('gulp-util');
+const htmlmin = require('gulp-htmlmin');
+const minifyCss = require('gulp-minify-css');
+const ngConstant = require('gulp-ng-constant');
+const nunjucks = require('gulp-nunjucks')
+const path = require('path');
 const postcss = require('gulp-postcss');
-const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const browserify = require('browserify');
-const watchify = require('watchify');
+const protractor = require("gulp-protractor").protractor;
+const plumber = require('gulp-plumber')
 const rev = require('gulp-rev');
 const revReplace = require('gulp-rev-replace');
-const uglify = require('gulp-uglify');
-const minifyCss = require('gulp-minify-css');
-const htmlmin = require('gulp-htmlmin');
-const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
-const ngConstant = require('gulp-ng-constant');
-const protractor = require("gulp-protractor").protractor;
+const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
+const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
+const watchify = require('watchify');
 
 const nodeModules = (() => {
     let base = 'node_modules';
@@ -85,6 +87,16 @@ function bundle(options) {
 
 }
 
+gulp.task('nunjucks', () => {
+  return gulp.src(['src/templates/**/*.html', '!**/_*'])
+    .pipe(plumber())
+    .pipe(nunjucks.compile(config, {
+      throwOnUndefined: true
+    }))
+    .pipe(plumber.stop())
+    .pipe(gulp.dest('public/'))
+})
+
 gulp.task('browserify', () => {
     return bundle();
 });
@@ -109,11 +121,6 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('html', () => {
-    return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
-        .pipe(gulp.dest('./public/'));
-});
-
 gulp.task('extras', () => {
     return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
         .pipe(gulp.dest('./public/'));
@@ -126,7 +133,7 @@ gulp.task('start', ['sass', 'extras', 'watchify'], () => {
     });
 
     gulp.watch('./src/scss/**/*.scss', ['sass']);
-    gulp.watch('./src/**/*.html', ['html']);
+    gulp.watch('src/**/*.html', ['nunjucks'])
     gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
@@ -177,7 +184,7 @@ gulp.task('clean', () => {
     return del('./public/');
 });
 
-gulp.task('default', ['browserify', 'html', 'sass', 'extras']);
+gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
     const sequence = ['default', 'start' /*, 'e2e'*/ ];

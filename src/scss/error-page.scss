@@ -1,0 +1,63 @@
+@import "settings";
+.error-page {
+    background-color: $franklin-soft-violeta;
+    color: $color-white;
+    height: 100vh;
+    text-align: center;
+    width: 100%;
+}
+
+.error-page__header {
+    color: $color-white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.25rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    line-height: 3rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+
+.error-page__content {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: center;
+    width: 100%;
+    svg {
+        fill: $franklin-purpura;
+        margin-bottom: 5%;
+        width: 7rem;
+    }
+}
+
+.links-area {
+    margin-top: 4rem;
+    width: 80%;
+}
+
+.error-page__copy {
+    color: $franklin-lavanda;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+}
+
+.error-page__link {
+    color: $franklin-lavanda;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    text-decoration: none;
+    &:hover {
+        color: $franklin-meadow;
+    }
+}
+
+.error-page__footer {
+    color: $franklin-purpura;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 20%;
+    letter-spacing: 0.4rem;
+}
