@@ -1,34 +1,34 @@
+
 'use strict';
 
-const autoprefixer = require('autoprefixer');
-const browserify = require('browserify');
-const browserSync = require('browser-sync').create();
-const buffer = require('vinyl-buffer');
-const concat = require('gulp-concat');
-const config = require('./config').get();
-const del = require('del');
-const dotENV = require('dotenv').load();
-const envify = require('loose-envify/custom');
 const fs = require('fs');
-const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const gutil = require('gulp-util');
-const htmlmin = require('gulp-htmlmin');
-const minifyCss = require('gulp-minify-css');
-const ngConstant = require('gulp-ng-constant');
-const nunjucks = require('gulp-nunjucks')
 const path = require('path');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const del = require('del');
+const concat = require('gulp-concat');
+const dotENV = require('dotenv').load();
+const envify = require('loose-envify/custom')
+const config = require('./config').get();
+const browserSync = require('browser-sync').create();
+const autoprefixer = require('autoprefixer');
 const postcss = require('gulp-postcss');
-const protractor = require("gulp-protractor").protractor;
-const plumber = require('gulp-plumber')
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const browserify = require('browserify');
+const watchify = require('watchify');
 const rev = require('gulp-rev');
 const revReplace = require('gulp-rev-replace');
-const runSequence = require('run-sequence');
-const sass = require('gulp-sass');
-const source = require('vinyl-source-stream');
-const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
-const watchify = require('watchify');
+const minifyCss = require('gulp-minify-css');
+const htmlmin = require('gulp-htmlmin');
+const gulpif = require('gulp-if');
+const runSequence = require('run-sequence');
+const protractor = require("gulp-protractor").protractor;
+const nunjucks = require('gulp-nunjucks');
+const plumber = require('gulp-plumber');
 
 const nodeModules = (() => {
     let base = 'node_modules';

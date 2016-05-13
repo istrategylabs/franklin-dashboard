@@ -12,9 +12,9 @@ app.get('/', function (req, res) {
    fs.createReadStream(`${__dirname}/index.html`).pipe(res);
 });
 
-app.get('*', function(req, res){
-  fs.createReadStream(`${__dirname}/404.html`).pipe(res);
-});
+// app.get('/*', function(req, res){
+//   fs.createReadStream(`${__dirname}/404.html`).pipe(res);
+// });
 
 app.listen(process.env.PORT || 3000)
 console.log('Running on http://localhost:' + process.env.PORT || 3000);
