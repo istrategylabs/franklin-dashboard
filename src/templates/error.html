@@ -6,8 +6,131 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Franklin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
-    <link href="css/main-error.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
+    
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+    
+    html,
+    body {
+        font-size: 12px;        
+    }
+
+    @media screen and (min-width: 1024px){
+       html,
+        body {
+            font-size: 16px;        
+        }
+    }
+    
+    body {
+        background: #fff;
+        color: #222;
+        padding: 0;
+        margin: 0;
+        font-family: "adelle-sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.5;
+        position: relative;
+        cursor: auto;
+    }
+    
+    .error-page {
+        background-color: #bd76ff;
+        color: #FFFFFF;
+        height: 100vh;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .error-page__header {
+        color: #FFFFFF;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3.25rem;
+        font-weight: bold;
+        letter-spacing: 5px;
+        line-height: 3rem;
+        margin-bottom: 2rem;
+        margin-top: 0;
+    }
+    
+    .error-page__content {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 80%;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        width: 80%;
+    }
+
+    @media screen and (min-width: 1024px){
+       .error-page__content {
+            width: 45%;
+        }
+    }
+    
+    .error-page__content svg {
+        fill: #8200ff;
+        margin: 20px;
+        width: 7rem;
+        height: 7rem;
+        margin-bottom: 8%;
+        min-height: 4rem;
+    }
+    
+    .links-area {
+        margin-top: 4rem;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .error-page__copy {
+        color: #e2c4ff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+    }
+    
+    .error-page__link {
+        color: #e2c4ff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+    
+    .error-page__link:hover {
+        color: #16cc9c;
+    }
+    
+    .error-page__footer {
+        color: #8200ff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        height: 20%;
+        letter-spacing: 0.4rem;
+        padding-top: 3rem;
+    }
+    </style>
 </head>
 
 <body>
@@ -31,39 +154,28 @@
                 </g>
             </svg>
             <h1 class="error-page__header">                
-				{% block errorCode %}
-				{% endblock %}
+                {% block errorCode %}
+                {% endblock %}
             </h1>
             <h1 class="error-page__header">
                 {% block errorDescription %}
-				{% endblock %}
-            </h1>
-            <div class="row">
-                <div class="columns small-12 medium-8 small-centered">
-                    <p class="error-page__copy">
-                        {% block errorMessage %}
-						{% endblock %}
-                    </p>
-                </div>
-            </div>
-            <div class="links-area">
-                <div class="row">
-                    <div class="columns small-12 medium-4">
-                        <a class="error-page__link">
-                            Contact Franklin
-                        </a>
-                    </div>
-                    <div class="columns small-12 medium-4">
-                        <a class="error-page__link" href="https://github.com/istrategylabs/franklin/issues/new" target="_blank">
-                            Report a bug
-                        </a>
-                    </div>
-                    <div class="columns small-12 medium-4">
-                        <a class="error-page__link">
-                            @franklin
-                        </a>
-                    </div>
-                </div>
+                {% endblock %}
+            </h1> 
+            <p class="error-page__copy">
+                {% block errorMessage %} {% endblock %}
+            </p>
+            <div class="links-area">               
+                <a class="error-page__link">
+                    Contact Franklin
+                </a>  
+                <span class="error-page__link">&mdash;</span>
+                <a class="error-page__link" href="https://github.com/istrategylabs/franklin/issues/new" target="_blank">
+                    Report a bug
+                </a>
+                <span class="error-page__link">&mdash;</span>
+                <a class="error-page__link">
+                    @franklin
+                </a>                    
             </div>
         </div>
         <div class="error-page__footer">

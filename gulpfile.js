@@ -1,4 +1,3 @@
-
 'use strict';
 
 const fs = require('fs');
@@ -87,16 +86,6 @@ function bundle(options) {
 
 }
 
-gulp.task('nunjucks', () => {
-  return gulp.src(['src/templates/**/*.html', '!**/_*'])
-    .pipe(plumber())
-    .pipe(nunjucks.compile(config, {
-      throwOnUndefined: true
-    }))
-    .pipe(plumber.stop())
-    .pipe(gulp.dest('public/'))
-})
-
 gulp.task('browserify', () => {
     return bundle();
 });
@@ -121,6 +110,16 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('./public/css/'));
 });
 
+gulp.task('nunjucks', () => {
+  return gulp.src(['src/templates/**/*.html', 'src/js/**/*.html','!**/_*'])
+    .pipe(plumber())
+    .pipe(nunjucks.compile(config, {
+      throwOnUndefined: true
+    }))
+    .pipe(plumber.stop())
+    .pipe(gulp.dest('public/'))
+});
+
 gulp.task('extras', () => {
     return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
         .pipe(gulp.dest('./public/'));
@@ -133,7 +132,7 @@ gulp.task('start', ['sass', 'extras', 'watchify'], () => {
     });
 
     gulp.watch('./src/scss/**/*.scss', ['sass']);
-    gulp.watch('src/**/*.html', ['nunjucks'])
+    gulp.watch('./src/**/*.html', ['nunjucks']);
     gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
