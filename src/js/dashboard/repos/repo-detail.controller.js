@@ -31,8 +31,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
     }
 
     $scope.$watch(dec.repo.build,
-        (newValue, oldValue) => { 
-            updateIndicators();           
+        (newValue, oldValue) => {
+            updateIndicators();
         }, true);
 
     /**************************************************************************/
@@ -55,7 +55,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
                     github_id: dec.repo.github_id
                 };
 
-                //delete repo in franklin 
+                //delete repo in franklin
                 let response =
                     franklinAPIService.userRepos.deleteRepo(payload);
                 response.$promise.then(() => {
@@ -70,8 +70,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
         let payload = {
             github_id: dec.repo.github_id
         };
-        
-        //deploy repo in franklin 
+
+        //deploy repo in franklin
         let response =
             franklinAPIService.userRepos.deployRepo(payload);
         response.$promise.then((build) => {
@@ -81,7 +81,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             if(build.status === `success`){
                 dec.repo.environments[index].build = build;
             }
-            
+
         }, (error) => {
             if(error.status == 503){
                 dec.repo.build = error.data.build;
@@ -100,8 +100,8 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
             //TODO: find a way to send texts that is not scope related
             $scope.modalTitle = 'Promote';
-            $scope.modalMessage = `Are you sure you want to promote from 
-            ${dec.repo.environments[index].name} to 
+            $scope.modalMessage = `Are you sure you want to promote from
+            ${dec.repo.environments[index].name} to
             ${dec.repo.environments[index + 1].name}?`;
 
             let modalInstance = $modal.open({
@@ -116,10 +116,10 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
                     let payload = {
                         github_id: dec.repo.github_id,
                         env: dec.repo.environments[index + 1].name.toLowerCase(),
-                        git_hash: dec.repo.environments[index].build.git_hash
+                        uuid: dec.repo.environments[index].build.uuid
                     };
 
-                    //promote in franklin 
+                    //promote in franklin
                     let response =
                         franklinAPIService.environments.promote(payload);
                     response.$promise.then(() => {
@@ -136,7 +136,7 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
             github_id: dec.repo.github_id
         };
 
-        //get detail info repo from franklin 
+        //get detail info repo from franklin
         let responseRepo = franklinAPIService.userRepos.getRepo(payload);
         responseRepo.$promise.then((data) => {
 
@@ -153,11 +153,11 @@ function DetailComponent($scope, detailRepoService, franklinAPIService,
 
     function updateIndicators(){
         dec.failedBuild = angular.equals({}, dec.repo.build) ? false :
-            (dec.repo.build.status ? dec.repo.build.status == `failed` 
+            (dec.repo.build.status ? dec.repo.build.status == `failed`
             : false);
-        dec.showDeployButton = !dec.failedBuild 
-            && angular.equals({}, dec.repo.build) ? true : 
-            (dec.repo.build.status ? !dec.repo.build.status === 'building' : true);  
+        dec.showDeployButton = !dec.failedBuild
+            && angular.equals({}, dec.repo.build) ? true :
+            (dec.repo.build.status ? !dec.repo.build.status === 'building' : true);
     }
 
     function error(error) {
