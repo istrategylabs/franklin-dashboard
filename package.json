@@ -32,7 +32,7 @@
     "gulp-htmlmin": "1.2.0",
     "gulp-if": "2.0.0",
     "gulp-minify-css": "1.2.1",
-    "gulp-ng-constant": "^1.1.0",
+    "gulp-nunjucks": "2.2.0",
     "gulp-postcss": "6.0.1",
     "gulp-protractor": "2.0.0",
     "gulp-rev": "6.0.1",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "browserify": "12.0.1",
     "del": "2.0.2",
+    "gulp-plumber": "1.1.0",
     "jasmine-core": "2.4.1",
     "karma": "0.13.15",
     "karma-browserify": "5.0.3",

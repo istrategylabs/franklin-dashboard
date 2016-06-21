@@ -25,8 +25,9 @@ const minifyCss = require('gulp-minify-css');
 const htmlmin = require('gulp-htmlmin');
 const gulpif = require('gulp-if');
 const runSequence = require('run-sequence');
-const ngConstant = require('gulp-ng-constant');
 const protractor = require("gulp-protractor").protractor;
+const nunjucks = require('gulp-nunjucks');
+const plumber = require('gulp-plumber');
 
 const nodeModules = (() => {
     let base = 'node_modules';
@@ -109,9 +110,14 @@ gulp.task('sass', () => {
         .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('html', () => {
-    return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
-        .pipe(gulp.dest('./public/'));
+gulp.task('nunjucks', () => {
+  return gulp.src(['src/templates/**/*.html', 'src/js/**/*.html','!**/_*'])
+    .pipe(plumber())
+    .pipe(nunjucks.compile(config, {
+      throwOnUndefined: true
+    }))
+    .pipe(plumber.stop())
+    .pipe(gulp.dest('public/'))
 });
 
 gulp.task('extras', () => {
@@ -126,7 +132,7 @@ gulp.task('start', ['sass', 'extras', 'watchify'], () => {
     });
 
     gulp.watch('./src/scss/**/*.scss', ['sass']);
-    gulp.watch('./src/**/*.html', ['html']);
+    gulp.watch('./src/**/*.html', ['nunjucks']);
     gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
@@ -177,7 +183,7 @@ gulp.task('clean', () => {
     return del('./public/');
 });
 
-gulp.task('default', ['browserify', 'html', 'sass', 'extras']);
+gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras']);
 
 gulp.task('build-dev', (done) => {
     const sequence = ['default', 'start' /*, 'e2e'*/ ];

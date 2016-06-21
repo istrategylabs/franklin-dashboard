@@ -1,0 +1,15 @@
+{% extends "error.html" %}
+
+{% block errorCode %}
+502
+{% endblock %}
+
+{% block errorDescription %}
+Bad Gateway
+{% endblock %}
+
+{% block errorMessage %}
+
+The server was acting like a gateway or proxy and receive an invalid response from the upstream server.
+
+{% endblock %}

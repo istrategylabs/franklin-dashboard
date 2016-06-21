@@ -153,10 +153,10 @@ function bootstrapApplication(response) {
 
         //toastr configuration - error messages
         angular.extend(toastrConfig, {
-          positionClass: 'toast-bottom-center',
           closeButton: false,
           closeHtml: '<button>&times;</button>',
           extendedTimeOut: 10000,
+          positionClass: 'toast-bottom-center',
           tapToDismiss: true,
           timeOut: 10000,
         });
